@@ -26,7 +26,7 @@ public class Database {
 
     private String usuario = "root";
     private String clave = "";
-    private String url = "jdbc:mysql://localhost:3306/jema";
+    private String url = "jdbc:mysql://localhost/jema?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     Connection con;
     Statement stmt;
    

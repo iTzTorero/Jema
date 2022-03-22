@@ -8,6 +8,7 @@ package accesoDatos;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import objetoNegocio.Cliente;
@@ -41,13 +42,31 @@ public class ClienteDAO extends Database implements IDAO<Cliente> {
 
     @Override
     public void actualizar(Cliente obj) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = String.format("UPDATE cliente SET nombre = '%s', telefono1 = '%s', telefono2 = '%s' WHERE idcliente = %d",
+                obj.getNombre(),
+                obj.getTelefono1(),
+                obj.getTelefono2(),
+                obj.getIdcliente());
+        
+        Statement statement = con.createStatement();
+        
+        int registroAfectado = statement.executeUpdate(sql);
+        if(registroAfectado != 1){
+            throw new Exception("El cliente no ha podido ser actualizado.");
+        }
     }
 
     @Override
     public void eliminar(int id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = String.format("DELETE FROM cliente WHERE idcliente = %d", id);
+        Statement statement = con.createStatement();
+        
+        int registroAfectado = statement.executeUpdate(sql);
+        if (registroAfectado != 1) {
+            throw new Exception("El cliente no ha podido ser eliminado.");
+        }
     }
+
 
     @Override
     public Cliente consultarPorId(int id) throws Exception {

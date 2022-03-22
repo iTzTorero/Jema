@@ -10,10 +10,18 @@ package objetoNegocio;
  * @author Juan Pablo
  */
 public class Cliente {
+   private Integer idcliente;
    private String nombre;
    private String telefono1;
    private String telefono2;
 
+    public Cliente(Integer idcliente, String nombre, String telefono1, String telefono2) {
+        this.idcliente = idcliente;
+        this.nombre = nombre;
+        this.telefono1 = telefono1;
+        this.telefono2 = telefono2;
+    }
+   
     public Cliente(String nombre, String telefono1, String telefono2) {
         this.nombre = nombre;
         this.telefono1 = telefono1;
@@ -23,6 +31,14 @@ public class Cliente {
     public Cliente() {
     }
 
+    public Integer getIdcliente() {
+        return idcliente;
+    }
+
+    public void setIdcliente(Integer idcliente) {
+        this.idcliente = idcliente;
+    }
+  
     public String getNombre() {
         return nombre;
     }

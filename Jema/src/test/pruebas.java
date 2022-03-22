@@ -5,6 +5,7 @@
  */
 package test;
 
+import accesoDatos.ClienteDAO;
 import accesoDatos.Database;
 import factory.FactoryAccesoDatos;
 import java.sql.ResultSet;
@@ -22,8 +23,12 @@ public class pruebas {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-    FactoryAccesoDatos factory = new FactoryAccesoDatos();
+        FactoryAccesoDatos factory = new FactoryAccesoDatos();
         System.out.println(factory.obtenerClienteDAO().consultarPorId(1).getNombre());
+
+        ClienteDAO clienteDAO = new ClienteDAO();
+//        clienteDAO.actualizar(new Cliente(4, "Michi", "711377777", "11556111"));
+        clienteDAO.eliminar(3);
     }
-    
+
 }
