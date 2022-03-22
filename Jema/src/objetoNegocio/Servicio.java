@@ -10,6 +10,7 @@ package objetoNegocio;
  * @author Juan Pablo
  */
 public class Servicio {
+    private int idServicio;
     private String nombre;
     private float costo;
 
@@ -19,6 +20,22 @@ public class Servicio {
     public Servicio(String nombre, float costo) {
         this.nombre = nombre;
         this.costo = costo;
+    }
+
+    public Servicio(int idServicio, String nombre, float costo) {
+        this.idServicio = idServicio;
+        this.nombre = nombre;
+        this.costo = costo;
+    }
+    
+    
+
+    public int getIdServicio() {
+        return idServicio;
+    }
+
+    public void setIdServicio(int idServicio) {
+        this.idServicio = idServicio;
     }
 
     public String getNombre() {
