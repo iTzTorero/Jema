@@ -53,36 +53,4 @@ public class Database {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-
-
-
-
-
-
-    public void insertarUsuario(String nombre, String contrasena, String direccion, String telefono1, String telefono2) throws SQLException {
-        String sql = "INSERT INTO `usuario` (`idusuario`, `nombre`, `contrasena`, `direccion`, `telefono1`, `telefono2`) VALUES (NULL, ?, ?, ?, ?, ?)";
-        PreparedStatement ps;
-        ps = con.prepareStatement(sql);
-        ps.setString(1, nombre);
-        ps.setString(2, contrasena);
-        ps.setString(3, direccion);
-        ps.setString(4, telefono1);
-        ps.setString(5, telefono2);
-
-        ps.executeUpdate();
-        ps.close();
-    }
-
-    public void insertarVenta(Date date,float total) throws SQLException {
-        String sql = "INSERT INTO `usuario` (`idusuario`, `nombre`, `contrasena`, `direccion`, `telefono1`, `telefono2`) VALUES (NULL, ?, ?, ?, ?, ?)";
-        PreparedStatement ps;
-
-        ps = con.prepareStatement(sql);
-        ps.setDate(1, date);
-        ps.setFloat(2, total);
-
-        ps.executeUpdate();
-        ps.close();
-    }
 }
