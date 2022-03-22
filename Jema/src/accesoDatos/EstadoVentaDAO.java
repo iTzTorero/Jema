@@ -9,25 +9,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import objetoNegocio.DetalleVenta;
+import objetoNegocio.EstadoVenta;
 
 /**
  *
  * @author Juan Pablo
  */
-public class DetalleVentaDAO extends Database implements IDAO<DetalleVenta>{
+public class EstadoVentaDAO extends Database implements IDAO<EstadoVenta>{
 
-    public DetalleVentaDAO() {
+    public EstadoVentaDAO() {
     super();
     }
 
     @Override
-    public void insertar(DetalleVenta obj) throws Exception {
+    public void insertar(EstadoVenta obj) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void actualizar(DetalleVenta obj) throws Exception {
+    public void actualizar(EstadoVenta obj) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -37,21 +37,20 @@ public class DetalleVentaDAO extends Database implements IDAO<DetalleVenta>{
     }
 
     @Override
-    public DetalleVenta consultarPorId(int id) throws Exception {
+    public EstadoVenta consultarPorId(int id) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public ResultSet consultarTodos() throws Exception {
-        String sql = "SELECT * FROM `detalleVenta`";
+String sql = "SELECT * FROM `estadoVenta`";
         try {
             return stmt.executeQuery(sql);
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
-    }
+        return null;    }
 
-    
+  
     
 }

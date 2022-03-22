@@ -5,7 +5,8 @@
  */
 package test;
 
-import database.Database;
+import accesoDatos.Database;
+import factory.FactoryAccesoDatos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -20,18 +21,9 @@ public class pruebas {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        try {
-            Database db = new Database();
-            ResultSet rs = db.consultaClientes();
-            while(rs.next()){
-                System.out.println(rs.getString("nombre"));
-            }
-            db.insertarCliente("Juan", "123123123", "321321321");
-        } catch (SQLException ex) {
-            Logger.getLogger(pruebas.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+    public static void main(String[] args) throws Exception {
+    FactoryAccesoDatos factory = new FactoryAccesoDatos();
+        System.out.println(factory.obtenerClienteDAO().consultarPorId(1).getNombre());
     }
     
 }

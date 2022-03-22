@@ -9,6 +9,6 @@ package objetoNegocio;
  *
  * @author Juan Pablo
  */
-public enum EstadoServicio {
+public enum EstadoVenta {
     EN_ESPERA,INICIADO, TERMINADO,ENTREGADO;
 }

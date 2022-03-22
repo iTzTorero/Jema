@@ -12,4 +12,35 @@ package objetoNegocio;
 public class Servicio {
     private String nombre;
     private float costo;
+
+    public Servicio() {
+    }
+
+    public Servicio(String nombre, float costo) {
+        this.nombre = nombre;
+        this.costo = costo;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public float getCosto() {
+        return costo;
+    }
+
+    public void setCosto(float costo) {
+        this.costo = costo;
+    }
+
+    @Override
+    public String toString() {
+        return "Servicio{" + "nombre=" + nombre + ", costo=" + costo + '}';
+    }
+    
+    
 }

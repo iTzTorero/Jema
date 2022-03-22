@@ -5,10 +5,67 @@
  */
 package accesoDatos;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import objetoNegocio.Cliente;
+
 /**
  *
  * @author Juan Pablo
  */
-public class ClienteDAO extends Database{
-    
+public class ClienteDAO extends Database implements IDAO<Cliente> {
+
+    public ClienteDAO() {
+        super();
+    }
+
+    @Override
+    public void insertar(Cliente cliente) throws Exception {
+        String sql = "INSERT INTO `cliente` (`idcliente`,`nombre`, `telefono1`, `telefono2`) VALUES (NULL, ?, ?, ?)";
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ps.setString(1, cliente.getNombre());
+        ps.setString(2, cliente.getTelefono1());
+        ps.setString(3, cliente.getTelefono2());
+
+        ps.executeUpdate();
+        ps.close();
+    }
+
+    @Override
+    public void actualizar(Cliente obj) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void eliminar(int id) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Cliente consultarPorId(int id) throws Exception {
+        String sql = "SELECT * FROM `cliente` WHERE cliente.idcliente = 1";
+        ResultSet rs  = stmt.executeQuery(sql);
+        rs.next();
+        return new Cliente(rs.getNString("nombre"),rs.getNString("telefono1"),rs.getNString("telefono2"));
+    }
+
+    @Override
+    public ResultSet consultarTodos() throws Exception {
+        String sql = "SELECT * FROM `cliente`";
+        try {
+            return stmt.executeQuery(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
 }

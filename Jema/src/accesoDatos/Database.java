@@ -27,9 +27,9 @@ public class Database {
     private String usuario = "root";
     private String clave = "";
     private String url = "jdbc:mysql://localhost:3306/jema";
-    private Connection con;
-    private Statement stmt;
-    private ResultSet rs;
+    Connection con;
+    Statement stmt;
+   
 
     /**
      * Constructor de la clase.
@@ -54,32 +54,11 @@ public class Database {
         }
     }
 
-    public ResultSet consultaClientes() throws SQLException {
-        String sql = "SELECT * FROM `cliente`";
-        return stmt.executeQuery(sql);
-    }
 
-    public ResultSet consultarUsuarios() throws SQLException {
-        String sql = "SELECT * FROM `usuario`";
-        return stmt.executeQuery(sql);
-    }
 
-    public ResultSet consultarVentas() throws SQLException {
-        String sql = "SELECT * FROM `venta`";
-        return stmt.executeQuery(sql);
-    }
 
-    public void insertarCliente(String nombre, String telefono1, String telefono2) throws SQLException {
-        String sql = "INSERT INTO `cliente` (`idcliente`,`nombre`, `telefono1`, `telefono2`) VALUES (NULL, ?, ?, ?)";
-        PreparedStatement ps;
-        ps = con.prepareStatement(sql);
-        ps.setString(1, nombre);
-        ps.setString(2, telefono1);
-        ps.setString(3, telefono2);
 
-        ps.executeUpdate();
-        ps.close();
-    }
+
 
     public void insertarUsuario(String nombre, String contrasena, String direccion, String telefono1, String telefono2) throws SQLException {
         String sql = "INSERT INTO `usuario` (`idusuario`, `nombre`, `contrasena`, `direccion`, `telefono1`, `telefono2`) VALUES (NULL, ?, ?, ?, ?, ?)";
