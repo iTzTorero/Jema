@@ -5,6 +5,7 @@
  */
 package accesoDatos;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -22,8 +23,22 @@ public class CorteDAO extends Database implements IDAO<Corte> {
     }
 
     @Override
-    public void insertar(Corte obj) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void insertar(Corte corte) throws Exception {
+       
+        String sql = "INSERT INTO `corte` (`fecha`,`total`, `idUsuario`) VALUES (NULL, ?, ?)";
+        PreparedStatement ps = null;
+        
+        try {
+            ps = con.prepareStatement(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(CorteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ps.setDate(1, corte.getFecha());
+        ps.setFloat(2, corte.getTotal());
+        ps.setInt(3, corte.getIdUsuario());
+
+        ps.executeUpdate();
+        ps.close();
     }
 
     @Override
