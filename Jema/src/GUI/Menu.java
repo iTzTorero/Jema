@@ -27,21 +27,97 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        menuRegistrar = new javax.swing.JMenuItem();
+        menuModificar = new javax.swing.JMenuItem();
+        menuCancelar = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        menuConsultarS = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        menuSalir = new javax.swing.JMenuItem();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jMenu1.setText("Servicios ");
+
+        menuRegistrar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        menuRegistrar.setText("Registrar Servicio ");
+        menuRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuRegistrarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuRegistrar);
+
+        menuModificar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        menuModificar.setText("Modificar Servicio ");
+        menuModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuModificarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuModificar);
+
+        menuCancelar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        menuCancelar.setText("Cancelar Servicio ");
+        menuCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCancelarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuCancelar);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Consultar ");
+
+        menuConsultarS.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        menuConsultarS.setText("Lista Servicio ");
+        jMenu2.add(menuConsultarS);
+
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Salir ");
+
+        menuSalir.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        menuSalir.setText("Salir ");
+        jMenu3.add(menuSalir);
+
+        jMenuBar1.add(jMenu3);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 690, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 375, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void menuRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRegistrarActionPerformed
+        Principal principal = new Principal();
+        this.dispose();
+        principal.setVisible(true);
+        
+    }//GEN-LAST:event_menuRegistrarActionPerformed
+
+    private void menuModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuModificarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuModificarActionPerformed
+
+    private void menuCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCancelarActionPerformed
+        Cancelar cancelar = new Cancelar();
+        this.dispose();
+        cancelar.setVisible(true);
+    }//GEN-LAST:event_menuCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +155,14 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem menuCancelar;
+    private javax.swing.JMenuItem menuConsultarS;
+    private javax.swing.JMenuItem menuModificar;
+    private javax.swing.JMenuItem menuRegistrar;
+    private javax.swing.JMenuItem menuSalir;
     // End of variables declaration//GEN-END:variables
 }
