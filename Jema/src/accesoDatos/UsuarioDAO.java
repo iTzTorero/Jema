@@ -47,11 +47,12 @@ public class UsuarioDAO extends Database implements IDAO<Usuario> {
     public void eliminar(int id) throws Exception {
         String sql = String.format("DELETE FROM usuario WHERE idusuario = %d", id);
         Statement statement = con.createStatement();
-        
+
         int registroAfectado = statement.executeUpdate(sql);
         if (registroAfectado != 1) {
             throw new Exception("El cliente no ha podido ser eliminado.");
-        }    }
+        }
+    }
 
     @Override
     public Usuario consultarPorId(int id) throws Exception {
