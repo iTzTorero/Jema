@@ -16,7 +16,7 @@ import objetoNegocio.EstadoVenta;
  *
  * @author Juan Pablo
  */
-public class EstadoVentaDAO extends Database implements IDAO<EstadoVenta> {
+public class EstadoVentaDAO extends DatabaseConection implements IDAO<EstadoVenta> {
 
     public EstadoVentaDAO() {
         super();

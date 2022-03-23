@@ -17,7 +17,7 @@ import objetoNegocio.Cliente;
  *
  * @author Juan Pablo
  */
-public class ClienteDAO extends Database implements IDAO<Cliente> {
+public class ClienteDAO extends DatabaseConection implements IDAO<Cliente> {
 
     public ClienteDAO() {
         super();

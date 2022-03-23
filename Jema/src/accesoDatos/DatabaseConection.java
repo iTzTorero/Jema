@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  *
  * @author Juan Pablo
  */
-public class Database {
+public class DatabaseConection {
 
     private String usuario = "root";
     private String clave = "";
@@ -34,23 +34,23 @@ public class Database {
     /**
      * Constructor de la clase.
      */
-    public Database() {
+    public DatabaseConection() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DatabaseConection.class.getName()).log(Level.SEVERE, null, ex);
         }
         // Conexion
         try {
             con = DriverManager.getConnection(url, usuario, clave);
         } catch (SQLException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DatabaseConection.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         try {
             stmt = con.createStatement();
         } catch (SQLException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DatabaseConection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

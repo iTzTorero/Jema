@@ -16,7 +16,7 @@ import objetoNegocio.Servicio;
  *
  * @author Juan Pablo
  */
-public class ServicioDAO extends Database implements IDAO<Servicio> {
+public class ServicioDAO extends DatabaseConection implements IDAO<Servicio> {
 
     public ServicioDAO() {
         super();

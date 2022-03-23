@@ -17,7 +17,7 @@ import objetoNegocio.Usuario;
  *
  * @author Juan Pablo
  */
-public class UsuarioDAO extends Database implements IDAO<Usuario> {
+public class UsuarioDAO extends DatabaseConection implements IDAO<Usuario> {
 
     public UsuarioDAO() {
         super();
