@@ -176,7 +176,7 @@ public class Menu extends javax.swing.JFrame {
         Cliente cancelar = new Cliente();
         this.dispose();
         cancelar.setVisible(true);
-        
+       
     }//GEN-LAST:event_jButtonCancelarServicioActionPerformed
 
     /**
