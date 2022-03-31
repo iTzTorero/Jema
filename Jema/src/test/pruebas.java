@@ -6,14 +6,13 @@
 package test;
 
 import accesoDatos.ClienteDAO;
-import accesoDatos.Database;
-import accesoDatos.ServicioDAO;
+import accesoDatos.DatabaseConection;
 import factory.FactoryAccesoDatos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import objetoNegocio.Servicio;
+import objetoNegocio.Cliente;
 
 /**
  *
@@ -27,14 +26,9 @@ public class pruebas {
     public static void main(String[] args) throws Exception {
         FactoryAccesoDatos factory = new FactoryAccesoDatos();
         System.out.println(factory.obtenerClienteDAO().consultarPorId(1).getNombre());
-
-//        ClienteDAO clienteDAO = new ClienteDAO();
-//        clienteDAO.actualizar(new Cliente(4, "Michi", "711377777", "11556111"));
-//        clienteDAO.eliminar(3);
-        
-        ServicioDAO servicioDAO = new ServicioDAO();
-//        servicioDAO.insertar(new Servicio("Prueba", 100));
-        servicioDAO.actualizar(new Servicio(1, "Prueba2", 50));
+        factory.obtenerClienteDAO().insertar(new Cliente("Mauricio", "12123123", "11556111"));
+        factory.obtenerClienteDAO().actualizar(new Cliente(2, "Michi", "711377777", "11556111"));
+        //factory.obtenerClienteDAO().eliminar(4);
     }
 
 }

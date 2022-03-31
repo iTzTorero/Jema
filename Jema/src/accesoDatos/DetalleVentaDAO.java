@@ -7,6 +7,7 @@ package accesoDatos;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import objetoNegocio.DetalleVenta;
@@ -15,7 +16,7 @@ import objetoNegocio.DetalleVenta;
  *
  * @author Juan Pablo
  */
-public class DetalleVentaDAO extends Database implements IDAO<DetalleVenta>{
+public class DetalleVentaDAO extends DatabaseConection implements IDAO<DetalleVenta>{
 
     public DetalleVentaDAO() {
     super();
@@ -33,7 +34,13 @@ public class DetalleVentaDAO extends Database implements IDAO<DetalleVenta>{
 
     @Override
     public void eliminar(int id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       String sql = String.format("DELETE FROM detalleventa WHERE iddetalle_venta = %d", id);
+        Statement statement = con.createStatement();
+
+        int registroAfectado = statement.executeUpdate(sql);
+        if (registroAfectado != 1) {
+            throw new Exception("El cliente no ha podido ser eliminado.");
+        }
     }
 
     @Override

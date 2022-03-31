@@ -10,28 +10,46 @@ package objetoNegocio;
  * @author Juan Pablo
  */
 public class DetalleVenta {
-    private Servicio servicio;
+    private int idServicio;
     private float precio;
-    private Cliente cliente;
-    private EstadoVenta estadoServicio;
+    private int idCliente;
+    private int idEstadoServicio;
 
     public DetalleVenta() {
     }
 
-    public DetalleVenta(Servicio servicio, float precio, Cliente cliente, EstadoVenta estadoServicio) {
-        this.servicio = servicio;
+    public DetalleVenta(int idServicio, float precio, int idCliente, int idEstadoServicio) {
+        this.idServicio = idServicio;
         this.precio = precio;
-        this.cliente = cliente;
-        this.estadoServicio = estadoServicio;
+        this.idCliente = idCliente;
+        this.idEstadoServicio = idEstadoServicio;
     }
 
-    public Servicio getServicio() {
-        return servicio;
+    public int getIdServicio() {
+        return idServicio;
     }
 
-    public void setServicio(Servicio servicio) {
-        this.servicio = servicio;
+    public void setIdServicio(int idServicio) {
+        this.idServicio = idServicio;
     }
+
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
+    }
+
+    public int getIdEstadoServicio() {
+        return idEstadoServicio;
+    }
+
+    public void setIdEstadoServicio(int idEstadoServicio) {
+        this.idEstadoServicio = idEstadoServicio;
+    }
+
+    
 
     public float getPrecio() {
         return precio;
@@ -41,25 +59,10 @@ public class DetalleVenta {
         this.precio = precio;
     }
 
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public EstadoVenta getEstadoServicio() {
-        return estadoServicio;
-    }
-
-    public void setEstadoServicio(EstadoVenta estadoServicio) {
-        this.estadoServicio = estadoServicio;
-    }
 
     @Override
     public String toString() {
-        return "DetalleVenta{" + "servicio=" + servicio + ", precio=" + precio + ", cliente=" + cliente + ", estadoServicio=" + estadoServicio + '}';
+        return "DetalleVenta{" + "servicio=" + idServicio + ", precio=" + precio + ", cliente=" + idCliente + ", estadoServicio=" + idEstadoServicio + '}';
     }
     
     

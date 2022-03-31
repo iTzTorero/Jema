@@ -8,6 +8,7 @@ package accesoDatos;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import objetoNegocio.Corte;
@@ -16,7 +17,7 @@ import objetoNegocio.Corte;
  *
  * @author Juan Pablo
  */
-public class CorteDAO extends Database implements IDAO<Corte> {
+public class CorteDAO extends DatabaseConection implements IDAO<Corte> {
 
     public CorteDAO() {
         super();
@@ -48,8 +49,13 @@ public class CorteDAO extends Database implements IDAO<Corte> {
 
     @Override
     public void eliminar(int id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        String sql = String.format("DELETE FROM corte WHERE idcorte = %d", id);
+        Statement statement = con.createStatement();
+        
+        int registroAfectado = statement.executeUpdate(sql);
+        if (registroAfectado != 1) {
+            throw new Exception("El cliente no ha podido ser eliminado.");
+        }    }
 
     @Override
     public Corte consultarPorId(int id) throws Exception {

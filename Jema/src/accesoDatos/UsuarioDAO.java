@@ -5,8 +5,10 @@
  */
 package accesoDatos;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import objetoNegocio.Usuario;
@@ -15,7 +17,7 @@ import objetoNegocio.Usuario;
  *
  * @author Juan Pablo
  */
-public class UsuarioDAO extends Database implements IDAO<Usuario> {
+public class UsuarioDAO extends DatabaseConection implements IDAO<Usuario> {
 
     public UsuarioDAO() {
         super();
@@ -23,7 +25,17 @@ public class UsuarioDAO extends Database implements IDAO<Usuario> {
 
     @Override
     public void insertar(Usuario obj) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "INSERT INTO `usuario` (`idusuario`, `nombre`, `contrasena`, `direccion`, `telefono1`, `telefono2`) VALUES (NULL, ?, ?, ?, ?, ?)";
+        PreparedStatement ps;
+        ps = con.prepareStatement(sql);
+        ps.setString(1, obj.getNombre());
+        ps.setString(2, obj.getPassword());
+        ps.setString(3, obj.getDireccion());
+        ps.setString(4, obj.getTelefono1());
+        ps.setString(5, obj.getTelefono2());
+
+        ps.executeUpdate();
+        ps.close();
     }
 
     @Override
@@ -33,7 +45,13 @@ public class UsuarioDAO extends Database implements IDAO<Usuario> {
 
     @Override
     public void eliminar(int id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = String.format("DELETE FROM usuario WHERE idusuario = %d", id);
+        Statement statement = con.createStatement();
+
+        int registroAfectado = statement.executeUpdate(sql);
+        if (registroAfectado != 1) {
+            throw new Exception("El cliente no ha podido ser eliminado.");
+        }
     }
 
     @Override
