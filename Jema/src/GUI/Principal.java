@@ -62,6 +62,7 @@ public class Principal extends javax.swing.JFrame {
         btnRegistrar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         lblNumNota = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registrar Servicio");
@@ -222,6 +223,9 @@ public class Principal extends javax.swing.JFrame {
         lblNumNota.setForeground(new java.awt.Color(255, 153, 153));
         jPanel1.add(lblNumNota, new org.netbeans.lib.awtextra.AbsoluteConstraints(1700, 30, 170, -1));
 
+        jPanel4.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 1920, 1050));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1920, 1050));
 
         pack();
@@ -338,6 +342,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblNumNota;
     private javax.swing.JTable tableDesc;

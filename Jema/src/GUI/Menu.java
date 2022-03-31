@@ -5,9 +5,12 @@
  */
 package GUI;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 /**
  *
- * @author PC
+ * @author JEMA
  */
 public class Menu extends javax.swing.JFrame {
 
@@ -27,48 +30,104 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jButtonSalir = new javax.swing.JButton();
+        jButtonRegistrarServicio = new javax.swing.JButton();
+        jButtonModificarServicio = new javax.swing.JButton();
+        jButtonCancelarServicio = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        menuRegistrar = new javax.swing.JMenuItem();
-        menuModificar = new javax.swing.JMenuItem();
-        menuCancelar = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         menuConsultarS = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        menuSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu1.setText("Servicios ");
+        jPanel1.setBackground(new java.awt.Color(204, 255, 255));
 
-        menuRegistrar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        menuRegistrar.setText("Registrar Servicio ");
-        menuRegistrar.addActionListener(new java.awt.event.ActionListener() {
+        jLabel3.setFont(new java.awt.Font("Segoe UI Semilight", 3, 36)); // NOI18N
+        jLabel3.setText("JEMA");
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI Semilight", 3, 24)); // NOI18N
+        jLabel4.setText("Lavanderia");
+
+        jButtonSalir.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonSalir.setText("Salir");
+        jButtonSalir.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuRegistrarActionPerformed(evt);
+                jButtonSalirActionPerformed(evt);
             }
         });
-        jMenu1.add(menuRegistrar);
 
-        menuModificar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        menuModificar.setText("Modificar Servicio ");
-        menuModificar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonRegistrarServicio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonRegistrarServicio.setText("Registrar Servicio");
+        jButtonRegistrarServicio.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButtonRegistrarServicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuModificarActionPerformed(evt);
+                jButtonRegistrarServicioActionPerformed(evt);
             }
         });
-        jMenu1.add(menuModificar);
 
-        menuCancelar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        menuCancelar.setText("Cancelar Servicio ");
-        menuCancelar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonModificarServicio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonModificarServicio.setText("Modificar Servicio");
+        jButtonModificarServicio.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButtonModificarServicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuCancelarActionPerformed(evt);
+                jButtonModificarServicioActionPerformed(evt);
             }
         });
-        jMenu1.add(menuCancelar);
 
-        jMenuBar1.add(jMenu1);
+        jButtonCancelarServicio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonCancelarServicio.setText("Cancelar Servicio");
+        jButtonCancelarServicio.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButtonCancelarServicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarServicioActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(301, 301, 301)
+                        .addComponent(jLabel3))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(286, 286, 286)
+                        .addComponent(jLabel4))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(266, 266, 266)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButtonRegistrarServicio, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                            .addComponent(jButtonModificarServicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonCancelarServicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(271, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addComponent(jButtonRegistrarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonModificarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonCancelarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
+        );
 
         jMenu2.setText("Consultar ");
 
@@ -78,46 +137,47 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setText("Salir ");
-
-        menuSalir.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        menuSalir.setText("Salir ");
-        jMenu3.add(menuSalir);
-
-        jMenuBar1.add(jMenu3);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 690, Short.MAX_VALUE)
+            .addGap(0, 701, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 375, Short.MAX_VALUE)
+            .addGap(0, 403, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void menuRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRegistrarActionPerformed
+    private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButtonSalirActionPerformed
+
+    private void jButtonRegistrarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarServicioActionPerformed
         Principal principal = new Principal();
         this.dispose();
         principal.setVisible(true);
-        
-    }//GEN-LAST:event_menuRegistrarActionPerformed
+   
+    }//GEN-LAST:event_jButtonRegistrarServicioActionPerformed
 
-    private void menuModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuModificarActionPerformed
+    private void jButtonModificarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarServicioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_menuModificarActionPerformed
+    }//GEN-LAST:event_jButtonModificarServicioActionPerformed
 
-    private void menuCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCancelarActionPerformed
-        Cancelar cancelar = new Cancelar();
+    private void jButtonCancelarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarServicioActionPerformed
+        Cliente cancelar = new Cliente();
         this.dispose();
         cancelar.setVisible(true);
-    }//GEN-LAST:event_menuCancelarActionPerformed
+        
+    }//GEN-LAST:event_jButtonCancelarServicioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,15 +214,27 @@ public class Menu extends javax.swing.JFrame {
         });
     }
 
+    private void centrarVentana(){
+        Dimension screenSize, frameSize;
+        int x, y;
+        screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        frameSize = getSize();
+        x = (screenSize.width - frameSize.width) / 2;
+        y = (screenSize.height - frameSize.height) / 2;
+        setLocation(x, y);
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
+    private javax.swing.JButton jButtonCancelarServicio;
+    private javax.swing.JButton jButtonModificarServicio;
+    private javax.swing.JButton jButtonRegistrarServicio;
+    private javax.swing.JButton jButtonSalir;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem menuCancelar;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem menuConsultarS;
-    private javax.swing.JMenuItem menuModificar;
-    private javax.swing.JMenuItem menuRegistrar;
-    private javax.swing.JMenuItem menuSalir;
     // End of variables declaration//GEN-END:variables
 }
