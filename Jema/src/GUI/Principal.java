@@ -329,14 +329,17 @@ public class Principal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtTelefonoClienteKeyTyped
 
-    
+
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        try {
-            // falta obtener el usuario de la sesión actual y guardar los detalle venta en el arreglo:
-            acceso.obtenerVentaDAO().insertar(new Venta(new java.sql.Date(jDateChooser1.getDate().getTime()), importe, acceso.obtenerUsuarioDAO().consultarPorId(1),detallesVenta));
-        } catch (Exception ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        if (jDateChooser2.getDate().after(jDateChooser2.getDate())) {
+            try {
+                // falta obtener el usuario de la sesión actual y guardar los detalle venta en el arreglo:
+                acceso.obtenerVentaDAO().insertar(new Venta(new java.sql.Date(jDateChooser1.getDate().getTime()), importe, acceso.obtenerUsuarioDAO().consultarPorId(1), detallesVenta));
+            } catch (Exception ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void txtTelefonoClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoClienteKeyPressed
