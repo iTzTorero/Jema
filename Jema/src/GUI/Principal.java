@@ -29,7 +29,6 @@ import validacion.*;
  * @author PC
  */
 public class Principal extends javax.swing.JFrame {
-
     ValidarCampos validar = new ValidarCampos();
     FactoryAccesoDatos acceso = new FactoryAccesoDatos();
     static float importe = 0;
@@ -53,6 +52,7 @@ public class Principal extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
+        detallesVenta = new ArrayList();
     }
 
     /**
@@ -244,9 +244,11 @@ public class Principal extends javax.swing.JFrame {
         double precioUnit = 0.0;
         if (cbLavado.isSelected()) {
             try {
-                //Agregar los ids del cliente seleccionado
-                acceso.obtenerDetalleVentaDAO().insertar(new DetalleVenta(acceso.obtenerServicioDAO().consultarPorNombre("Lavado").getIdServicio(),
+                detallesVenta.add(new DetalleVenta(acceso.obtenerServicioDAO().consultarPorNombre("Lavado").getIdServicio(),
                         acceso.obtenerServicioDAO().consultarPorNombre("Lavado").getCosto(), acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString()).getIdcliente(), 0));
+                //Agregar los ids del cliente seleccionado
+       //         acceso.obtenerDetalleVentaDAO().insertar(new DetalleVenta(acceso.obtenerServicioDAO().consultarPorNombre("Lavado").getIdServicio(),
+         //               acceso.obtenerServicioDAO().consultarPorNombre("Lavado").getCosto(), acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString()).getIdcliente(), 0));
             } catch (SQLException ex) {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
@@ -257,8 +259,14 @@ public class Principal extends javax.swing.JFrame {
         }
         if (cbPlanchado.isSelected()) {
             try {
-                acceso.obtenerDetalleVentaDAO().insertar(new DetalleVenta(acceso.obtenerServicioDAO().consultarPorNombre("Planchado").getIdServicio(),
+                detallesVenta.add(new DetalleVenta(acceso.obtenerServicioDAO().consultarPorNombre("Planchado").getIdServicio(),
                         acceso.obtenerServicioDAO().consultarPorNombre("Planchado").getCosto(), acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString()).getIdcliente(), 0));
+            
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            
+            
+           //     acceso.obtenerDetalleVentaDAO().insertar(new DetalleVenta(acceso.obtenerServicioDAO().consultarPorNombre("Planchado").getIdServicio(),
+             //           acceso.obtenerServicioDAO().consultarPorNombre("Planchado").getCosto(), acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString()).getIdcliente(), 0));
             } catch (SQLException ex) {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
@@ -319,7 +327,9 @@ public class Principal extends javax.swing.JFrame {
         if (jDateChooser2.getDate().after(jDateChooser2.getDate())) {
             try {
                 // falta obtener el usuario de la sesión actual y guardar los detalle venta en el arreglo:
+                
                 acceso.obtenerVentaDAO().insertar(new Venta(new java.sql.Date(jDateChooser1.getDate().getTime()), importe, acceso.obtenerUsuarioDAO().consultarPorId(0), detallesVenta));
+                
             } catch (Exception ex) {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             }
