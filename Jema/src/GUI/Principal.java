@@ -69,8 +69,6 @@ public class Principal extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
-        txtNombreCliente = new javax.swing.JTextField();
-        txtTelefonoCliente = new javax.swing.JTextField();
         btnLimpiarC = new javax.swing.JButton();
         cb_clientes = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
@@ -110,25 +108,6 @@ public class Principal extends javax.swing.JFrame {
         jLabel4.setText("Entrega:");
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 70, 35));
         jPanel3.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, 180, 35));
-
-        txtNombreCliente.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtNombreCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreClienteActionPerformed(evt);
-            }
-        });
-        jPanel3.add(txtNombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 20, 260, 70));
-
-        txtTelefonoCliente.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtTelefonoCliente.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtTelefonoClienteKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtTelefonoClienteKeyTyped(evt);
-            }
-        });
-        jPanel3.add(txtTelefonoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 260, 40));
 
         btnLimpiarC.setBackground(new java.awt.Color(255, 153, 153));
         btnLimpiarC.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -201,7 +180,6 @@ public class Principal extends javax.swing.JFrame {
         tableDesc.setBackground(new java.awt.Color(255, 155, 155));
         tableDesc.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         tableDesc.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        tableDesc.setForeground(new java.awt.Color(0, 0, 0));
         tableDesc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -321,14 +299,6 @@ public class Principal extends javax.swing.JFrame {
         limpiarTabla();
     }//GEN-LAST:event_btnLimpiarC1ActionPerformed
 
-    private void txtTelefonoClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoClienteKeyTyped
-        // TODO add your handling code here:
-//        if (!validar.validarTelefono(txtTelefonoCliente.getText())) {
-//            JOptionPane.showMessageDialog(this, "Por favor, ingrese un número telefónico válido.", "Advertencia",1);
-//        }
-
-    }//GEN-LAST:event_txtTelefonoClienteKeyTyped
-
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         if (jDateChooser2.getDate().after(jDateChooser2.getDate())) {
@@ -341,29 +311,6 @@ public class Principal extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnRegistrarActionPerformed
-
-    private void txtTelefonoClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoClienteKeyPressed
-        String numero = txtTelefonoCliente.getText();
-        int tamanio = numero.length();
-        
-        if (evt.getKeyChar() >= '0' && evt.getKeyChar() <= '9') {
-            if (tamanio < 10) 
-                txtTelefonoCliente.setEditable(true);
-            else
-                txtTelefonoCliente.setEditable(false);
-                 
-        }else{
-            if (evt.getExtendedKeyCode()==KeyEvent.VK_BACKSPACE || evt.getExtendedKeyCode()==KeyEvent.VK_DELETE ) 
-                txtTelefonoCliente.setEditable(true);
-            else
-                txtTelefonoCliente.setEditable(false);
-            
-        }
-    }//GEN-LAST:event_txtTelefonoClienteKeyPressed
-
-    private void txtNombreClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreClienteActionPerformed
     private void limpiarTabla() {
         tableDesc.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{
@@ -453,8 +400,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField txtDescRopa;
     private javax.swing.JTextField txtImporte;
     private javax.swing.JTextField txtNoPiezas;
-    private javax.swing.JTextField txtNombreCliente;
     private javax.swing.JTextField txtPrecioU;
-    private javax.swing.JTextField txtTelefonoCliente;
     // End of variables declaration//GEN-END:variables
 }
