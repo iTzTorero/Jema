@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import objetoNegocio.Cliente;
 
 /**
@@ -82,6 +83,15 @@ public class ClienteDAO extends DatabaseConection implements IDAO<Cliente> {
         return new Cliente(rs.getNString("nombre"), rs.getNString("telefono1"), rs.getNString("telefono2"));
     }
 
+    public DefaultComboBoxModel consultarClientesCB() throws Exception {
+
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        ResultSet rs = consultarTodos();
+        modelo.addElement(rs.getString("nombre"));
+        return modelo;
+
+    }
+
     public Cliente consultarPorTelefono(String telefono) throws SQLException {
         String sql = String.format("SELECT * FROM 'cliente' WHERE telefono1 = %d", telefono);
         ResultSet rs = stmt.executeQuery(sql);
@@ -99,7 +109,5 @@ public class ClienteDAO extends DatabaseConection implements IDAO<Cliente> {
         }
         return null;
     }
-    
-   
 
 }

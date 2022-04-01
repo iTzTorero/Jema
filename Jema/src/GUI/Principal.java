@@ -47,7 +47,11 @@ public class Principal extends javax.swing.JFrame {
         TextPrompt phPrecioU = new TextPrompt("Inserte el precio unitario", txtPrecioU);
         TextPrompt phImporte = new TextPrompt("Inserte el importe", txtImporte);
         
-        
+        try {
+            cb_clientes.setModel(acceso.obtenerClienteDAO().consultarClientesCB());
+        } catch (Exception ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
