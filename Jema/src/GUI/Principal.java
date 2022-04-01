@@ -138,10 +138,15 @@ public class Principal extends javax.swing.JFrame {
         });
         jPanel2.add(txtNoPiezas, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 270, 40));
         jPanel2.add(txtDescRopa, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 741, 70));
-        jPanel2.add(txtPrecioU, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 180, 50));
+        jPanel2.add(txtPrecioU, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 180, 50));
 
         txtImporte.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel2.add(txtImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 180, 50));
+        txtImporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtImporteActionPerformed(evt);
+            }
+        });
+        jPanel2.add(txtImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 180, 50));
 
         btnLimpiarC1.setBackground(new java.awt.Color(255, 153, 153));
         btnLimpiarC1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -179,14 +184,10 @@ public class Principal extends javax.swing.JFrame {
 
         tableDesc.setBackground(new java.awt.Color(255, 155, 155));
         tableDesc.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        tableDesc.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        tableDesc.setFont(new java.awt.Font("Tahoma", 0, 12));
+        tableDesc.setForeground(new java.awt.Color(255, 255, 255));
         tableDesc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
             },
             new String [] {
                 "PZ", "Descripción", "Servicio", "Precio Unitario ", "Importe "
@@ -243,6 +244,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // Se agregan los detalle venta
+        actualizarTabla();
+        
         double precioUnit = 0.0;
         if(cbLavado.isSelected()){
             try {
@@ -299,8 +302,24 @@ public class Principal extends javax.swing.JFrame {
         limpiarTabla();
     }//GEN-LAST:event_btnLimpiarC1ActionPerformed
     private void actualizarTabla(){
+        String servicio = "";
         DefaultTableModel modelo = (DefaultTableModel) tableDesc.getModel();
         Object [] fila = new Object[5];
+        fila[0] = txtNoPiezas.getText();
+        fila[1] = txtDescRopa.getText();
+        //Servicio
+        if(cbLavado.isSelected())
+            servicio = servicio + "Lavado ";
+        
+        if(cbPlanchado.isSelected())
+            servicio = servicio + "Planchado ";
+        
+        fila[2] = servicio;
+        fila[3] = "$ " + txtPrecioU.getText();
+        fila[4] = "$ " + txtImporte.getText();
+        
+        modelo.addRow(fila);
+        tableDesc.setModel(modelo);
         
     }
 
@@ -315,6 +334,10 @@ public class Principal extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void txtImporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtImporteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtImporteActionPerformed
     private void limpiarTabla() {
         tableDesc.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{
