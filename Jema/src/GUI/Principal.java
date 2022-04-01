@@ -32,7 +32,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        
     }
 
     /**
