@@ -69,10 +69,10 @@ public class Principal extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
-        txtNombreCliente = new javax.swing.JTextField();
-        txtTelefonoCliente = new javax.swing.JTextField();
         btnLimpiarC = new javax.swing.JButton();
         cb_clientes = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         txtNoPiezas = new javax.swing.JTextField();
         txtDescRopa = new javax.swing.JTextField();
@@ -100,35 +100,16 @@ public class Principal extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel3.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 180, 35));
+        jPanel3.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 50, 180, 35));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel3.setText("Fecha:");
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
+        jLabel3.setText("Cliente:");
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Entrega:");
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 70, 35));
-        jPanel3.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, 180, 35));
-
-        txtNombreCliente.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtNombreCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreClienteActionPerformed(evt);
-            }
-        });
-        jPanel3.add(txtNombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 20, 260, 70));
-
-        txtTelefonoCliente.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtTelefonoCliente.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtTelefonoClienteKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtTelefonoClienteKeyTyped(evt);
-            }
-        });
-        jPanel3.add(txtTelefonoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 260, 40));
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 20, 70, 35));
+        jPanel3.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 50, 180, 35));
 
         btnLimpiarC.setBackground(new java.awt.Color(255, 153, 153));
         btnLimpiarC.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -139,11 +120,19 @@ public class Principal extends javax.swing.JFrame {
                 btnLimpiarCActionPerformed(evt);
             }
         });
-        jPanel3.add(btnLimpiarC, new org.netbeans.lib.awtextra.AbsoluteConstraints(793, 238, 140, 40));
+        jPanel3.add(btnLimpiarC, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 40, 140, 40));
 
         cb_clientes.setBackground(new java.awt.Color(255, 155, 155));
         cb_clientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel3.add(cb_clientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 230, 50));
+        jPanel3.add(cb_clientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 230, 50));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel5.setText("Fecha:");
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel7.setText("Fecha:");
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, -1, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 1000, 290));
 
@@ -201,7 +190,6 @@ public class Principal extends javax.swing.JFrame {
         tableDesc.setBackground(new java.awt.Color(255, 155, 155));
         tableDesc.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         tableDesc.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        tableDesc.setForeground(new java.awt.Color(0, 0, 0));
         tableDesc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -269,7 +257,7 @@ public class Principal extends javax.swing.JFrame {
             try {
                 
                 acceso.obtenerDetalleVentaDAO().insertar(new DetalleVenta(acceso.obtenerServicioDAO().consultarPorNombre("Lavado").getIdServicio(),
-                        acceso.obtenerServicioDAO().consultarPorNombre("Lavado").getCosto(), acceso.obtenerClienteDAO().consultarPorNombre(txtNombreCliente.getText()).getIdcliente(),0));
+                        acceso.obtenerServicioDAO().consultarPorNombre("Lavado").getCosto(), acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString()).getIdcliente(),0));
             } catch (SQLException ex) {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
@@ -281,7 +269,7 @@ public class Principal extends javax.swing.JFrame {
         if(cbPlanchado.isSelected()){
             try {
                 acceso.obtenerDetalleVentaDAO().insertar(new DetalleVenta(acceso.obtenerServicioDAO().consultarPorNombre("Planchado").getIdServicio(),
-                        acceso.obtenerServicioDAO().consultarPorNombre("Planchado").getCosto(), acceso.obtenerClienteDAO().consultarPorNombre(txtNombreCliente.getText()).getIdcliente(),0));
+                        acceso.obtenerServicioDAO().consultarPorNombre("Planchado").getCosto(), acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString()).getIdcliente(),0));
             } catch (SQLException ex) {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
@@ -321,14 +309,6 @@ public class Principal extends javax.swing.JFrame {
         limpiarTabla();
     }//GEN-LAST:event_btnLimpiarC1ActionPerformed
 
-    private void txtTelefonoClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoClienteKeyTyped
-        // TODO add your handling code here:
-//        if (!validar.validarTelefono(txtTelefonoCliente.getText())) {
-//            JOptionPane.showMessageDialog(this, "Por favor, ingrese un número telefónico válido.", "Advertencia",1);
-//        }
-
-    }//GEN-LAST:event_txtTelefonoClienteKeyTyped
-
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         if (jDateChooser2.getDate().after(jDateChooser2.getDate())) {
@@ -341,29 +321,6 @@ public class Principal extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnRegistrarActionPerformed
-
-    private void txtTelefonoClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoClienteKeyPressed
-        String numero = txtTelefonoCliente.getText();
-        int tamanio = numero.length();
-        
-        if (evt.getKeyChar() >= '0' && evt.getKeyChar() <= '9') {
-            if (tamanio < 10) 
-                txtTelefonoCliente.setEditable(true);
-            else
-                txtTelefonoCliente.setEditable(false);
-                 
-        }else{
-            if (evt.getExtendedKeyCode()==KeyEvent.VK_BACKSPACE || evt.getExtendedKeyCode()==KeyEvent.VK_DELETE ) 
-                txtTelefonoCliente.setEditable(true);
-            else
-                txtTelefonoCliente.setEditable(false);
-            
-        }
-    }//GEN-LAST:event_txtTelefonoClienteKeyPressed
-
-    private void txtNombreClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreClienteActionPerformed
     private void limpiarTabla() {
         tableDesc.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{
@@ -427,7 +384,9 @@ public class Principal extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -438,8 +397,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField txtDescRopa;
     private javax.swing.JTextField txtImporte;
     private javax.swing.JTextField txtNoPiezas;
-    private javax.swing.JTextField txtNombreCliente;
     private javax.swing.JTextField txtPrecioU;
-    private javax.swing.JTextField txtTelefonoCliente;
     // End of variables declaration//GEN-END:variables
 }
