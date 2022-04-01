@@ -29,24 +29,25 @@ import validacion.*;
  * @author PC
  */
 public class Principal extends javax.swing.JFrame {
+
     ValidarCampos validar = new ValidarCampos();
     FactoryAccesoDatos acceso = new FactoryAccesoDatos();
     static float importe = 0;
     ArrayList<DetalleVenta> detallesVenta;
+
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
         this.tableDesc.setShowGrid(true);
-       // llenarComboboxClientes();
-        
+        // llenarComboboxClientes();
 
         TextPrompt phPiezas = new TextPrompt("Inserte el número de piezas", txtNoPiezas);
         TextPrompt phDescripcion = new TextPrompt("Inserte una descripción", txtDescRopa);
         TextPrompt phPrecioU = new TextPrompt("Inserte el precio unitario", txtPrecioU);
         TextPrompt phImporte = new TextPrompt("Inserte el importe", txtImporte);
-        
+
         try {
             cb_clientes.setModel(acceso.obtenerClienteDAO().consultarClientesCB());
         } catch (Exception ex) {
@@ -138,15 +139,10 @@ public class Principal extends javax.swing.JFrame {
         });
         jPanel2.add(txtNoPiezas, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 270, 40));
         jPanel2.add(txtDescRopa, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 741, 70));
-        jPanel2.add(txtPrecioU, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 180, 50));
+        jPanel2.add(txtPrecioU, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 180, 50));
 
         txtImporte.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtImporte.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtImporteActionPerformed(evt);
-            }
-        });
-        jPanel2.add(txtImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 180, 50));
+        jPanel2.add(txtImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 180, 50));
 
         btnLimpiarC1.setBackground(new java.awt.Color(255, 153, 153));
         btnLimpiarC1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -184,10 +180,14 @@ public class Principal extends javax.swing.JFrame {
 
         tableDesc.setBackground(new java.awt.Color(255, 155, 155));
         tableDesc.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        tableDesc.setFont(new java.awt.Font("Tahoma", 0, 12));
-        tableDesc.setForeground(new java.awt.Color(255, 255, 255));
+        tableDesc.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tableDesc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
                 "PZ", "Descripción", "Servicio", "Precio Unitario ", "Importe "
@@ -244,26 +244,24 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // Se agregan los detalle venta
-        actualizarTabla();
-        
         double precioUnit = 0.0;
-        if(cbLavado.isSelected()){
+        if (cbLavado.isSelected()) {
             try {
                 //Agregar los ids del cliente seleccionado
                 acceso.obtenerDetalleVentaDAO().insertar(new DetalleVenta(acceso.obtenerServicioDAO().consultarPorNombre("Lavado").getIdServicio(),
-                        acceso.obtenerServicioDAO().consultarPorNombre("Lavado").getCosto(), 1,0));
+                        acceso.obtenerServicioDAO().consultarPorNombre("Lavado").getCosto(), acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString()).getIdcliente(), 0));
             } catch (SQLException ex) {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             }
             precioUnit += acceso.obtenerServicioDAO().consultarPorNombre("Lavado").getCosto();
-            
+
         }
-        if(cbPlanchado.isSelected()){
+        if (cbPlanchado.isSelected()) {
             try {
                 acceso.obtenerDetalleVentaDAO().insertar(new DetalleVenta(acceso.obtenerServicioDAO().consultarPorNombre("Planchado").getIdServicio(),
-                        acceso.obtenerServicioDAO().consultarPorNombre("Planchado").getCosto(), 1,0));
+                        acceso.obtenerServicioDAO().consultarPorNombre("Planchado").getCosto(), acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString()).getIdcliente(), 0));
             } catch (SQLException ex) {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
@@ -271,12 +269,12 @@ public class Principal extends javax.swing.JFrame {
             }
             precioUnit += acceso.obtenerServicioDAO().consultarPorNombre("Planchado").getCosto();
         }
-        
+
         txtPrecioU.setText(String.valueOf(precioUnit));
         importe += importe;
-        
+
         //Falta agregarlos al arraylist
-        
+
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnCancelarRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarRActionPerformed
@@ -301,43 +299,23 @@ public class Principal extends javax.swing.JFrame {
         txtPrecioU.setText("");
         limpiarTabla();
     }//GEN-LAST:event_btnLimpiarC1ActionPerformed
-    private void actualizarTabla(){
-        String servicio = "";
+    private void actualizarTabla() {
         DefaultTableModel modelo = (DefaultTableModel) tableDesc.getModel();
-        Object [] fila = new Object[5];
-        fila[0] = txtNoPiezas.getText();
-        fila[1] = txtDescRopa.getText();
-        //Servicio
-        if(cbLavado.isSelected())
-            servicio = servicio + "Lavado ";
-        
-        if(cbPlanchado.isSelected())
-            servicio = servicio + "Planchado ";
-        
-        fila[2] = servicio;
-        fila[3] = "$ " + txtPrecioU.getText();
-        fila[4] = "$ " + txtImporte.getText();
-        
-        modelo.addRow(fila);
-        tableDesc.setModel(modelo);
-        
+        Object[] fila = new Object[5];
+
     }
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         if (jDateChooser2.getDate().after(jDateChooser2.getDate())) {
             try {
                 // falta obtener el usuario de la sesión actual y guardar los detalle venta en el arreglo:
-                acceso.obtenerVentaDAO().insertar(new Venta(new java.sql.Date(jDateChooser1.getDate().getTime()), importe, acceso.obtenerUsuarioDAO().consultarPorId(1), detallesVenta));
+                acceso.obtenerVentaDAO().insertar(new Venta(new java.sql.Date(jDateChooser1.getDate().getTime()), importe, acceso.obtenerUsuarioDAO().consultarPorId(0), detallesVenta));
             } catch (Exception ex) {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
     }//GEN-LAST:event_btnRegistrarActionPerformed
-
-    private void txtImporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtImporteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtImporteActionPerformed
     private void limpiarTabla() {
         tableDesc.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{
@@ -351,8 +329,7 @@ public class Principal extends javax.swing.JFrame {
                 }
         ));
     }
-    
-    
+
     /**
      * @param args the command line arguments
      */
