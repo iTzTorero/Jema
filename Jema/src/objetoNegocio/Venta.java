@@ -29,6 +29,12 @@ public class Venta {
         this.usuario = usuario;
         this.detalleVenta = detalleVenta;
     }
+     public Venta(Date fecha, float total, Usuario usuario, ArrayList<DetalleVenta> detalleVenta) {
+        this.fecha = fecha;
+        this.total = total;
+        this.usuario = usuario;
+        this.detalleVenta = detalleVenta;
+    }
 
     public Date getFecha() {
         return fecha;

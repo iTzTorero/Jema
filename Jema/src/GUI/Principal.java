@@ -6,10 +6,15 @@
 package GUI;
 
 import factory.FactoryAccesoDatos;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import objetoNegocio.DetalleVenta;
 import objetoNegocio.Venta;
 import validacion.*;
 
@@ -20,6 +25,8 @@ import validacion.*;
 public class Principal extends javax.swing.JFrame {
     ValidarCampos validar = new ValidarCampos();
     FactoryAccesoDatos acceso = new FactoryAccesoDatos();
+    static float importe = 0;
+    ArrayList<DetalleVenta> detallesVenta;
     /**
      * Creates new form Principal
      */
@@ -227,6 +234,11 @@ public class Principal extends javax.swing.JFrame {
         btnRegistrar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnRegistrar.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistrar.setText("Registrar ");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 930, 230, 60));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -256,10 +268,36 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // Se agregan los detalle venta
+        double precioUnit = 0.0;
         if(cbLavado.isSelected()){
+            try {
+                
+                acceso.obtenerDetalleVentaDAO().insertar(new DetalleVenta(acceso.obtenerServicioDAO().consultarPorNombre("Lavado").getIdServicio(),
+                        acceso.obtenerServicioDAO().consultarPorNombre("Lavado").getCosto(), acceso.obtenerClienteDAO().consultarPorNombre(txtNombreCliente.getText()).getIdcliente(),0));
+            } catch (SQLException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            precioUnit += acceso.obtenerServicioDAO().consultarPorNombre("Lavado").getCosto();
             
         }
-        acceso.obtenerDetalleVentaDAO().insertar(new DetalleVenta());
+        if(cbPlanchado.isSelected()){
+            try {
+                acceso.obtenerDetalleVentaDAO().insertar(new DetalleVenta(acceso.obtenerServicioDAO().consultarPorNombre("Planchado").getIdServicio(),
+                        acceso.obtenerServicioDAO().consultarPorNombre("Planchado").getCosto(), acceso.obtenerClienteDAO().consultarPorNombre(txtNombreCliente.getText()).getIdcliente(),0));
+            } catch (SQLException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            precioUnit += acceso.obtenerServicioDAO().consultarPorNombre("Planchado").getCosto();
+        }
+        
+        txtPrecioU.setText(String.valueOf(precioUnit));
+        importe += importe;
+        
+        //Falta agregarlos al arraylist
         
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -294,6 +332,15 @@ public class Principal extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_txtTelefonoClienteKeyTyped
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        try {
+            // falta obtener el usuario de la sesión actual y guardar los detalle venta en el arreglo:
+            acceso.obtenerVentaDAO().insertar(new Venta(new java.sql.Date(jDateChooser1.getDate().getTime()), importe, acceso.obtenerUsuarioDAO().consultarPorId(1),detallesVenta));
+        } catch (Exception ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnRegistrarActionPerformed
     private void limpiarTabla() {
         tableDesc.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{

@@ -57,5 +57,18 @@ public class ServicioDAO extends DatabaseConection implements IDAO<Servicio> {
         }
         return null;
     }
+    
+    public Servicio consultarPorNombre(String nombre) {
+        try {
+            String sql = String.format("SELECT * FROM 'servicio' WHERE nombre = %d", nombre);
+            ResultSet rs = stmt.executeQuery(sql);
+            rs.next();
+            return new Servicio(rs.getNString("nombre"), rs.getInt("costo"));
+        }catch(SQLException e){
+            
+        }
+        return null;
+
+    }
 
 }
