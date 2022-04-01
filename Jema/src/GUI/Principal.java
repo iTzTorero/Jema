@@ -185,10 +185,11 @@ public class Principal extends javax.swing.JFrame {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
-                "PZ", "Descripción", "Precio Unitario ", "Importe "
+                "PZ", "Descripción", "Servicio", "Precio Unitario ", "Importe "
             }
         ));
         tableDesc.setGridColor(new java.awt.Color(255, 255, 255));
@@ -298,6 +299,8 @@ public class Principal extends javax.swing.JFrame {
         limpiarTabla();
     }//GEN-LAST:event_btnLimpiarC1ActionPerformed
     private void actualizarTabla(){
+        DefaultTableModel modelo = (DefaultTableModel) tableDesc.getModel();
+        Object [] fila = new Object[5];
         
     }
 
