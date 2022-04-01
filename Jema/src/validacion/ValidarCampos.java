@@ -24,4 +24,8 @@ public class ValidarCampos {
                 + "[\\s|\\-|\\.]?){2})?)?)$/");
     }
     
+    public boolean validarNumero(String num){
+        return num.matches("[0-9]+");
+    }
+    
 }
