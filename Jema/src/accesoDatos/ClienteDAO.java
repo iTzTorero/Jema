@@ -75,6 +75,13 @@ public class ClienteDAO extends DatabaseConection implements IDAO<Cliente> {
         rs.next();
         return new Cliente(rs.getNString("nombre"),rs.getNString("telefono1"),rs.getNString("telefono2"));
     }
+    
+    public Cliente consultarPorNombre(String nombre) throws SQLException{
+        String sql = String.format("SELECT * FROM 'cliente' WHERE nombre = %d", nombre);
+        ResultSet rs = stmt.executeQuery(sql);
+        rs.next();
+        return new Cliente(rs.getNString("nombre"),rs.getNString("telefono1"),rs.getNString("telefono2"));
+    }
 
     @Override
     public ResultSet consultarTodos() throws Exception {

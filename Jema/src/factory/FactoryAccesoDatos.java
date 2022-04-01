@@ -6,6 +6,7 @@
 package factory;
 
 import accesoDatos.*;
+import java.sql.ResultSet;
 
 /**
  *

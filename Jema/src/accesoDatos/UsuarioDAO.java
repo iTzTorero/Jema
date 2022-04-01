@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import objetoNegocio.Cliente;
 import objetoNegocio.Usuario;
 
 /**
@@ -68,6 +69,14 @@ public class UsuarioDAO extends DatabaseConection implements IDAO<Usuario> {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    
+    public Usuario consultarUsuarioPorNombre(String nombre) throws SQLException{
+        String sql = String.format("SELECT * FROM 'usuario' WHERE nombre = %d", nombre);
+        ResultSet rs  = stmt.executeQuery(sql);
+        rs.next();
+        return new Usuario(rs.getNString("nombre"), rs.getNString("password"), rs.getNString("direccion"), rs.getNString("telefono1"));
+       
     }
 
 }

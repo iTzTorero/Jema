@@ -5,10 +5,12 @@
  */
 package GUI;
 
+import factory.FactoryAccesoDatos;
 import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import objetoNegocio.Venta;
 import validacion.*;
 
 /**
@@ -17,6 +19,7 @@ import validacion.*;
  */
 public class Principal extends javax.swing.JFrame {
     ValidarCampos validar = new ValidarCampos();
+    FactoryAccesoDatos acceso = new FactoryAccesoDatos();
     /**
      * Creates new form Principal
      */
@@ -56,6 +59,8 @@ public class Principal extends javax.swing.JFrame {
         btnLimpiarC1 = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
+        cbPlanchado = new javax.swing.JCheckBox();
+        cbLavado = new javax.swing.JCheckBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableDesc = new javax.swing.JTable();
         btnCancelarR = new javax.swing.JButton();
@@ -177,6 +182,16 @@ public class Principal extends javax.swing.JFrame {
         jLabel9.setText("Descripción");
         jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 105, -1, -1));
 
+        cbPlanchado.setBackground(new java.awt.Color(255, 255, 255));
+        cbPlanchado.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        cbPlanchado.setText("Planchado");
+        jPanel2.add(cbPlanchado, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 230, -1, -1));
+
+        cbLavado.setBackground(new java.awt.Color(255, 255, 255));
+        cbLavado.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        cbLavado.setText("Lavado");
+        jPanel2.add(cbLavado, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, -1, -1));
+
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 1000, 350));
 
         tableDesc.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -240,7 +255,12 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNoPiezasActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        // TODO add your handling code here:
+        // Se agregan los detalle venta
+        if(cbLavado.isSelected()){
+            
+        }
+        acceso.obtenerDetalleVentaDAO().insertar(new DetalleVenta());
+        
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnCancelarRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarRActionPerformed
@@ -328,6 +348,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btnLimpiarC;
     private javax.swing.JButton btnLimpiarC1;
     private javax.swing.JButton btnRegistrar;
+    private javax.swing.JCheckBox cbLavado;
+    private javax.swing.JCheckBox cbPlanchado;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
