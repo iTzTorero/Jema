@@ -47,11 +47,11 @@ public class ClienteDAO extends DatabaseConection implements IDAO<Cliente> {
                 obj.getTelefono1(),
                 obj.getTelefono2(),
                 obj.getIdcliente());
-        
+
         Statement statement = con.createStatement();
-        
+
         int registroAfectado = statement.executeUpdate(sql);
-        if(registroAfectado != 1){
+        if (registroAfectado != 1) {
             throw new Exception("El cliente no ha podido ser actualizado.");
         }
     }
@@ -60,27 +60,33 @@ public class ClienteDAO extends DatabaseConection implements IDAO<Cliente> {
     public void eliminar(int id) throws Exception {
         String sql = String.format("DELETE FROM cliente WHERE idcliente = %d", id);
         Statement statement = con.createStatement();
-        
+
         int registroAfectado = statement.executeUpdate(sql);
         if (registroAfectado != 1) {
             throw new Exception("El cliente no ha podido ser eliminado.");
         }
     }
 
-
     @Override
     public Cliente consultarPorId(int id) throws Exception {
         String sql = "SELECT * FROM `cliente` WHERE cliente.idcliente = 1";
-        ResultSet rs  = stmt.executeQuery(sql);
+        ResultSet rs = stmt.executeQuery(sql);
         rs.next();
-        return new Cliente(rs.getNString("nombre"),rs.getNString("telefono1"),rs.getNString("telefono2"));
+        return new Cliente(rs.getNString("nombre"), rs.getNString("telefono1"), rs.getNString("telefono2"));
     }
-    
-    public Cliente consultarPorNombre(String nombre) throws SQLException{
+
+    public Cliente consultarPorNombre(String nombre) throws SQLException {
         String sql = String.format("SELECT * FROM 'cliente' WHERE nombre = %d", nombre);
         ResultSet rs = stmt.executeQuery(sql);
         rs.next();
-        return new Cliente(rs.getNString("nombre"),rs.getNString("telefono1"),rs.getNString("telefono2"));
+        return new Cliente(rs.getNString("nombre"), rs.getNString("telefono1"), rs.getNString("telefono2"));
+    }
+
+    public Cliente consultarPorTelefono(String telefono) throws SQLException {
+        String sql = String.format("SELECT * FROM 'cliente' WHERE telefono1 = %d", telefono);
+        ResultSet rs = stmt.executeQuery(sql);
+        rs.next();
+        return new Cliente(rs.getNString("nombre"), rs.getNString("telefono1"), rs.getNString("telefono2"));
     }
 
     @Override
@@ -93,5 +99,7 @@ public class ClienteDAO extends DatabaseConection implements IDAO<Cliente> {
         }
         return null;
     }
+    
+   
 
 }
