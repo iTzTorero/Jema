@@ -262,7 +262,7 @@ public class Principal extends javax.swing.JFrame {
                 detallesVenta.add(new DetalleVenta(acceso.obtenerServicioDAO().consultarPorNombre("Planchado").getIdServicio(),
                         acceso.obtenerServicioDAO().consultarPorNombre("Planchado").getCosto(), acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString()).getIdcliente(), 0));
             
-                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+               
             
             
            //     acceso.obtenerDetalleVentaDAO().insertar(new DetalleVenta(acceso.obtenerServicioDAO().consultarPorNombre("Planchado").getIdServicio(),

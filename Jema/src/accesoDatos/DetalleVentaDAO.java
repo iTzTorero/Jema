@@ -5,6 +5,7 @@
  */
 package accesoDatos;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -16,15 +17,23 @@ import objetoNegocio.DetalleVenta;
  *
  * @author Juan Pablo
  */
-public class DetalleVentaDAO extends DatabaseConection implements IDAO<DetalleVenta>{
+public class DetalleVentaDAO extends DatabaseConection implements IDAO<DetalleVenta> {
 
     public DetalleVentaDAO() {
-    super();
+        super();
     }
 
     @Override
     public void insertar(DetalleVenta obj) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "INSERT INTO `detalle_venta` (`iddetalle_venta`, `idestadoventa`, `precio`, `idcliente`, `idusuario`, `idventa`) VALUES (NULL, '1', '12.50', '1', '1', '2');";
+        
+        PreparedStatement ps;
+        ps = con.prepareStatement(sql);
+        ps.setDate(1, obj.getFecha());
+        ps.setFloat(2, obj.getTotal());
+
+        ps.executeUpdate();
+        ps.close();
     }
 
     @Override
@@ -34,7 +43,7 @@ public class DetalleVentaDAO extends DatabaseConection implements IDAO<DetalleVe
 
     @Override
     public void eliminar(int id) throws Exception {
-       String sql = String.format("DELETE FROM detalleventa WHERE iddetalle_venta = %d", id);
+        String sql = String.format("DELETE FROM detalleventa WHERE iddetalle_venta = %d", id);
         Statement statement = con.createStatement();
 
         int registroAfectado = statement.executeUpdate(sql);
@@ -59,6 +68,4 @@ public class DetalleVentaDAO extends DatabaseConection implements IDAO<DetalleVe
         return null;
     }
 
-    
-    
 }
