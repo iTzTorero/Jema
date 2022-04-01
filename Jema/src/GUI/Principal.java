@@ -29,24 +29,25 @@ import validacion.*;
  * @author PC
  */
 public class Principal extends javax.swing.JFrame {
+
     ValidarCampos validar = new ValidarCampos();
     FactoryAccesoDatos acceso = new FactoryAccesoDatos();
     static float importe = 0;
     ArrayList<DetalleVenta> detallesVenta;
+
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
         this.tableDesc.setShowGrid(true);
-       // llenarComboboxClientes();
-        
+        // llenarComboboxClientes();
 
         TextPrompt phPiezas = new TextPrompt("Inserte el número de piezas", txtNoPiezas);
         TextPrompt phDescripcion = new TextPrompt("Inserte una descripción", txtDescRopa);
         TextPrompt phPrecioU = new TextPrompt("Inserte el precio unitario", txtPrecioU);
         TextPrompt phImporte = new TextPrompt("Inserte el importe", txtImporte);
-        
+
         try {
             cb_clientes.setModel(acceso.obtenerClienteDAO().consultarClientesCB());
         } catch (Exception ex) {
@@ -244,23 +245,23 @@ public class Principal extends javax.swing.JFrame {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // Se agregan los detalle venta
         double precioUnit = 0.0;
-        if(cbLavado.isSelected()){
+        if (cbLavado.isSelected()) {
             try {
                 //Agregar los ids del cliente seleccionado
                 acceso.obtenerDetalleVentaDAO().insertar(new DetalleVenta(acceso.obtenerServicioDAO().consultarPorNombre("Lavado").getIdServicio(),
-                        acceso.obtenerServicioDAO().consultarPorNombre("Lavado").getCosto(), 1,0));
+                        acceso.obtenerServicioDAO().consultarPorNombre("Lavado").getCosto(), acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString()).getIdcliente(), 0));
             } catch (SQLException ex) {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             }
             precioUnit += acceso.obtenerServicioDAO().consultarPorNombre("Lavado").getCosto();
-            
+
         }
-        if(cbPlanchado.isSelected()){
+        if (cbPlanchado.isSelected()) {
             try {
                 acceso.obtenerDetalleVentaDAO().insertar(new DetalleVenta(acceso.obtenerServicioDAO().consultarPorNombre("Planchado").getIdServicio(),
-                        acceso.obtenerServicioDAO().consultarPorNombre("Planchado").getCosto(), 1,0));
+                        acceso.obtenerServicioDAO().consultarPorNombre("Planchado").getCosto(), acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString()).getIdcliente(), 0));
             } catch (SQLException ex) {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
@@ -268,12 +269,12 @@ public class Principal extends javax.swing.JFrame {
             }
             precioUnit += acceso.obtenerServicioDAO().consultarPorNombre("Planchado").getCosto();
         }
-        
+
         txtPrecioU.setText(String.valueOf(precioUnit));
         importe += importe;
-        
+
         //Falta agregarlos al arraylist
-        
+
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnCancelarRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarRActionPerformed
@@ -298,17 +299,17 @@ public class Principal extends javax.swing.JFrame {
         txtPrecioU.setText("");
         limpiarTabla();
     }//GEN-LAST:event_btnLimpiarC1ActionPerformed
-    private void actualizarTabla(){
+    private void actualizarTabla() {
         DefaultTableModel modelo = (DefaultTableModel) tableDesc.getModel();
-        Object [] fila = new Object[5];
-        
+        Object[] fila = new Object[5];
+
     }
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         if (jDateChooser2.getDate().after(jDateChooser2.getDate())) {
             try {
                 // falta obtener el usuario de la sesión actual y guardar los detalle venta en el arreglo:
-                acceso.obtenerVentaDAO().insertar(new Venta(new java.sql.Date(jDateChooser1.getDate().getTime()), importe, acceso.obtenerUsuarioDAO().consultarPorId(1), detallesVenta));
+                acceso.obtenerVentaDAO().insertar(new Venta(new java.sql.Date(jDateChooser1.getDate().getTime()), importe, acceso.obtenerUsuarioDAO().consultarPorId(0), detallesVenta));
             } catch (Exception ex) {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -328,8 +329,7 @@ public class Principal extends javax.swing.JFrame {
                 }
         ));
     }
-    
-    
+
     /**
      * @param args the command line arguments
      */
