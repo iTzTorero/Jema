@@ -91,7 +91,7 @@ public class ClienteDAO extends DatabaseConection implements IDAO<Cliente> {
 
     @Override
     public ResultSet consultarTodos() throws Exception {
-        String sql = "SELECT * FROM `cliente`";
+        String sql = "SELECT * FROM `cliente` ORDER BY nombre ASC";
         try {
             return stmt.executeQuery(sql);
         } catch (SQLException ex) {

@@ -5,7 +5,12 @@
  */
 package GUI;
 
+import accesoDatos.ClienteDAO;
+import accesoDatos.DatabaseConection;
+import com.sun.glass.events.KeyEvent;
 import factory.FactoryAccesoDatos;
+import java.awt.Color;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,6 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import objetoNegocio.DetalleVenta;
 import objetoNegocio.Venta;
+import textPrompt.TextPrompt;
 import validacion.*;
 
 /**
@@ -32,6 +38,15 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        this.tableDesc.setShowGrid(true);
+        llenarComboboxClientes();
+        
+        TextPrompt phTelefono = new TextPrompt("Inserte el número telefonico", txtTelefonoCliente);
+        TextPrompt phPiezas = new TextPrompt("Inserte el número de piezas", txtNoPiezas);
+        TextPrompt phDescripcion = new TextPrompt("Inserte una descripción", txtDescRopa);
+        TextPrompt phPrecioU = new TextPrompt("Inserte el precio unitario", txtPrecioU);
+        TextPrompt phImporte = new TextPrompt("Inserte el importe", txtImporte);
+        
         
     }
 
@@ -46,8 +61,6 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -55,17 +68,14 @@ public class Principal extends javax.swing.JFrame {
         txtNombreCliente = new javax.swing.JTextField();
         txtTelefonoCliente = new javax.swing.JTextField();
         btnLimpiarC = new javax.swing.JButton();
+        cb_clientes = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         txtNoPiezas = new javax.swing.JTextField();
         txtDescRopa = new javax.swing.JTextField();
         txtPrecioU = new javax.swing.JTextField();
         txtImporte = new javax.swing.JTextField();
         btnLimpiarC1 = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
         cbPlanchado = new javax.swing.JCheckBox();
         cbLavado = new javax.swing.JCheckBox();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -86,24 +96,16 @@ public class Principal extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Cliente ");
-        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 34, -1, -1));
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setText("Telefono ");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 89, -1, -1));
-        jPanel3.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 150, 35));
+        jPanel3.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 180, 35));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Fecha:");
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 158, -1, -1));
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Entrega:");
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 70, 35));
-        jPanel3.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 150, 150, 35));
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 70, 35));
+        jPanel3.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, 180, 35));
 
         txtNombreCliente.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtNombreCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -111,15 +113,18 @@ public class Principal extends javax.swing.JFrame {
                 txtNombreClienteActionPerformed(evt);
             }
         });
-        jPanel3.add(txtNombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 31, 486, -1));
+        jPanel3.add(txtNombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 20, 260, 70));
 
         txtTelefonoCliente.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtTelefonoCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTelefonoClienteKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtTelefonoClienteKeyTyped(evt);
             }
         });
-        jPanel3.add(txtTelefonoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 93, 170, -1));
+        jPanel3.add(txtTelefonoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 260, 40));
 
         btnLimpiarC.setBackground(new java.awt.Color(255, 153, 153));
         btnLimpiarC.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -132,23 +137,15 @@ public class Principal extends javax.swing.JFrame {
         });
         jPanel3.add(btnLimpiarC, new org.netbeans.lib.awtextra.AbsoluteConstraints(793, 238, 140, 40));
 
+        cb_clientes.setBackground(new java.awt.Color(255, 155, 155));
+        cb_clientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel3.add(cb_clientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 230, 50));
+
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 1000, 290));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel5.setText("Piezas: ");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 43, -1, -1));
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel7.setText("Precio Unit ");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 172, -1, -1));
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel8.setText("Importe ");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 234, -1, -1));
 
         txtNoPiezas.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtNoPiezas.addActionListener(new java.awt.event.ActionListener() {
@@ -156,12 +153,12 @@ public class Principal extends javax.swing.JFrame {
                 txtNoPiezasActionPerformed(evt);
             }
         });
-        jPanel2.add(txtNoPiezas, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 34, 82, 40));
-        jPanel2.add(txtDescRopa, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 88, 741, 39));
-        jPanel2.add(txtPrecioU, new org.netbeans.lib.awtextra.AbsoluteConstraints(147, 229, 117, 39));
+        jPanel2.add(txtNoPiezas, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 270, 40));
+        jPanel2.add(txtDescRopa, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 741, 70));
+        jPanel2.add(txtPrecioU, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 180, 50));
 
         txtImporte.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel2.add(txtImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(147, 164, 117, 39));
+        jPanel2.add(txtImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 180, 50));
 
         btnLimpiarC1.setBackground(new java.awt.Color(255, 153, 153));
         btnLimpiarC1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -185,25 +182,22 @@ public class Principal extends javax.swing.JFrame {
         });
         jPanel2.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(793, 290, 140, 40));
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel9.setText("Descripción");
-        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 105, -1, -1));
-
         cbPlanchado.setBackground(new java.awt.Color(255, 255, 255));
         cbPlanchado.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         cbPlanchado.setText("Planchado");
-        jPanel2.add(cbPlanchado, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 230, -1, -1));
+        jPanel2.add(cbPlanchado, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 260, -1, -1));
 
         cbLavado.setBackground(new java.awt.Color(255, 255, 255));
         cbLavado.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         cbLavado.setText("Lavado");
-        jPanel2.add(cbLavado, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, -1, -1));
+        jPanel2.add(cbLavado, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 210, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 1000, 350));
 
+        tableDesc.setBackground(new java.awt.Color(255, 155, 155));
         tableDesc.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         tableDesc.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        tableDesc.setForeground(new java.awt.Color(255, 153, 153));
+        tableDesc.setForeground(new java.awt.Color(0, 0, 0));
         tableDesc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -215,6 +209,8 @@ public class Principal extends javax.swing.JFrame {
                 "PZ", "Descripción", "Precio Unitario ", "Importe "
             }
         ));
+        tableDesc.setGridColor(new java.awt.Color(255, 255, 255));
+        tableDesc.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tableDesc);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 70, 730, 470));
@@ -257,10 +253,6 @@ public class Principal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtNombreClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreClienteActionPerformed
 
     private void txtNoPiezasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNoPiezasActionPerformed
         // TODO add your handling code here:
@@ -327,12 +319,13 @@ public class Principal extends javax.swing.JFrame {
 
     private void txtTelefonoClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoClienteKeyTyped
         // TODO add your handling code here:
-        if (!validar.validarTelefono(txtTelefonoCliente.getText())) {
-            JOptionPane.showMessageDialog(this, "Por favor, ingrese un número telefónico válido.", "Advertencia",1);
-        }
+//        if (!validar.validarTelefono(txtTelefonoCliente.getText())) {
+//            JOptionPane.showMessageDialog(this, "Por favor, ingrese un número telefónico válido.", "Advertencia",1);
+//        }
 
     }//GEN-LAST:event_txtTelefonoClienteKeyTyped
 
+    
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         try {
             // falta obtener el usuario de la sesión actual y guardar los detalle venta en el arreglo:
@@ -341,6 +334,29 @@ public class Principal extends javax.swing.JFrame {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void txtTelefonoClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoClienteKeyPressed
+        String numero = txtTelefonoCliente.getText();
+        int tamanio = numero.length();
+        
+        if (evt.getKeyChar() >= '0' && evt.getKeyChar() <= '9') {
+            if (tamanio < 10) 
+                txtTelefonoCliente.setEditable(true);
+            else
+                txtTelefonoCliente.setEditable(false);
+                 
+        }else{
+            if (evt.getExtendedKeyCode()==KeyEvent.VK_BACKSPACE || evt.getExtendedKeyCode()==KeyEvent.VK_DELETE ) 
+                txtTelefonoCliente.setEditable(true);
+            else
+                txtTelefonoCliente.setEditable(false);
+            
+        }
+    }//GEN-LAST:event_txtTelefonoClienteKeyPressed
+
+    private void txtNombreClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreClienteActionPerformed
     private void limpiarTabla() {
         tableDesc.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{
@@ -353,6 +369,23 @@ public class Principal extends javax.swing.JFrame {
                     "PZ", "Descripción", "Precio Unitario ", "Importe "
                 }
         ));
+    }
+    
+    private void llenarComboboxClientes(){
+        ClienteDAO clienteDAO = new ClienteDAO();
+        try {  
+            cb_clientes.addItem("Seleccione un cliente:");
+            ResultSet rs = clienteDAO.consultarTodos();
+            
+            while(rs.next()) {
+                cb_clientes.addItem(rs.getString("nombre"));
+
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
     }
     /**
      * @param args the command line arguments
@@ -397,17 +430,12 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JCheckBox cbLavado;
     private javax.swing.JCheckBox cbPlanchado;
+    private javax.swing.JComboBox<String> cb_clientes;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
