@@ -86,7 +86,9 @@ public class ClienteDAO extends DatabaseConection implements IDAO<Cliente> {
     public DefaultComboBoxModel consultarClientesCB() throws Exception {
 
         DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+         modelo.addElement("Seleccione un cliente:");
         ResultSet rs = consultarTodos();
+        rs.next();
         do {
             modelo.addElement(rs.getString("nombre"));
 

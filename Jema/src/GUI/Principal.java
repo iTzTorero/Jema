@@ -39,7 +39,7 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         this.tableDesc.setShowGrid(true);
-        llenarComboboxClientes();
+       // llenarComboboxClientes();
         
         TextPrompt phTelefono = new TextPrompt("Inserte el número telefonico", txtTelefonoCliente);
         TextPrompt phPiezas = new TextPrompt("Inserte el número de piezas", txtNoPiezas);
@@ -375,22 +375,7 @@ public class Principal extends javax.swing.JFrame {
         ));
     }
     
-    private void llenarComboboxClientes(){
-        ClienteDAO clienteDAO = new ClienteDAO();
-        try {  
-            cb_clientes.addItem("Seleccione un cliente:");
-            ResultSet rs = clienteDAO.consultarTodos();
-            
-            while(rs.next()) {
-                cb_clientes.addItem(rs.getString("nombre"));
-
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-    }
+    
     /**
      * @param args the command line arguments
      */
