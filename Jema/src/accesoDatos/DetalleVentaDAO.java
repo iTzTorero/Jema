@@ -29,8 +29,8 @@ public class DetalleVentaDAO extends DatabaseConection implements IDAO<DetalleVe
         
         PreparedStatement ps;
         ps = con.prepareStatement(sql);
-        ps.setDate(1, obj.getFecha());
-        ps.setFloat(2, obj.getTotal());
+//        ps.setDate(1, obj.getFecha());
+//        ps.setFloat(2, obj.getTotal());
 
         ps.executeUpdate();
         ps.close();

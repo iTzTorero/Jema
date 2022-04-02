@@ -5,8 +5,12 @@
  */
 package GUI;
 
+import factory.FactoryAccesoDatos;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import objetoNegocio.Usuario;
 
 /**
  *
@@ -14,6 +18,8 @@ import java.awt.Toolkit;
  */
 public class IniciarSesion extends javax.swing.JFrame {
 
+    
+    FactoryAccesoDatos fad = new FactoryAccesoDatos();
     /**
      * Creates new form IniciarSesion
      */
@@ -38,7 +44,6 @@ public class IniciarSesion extends javax.swing.JFrame {
         ButtonIniciarSesion = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        ButtonMenu = new javax.swing.JButton();
         jPasswordField1 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -86,16 +91,6 @@ public class IniciarSesion extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI Semilight", 3, 18)); // NOI18N
         jLabel3.setText("Lavanderia JEMA");
 
-        ButtonMenu.setText("Menú");
-        ButtonMenu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        ButtonMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonMenuActionPerformed(evt);
-            }
-        });
-
-        jPasswordField1.setText("jPasswordField1");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -114,18 +109,15 @@ public class IniciarSesion extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ButtonMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(134, 134, 134)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(35, 35, 35)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPasswordField1)
-                            .addComponent(TextFieldUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                            .addComponent(TextFieldUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE))))
+                .addContainerGap(222, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(lblTitulo)
@@ -149,10 +141,8 @@ public class IniciarSesion extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addComponent(ButtonIniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ButtonMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
-                .addGap(0, 9, Short.MAX_VALUE))
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                .addGap(0, 13, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -178,14 +168,24 @@ public class IniciarSesion extends javax.swing.JFrame {
     }//GEN-LAST:event_TextFieldUsuarioActionPerformed
 
     private void ButtonIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonIniciarSesionActionPerformed
-        Menu menu = new Menu();
-        this.dispose();
-        menu.setVisible(true);
-    }//GEN-LAST:event_ButtonIniciarSesionActionPerformed
+        String nombre = this.TextFieldUsuario.getText().toUpperCase();
+        String password = new String(this.jPasswordField1.getPassword());
+        try{
 
-    private void ButtonMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonMenuActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_ButtonMenuActionPerformed
+        Usuario user1 = fad.obtenerUsuarioDAO().consultarUsuarioPorNombre(nombre);
+
+           if (user1.getNombre().equalsIgnoreCase(nombre) && user1.getPassword().equalsIgnoreCase(password)) {
+               Menu menu = new Menu();
+               menu.setVisible(true);
+               this.dispose();
+           }else{
+               JOptionPane.showMessageDialog(this, "Usuario/Contraseña Incorrecta","Error al iniciar sesión",JOptionPane.ERROR_MESSAGE);
+           }
+        
+       }catch(SQLException e){
+           JOptionPane.showMessageDialog(this, "No existe el usuario");
+       }
+    }//GEN-LAST:event_ButtonIniciarSesionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -234,7 +234,6 @@ public class IniciarSesion extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonIniciarSesion;
-    private javax.swing.JButton ButtonMenu;
     private javax.swing.JTextField TextFieldUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

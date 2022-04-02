@@ -72,10 +72,12 @@ public class UsuarioDAO extends DatabaseConection implements IDAO<Usuario> {
     }
     
     public Usuario consultarUsuarioPorNombre(String nombre) throws SQLException{
-        String sql = String.format("SELECT * FROM 'usuario' WHERE nombre = %d", nombre);
-        ResultSet rs  = stmt.executeQuery(sql);
+        String sql = String.format("SELECT * FROM usuario WHERE nombre = ?");
+        PreparedStatement pstmt = con.prepareStatement(sql);
+        pstmt.setString(1, nombre);
+        ResultSet rs  = pstmt.executeQuery();
         rs.next();
-        return new Usuario(rs.getNString("nombre"), rs.getNString("password"), rs.getNString("direccion"), rs.getNString("telefono1"));
+        return new Usuario(rs.getNString("nombre"), rs.getNString("contrasena"), rs.getNString("direccion"), rs.getNString("telefono1"));
        
     }
 
