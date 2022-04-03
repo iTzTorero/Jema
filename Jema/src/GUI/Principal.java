@@ -49,6 +49,7 @@ public class Principal extends javax.swing.JFrame {
 
         try {
             cb_clientes.setModel(acceso.obtenerClienteDAO().consultarClientesCB());
+            cb_servicios.setModel(acceso.obtenerServicioDAO().consultarServicioCB());
         } catch (Exception ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -79,7 +80,7 @@ public class Principal extends javax.swing.JFrame {
         txtImporte = new javax.swing.JTextField();
         btnLimpiarC1 = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
-        TipoServicio = new javax.swing.JComboBox<>();
+        cb_servicios = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableDesc = new javax.swing.JTable();
         btnCancelarR = new javax.swing.JButton();
@@ -167,8 +168,8 @@ public class Principal extends javax.swing.JFrame {
         });
         jPanel2.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, 140, 40));
 
-        TipoServicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel2.add(TipoServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, 140, 30));
+        cb_servicios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel2.add(cb_servicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, 140, 30));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 450, 390));
 
@@ -235,10 +236,9 @@ public class Principal extends javax.swing.JFrame {
         // Se agregan los detalle venta
         actualizarTabla();
         double precioUnit = 0.0;
-        if (cbLavado.isSelected()) {
             try {
-                detallesVenta.add(new DetalleVenta(acceso.obtenerServicioDAO().consultarPorNombre("Lavado").getIdServicio(),
-                        acceso.obtenerServicioDAO().consultarPorNombre("Lavado").getCosto(), acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString()).getIdcliente(), 0));
+                detallesVenta.add(new DetalleVenta(acceso.obtenerServicioDAO().consultarPorNombre(cb_servicios.getSelectedItem().toString()).getIdServicio(),
+                        acceso.obtenerServicioDAO().consultarPorNombre(cb_servicios.getSelectedItem().toString()).getCosto(), acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString()).getIdcliente(), 0));
                 //Agregar los ids del cliente seleccionado
        //         acceso.obtenerDetalleVentaDAO().insertar(new DetalleVenta(acceso.obtenerServicioDAO().consultarPorNombre("Lavado").getIdServicio(),
          //               acceso.obtenerServicioDAO().consultarPorNombre("Lavado").getCosto(), acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString()).getIdcliente(), 0));
@@ -247,26 +247,11 @@ public class Principal extends javax.swing.JFrame {
             } catch (Exception ex) {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             }
-            precioUnit += acceso.obtenerServicioDAO().consultarPorNombre("Lavado").getCosto();
 
-        }
-        if (cbPlanchado.isSelected()) {
-            try {
-                detallesVenta.add(new DetalleVenta(acceso.obtenerServicioDAO().consultarPorNombre("Planchado").getIdServicio(),
-                        acceso.obtenerServicioDAO().consultarPorNombre("Planchado").getCosto(), acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString()).getIdcliente(), 0));
-            
-               
-            
-            
-           //     acceso.obtenerDetalleVentaDAO().insertar(new DetalleVenta(acceso.obtenerServicioDAO().consultarPorNombre("Planchado").getIdServicio(),
-             //           acceso.obtenerServicioDAO().consultarPorNombre("Planchado").getCosto(), acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString()).getIdcliente(), 0));
-            } catch (SQLException ex) {
-                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (Exception ex) {
-                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            precioUnit += acceso.obtenerServicioDAO().consultarPorNombre("Planchado").getCosto();
-        }
+        
+
+            precioUnit += acceso.obtenerServicioDAO().consultarPorNombre(cb_servicios.getSelectedItem().toString()).getCosto();
+        
 
         txtPrecioU.setText(String.valueOf(precioUnit));
         importe = (float) (precioUnit * Integer.parseInt(txtNoPiezas.getText()));
@@ -303,10 +288,7 @@ public class Principal extends javax.swing.JFrame {
         Object[] fila = new Object[5];
         fila[0] = txtNoPiezas.getText();
         fila[1] = txtDescRopa.getText();
-        if(cbLavado.isSelected())
-            servicio += "Lavado ";
-        if(cbPlanchado.isSelected())
-            servicio += "Planchado";
+        servicio = cb_servicios.getSelectedItem().toString();
         fila[2] = servicio;
         fila[3] = "$ " + txtPrecioU.getText();
         fila[4] = "$ " + txtImporte.getText();
@@ -379,13 +361,13 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> TipoServicio;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnCancelarR;
     private javax.swing.JButton btnLimpiarC;
     private javax.swing.JButton btnLimpiarC1;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JComboBox<String> cb_clientes;
+    private javax.swing.JComboBox<String> cb_servicios;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel3;

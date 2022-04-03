@@ -37,11 +37,12 @@ public class ServicioDAO extends DatabaseConection implements IDAO<Servicio> {
     public void eliminar(int id) throws Exception {
         String sql = String.format("DELETE FROM servicio WHERE idServicio = %d", id);
         Statement statement = con.createStatement();
-        
+
         int registroAfectado = statement.executeUpdate(sql);
         if (registroAfectado != 1) {
             throw new Exception("El cliente no ha podido ser eliminado.");
-        }    }
+        }
+    }
 
     @Override
     public Servicio consultarPorId(int id) throws Exception {
@@ -58,23 +59,30 @@ public class ServicioDAO extends DatabaseConection implements IDAO<Servicio> {
         }
         return null;
     }
-    
+
     public Servicio consultarPorNombre(String nombre) {
         try {
             String sql = String.format("SELECT * FROM 'servicio' WHERE nombre = %d", nombre);
             ResultSet rs = stmt.executeQuery(sql);
             rs.next();
             return new Servicio(rs.getNString("nombre"), rs.getInt("costo"));
-        }catch(SQLException e){
-            
+        } catch (SQLException e) {
+
         }
         return null;
 
     }
-    
-    public DefaultComboBoxModel consultarServicioCB(){
+
+    public DefaultComboBoxModel consultarServicioCB() throws Exception {
         DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        modelo.addElement("Seleccione un servicio:");
+        ResultSet rs = consultarTodos();
+        rs.next();
+        do {
+            modelo.addElement(rs.getString("nombre"));
+
+        } while (rs.next());
         return modelo;
-    }  
+    }
 
 }
