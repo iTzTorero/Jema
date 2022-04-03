@@ -79,21 +79,19 @@ public class Principal extends javax.swing.JFrame {
         txtImporte = new javax.swing.JTextField();
         btnLimpiarC1 = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
-        cbPlanchado = new javax.swing.JCheckBox();
-        cbLavado = new javax.swing.JCheckBox();
+        TipoServicio = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableDesc = new javax.swing.JTable();
         btnCancelarR = new javax.swing.JButton();
         btnRegistrar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         lblNumNota = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registrar Servicio");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -110,22 +108,23 @@ public class Principal extends javax.swing.JFrame {
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 70, 35));
         jPanel3.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, 180, 35));
 
-        btnLimpiarC.setBackground(new java.awt.Color(255, 153, 153));
+        btnLimpiarC.setBackground(new java.awt.Color(255, 102, 102));
         btnLimpiarC.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnLimpiarC.setForeground(new java.awt.Color(255, 255, 255));
         btnLimpiarC.setText("Limpiar ");
+        btnLimpiarC.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnLimpiarC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarCActionPerformed(evt);
             }
         });
-        jPanel3.add(btnLimpiarC, new org.netbeans.lib.awtextra.AbsoluteConstraints(793, 238, 140, 40));
+        jPanel3.add(btnLimpiarC, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 230, 140, 40));
 
         cb_clientes.setBackground(new java.awt.Color(255, 155, 155));
         cb_clientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel3.add(cb_clientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 230, 50));
+        jPanel3.add(cb_clientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 230, 50));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 1000, 290));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 450, 290));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -137,46 +136,41 @@ public class Principal extends javax.swing.JFrame {
                 txtNoPiezasActionPerformed(evt);
             }
         });
-        jPanel2.add(txtNoPiezas, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 270, 40));
-        jPanel2.add(txtDescRopa, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 741, 70));
-        jPanel2.add(txtPrecioU, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 80, 50));
+        jPanel2.add(txtNoPiezas, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 230, 40));
+        jPanel2.add(txtDescRopa, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 400, 90));
+        jPanel2.add(txtPrecioU, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 220, 50));
 
         txtImporte.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel2.add(txtImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 180, 50));
+        jPanel2.add(txtImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 220, 50));
 
-        btnLimpiarC1.setBackground(new java.awt.Color(255, 153, 153));
+        btnLimpiarC1.setBackground(new java.awt.Color(255, 102, 102));
         btnLimpiarC1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnLimpiarC1.setForeground(new java.awt.Color(255, 255, 255));
         btnLimpiarC1.setText("Limpiar ");
+        btnLimpiarC1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnLimpiarC1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarC1ActionPerformed(evt);
             }
         });
-        jPanel2.add(btnLimpiarC1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 290, 140, 40));
+        jPanel2.add(btnLimpiarC1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, 140, 40));
 
-        btnAgregar.setBackground(new java.awt.Color(255, 153, 153));
+        btnAgregar.setBackground(new java.awt.Color(51, 255, 102));
         btnAgregar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnAgregar.setForeground(new java.awt.Color(255, 255, 255));
         btnAgregar.setText("Agregar");
+        btnAgregar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(793, 290, 140, 40));
+        jPanel2.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, 140, 40));
 
-        cbPlanchado.setBackground(new java.awt.Color(255, 255, 255));
-        cbPlanchado.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        cbPlanchado.setText("Planchado");
-        jPanel2.add(cbPlanchado, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 260, -1, -1));
+        TipoServicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel2.add(TipoServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, 140, 30));
 
-        cbLavado.setBackground(new java.awt.Color(255, 255, 255));
-        cbLavado.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        cbLavado.setText("Lavado");
-        jPanel2.add(cbLavado, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 210, -1, -1));
-
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 1000, 350));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 450, 390));
 
         tableDesc.setBackground(new java.awt.Color(255, 155, 155));
         tableDesc.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -193,43 +187,42 @@ public class Principal extends javax.swing.JFrame {
         tableDesc.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tableDesc);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 70, 730, 470));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, 730, 580));
 
-        btnCancelarR.setBackground(new java.awt.Color(255, 153, 153));
+        btnCancelarR.setBackground(new java.awt.Color(255, 102, 102));
         btnCancelarR.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnCancelarR.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelarR.setText("Cancelar ");
+        btnCancelarR.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnCancelarR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarRActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCancelarR, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 930, 250, 60));
+        jPanel1.add(btnCancelarR, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 670, 250, 60));
 
-        btnRegistrar.setBackground(new java.awt.Color(255, 153, 153));
+        btnRegistrar.setBackground(new java.awt.Color(102, 255, 102));
         btnRegistrar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnRegistrar.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistrar.setText("Registrar ");
+        btnRegistrar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistrarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 930, 230, 60));
+        jPanel1.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 670, 230, 60));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 153, 153));
         jLabel6.setText("NOTA");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1610, 30, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 10, -1, -1));
 
         lblNumNota.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblNumNota.setForeground(new java.awt.Color(255, 153, 153));
         jPanel1.add(lblNumNota, new org.netbeans.lib.awtextra.AbsoluteConstraints(1700, 30, 170, -1));
 
-        jPanel4.setBackground(new java.awt.Color(255, 204, 204));
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 1920, 1050));
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1920, 1050));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 1920, 1060));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -386,13 +379,12 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> TipoServicio;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnCancelarR;
     private javax.swing.JButton btnLimpiarC;
     private javax.swing.JButton btnLimpiarC1;
     private javax.swing.JButton btnRegistrar;
-    private javax.swing.JCheckBox cbLavado;
-    private javax.swing.JCheckBox cbPlanchado;
     private javax.swing.JComboBox<String> cb_clientes;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
@@ -402,7 +394,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblNumNota;
     private javax.swing.JTable tableDesc;

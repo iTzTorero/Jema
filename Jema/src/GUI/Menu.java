@@ -51,6 +51,7 @@ public class Menu extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI Semilight", 3, 24)); // NOI18N
         jLabel4.setText("Lavanderia");
 
+        jButtonSalir.setBackground(new java.awt.Color(255, 102, 102));
         jButtonSalir.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonSalir.setText("Salir");
         jButtonSalir.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -60,6 +61,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        jButtonRegistrarServicio.setBackground(new java.awt.Color(0, 204, 204));
         jButtonRegistrarServicio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonRegistrarServicio.setText("Registrar Servicio");
         jButtonRegistrarServicio.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -69,6 +71,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        jButtonModificarServicio.setBackground(new java.awt.Color(0, 204, 204));
         jButtonModificarServicio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonModificarServicio.setText("Modificar Servicio");
         jButtonModificarServicio.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -78,6 +81,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        jButtonCancelarServicio.setBackground(new java.awt.Color(0, 204, 204));
         jButtonCancelarServicio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonCancelarServicio.setText("Cancelar Servicio");
         jButtonCancelarServicio.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
