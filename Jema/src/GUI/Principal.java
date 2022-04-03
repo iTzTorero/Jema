@@ -81,6 +81,7 @@ public class Principal extends javax.swing.JFrame {
         btnLimpiarC1 = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
         cb_servicios = new javax.swing.JComboBox<>();
+        label1 = new java.awt.Label();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableDesc = new javax.swing.JTable();
         btnCancelarR = new javax.swing.JButton();
@@ -168,8 +169,11 @@ public class Principal extends javax.swing.JFrame {
         });
         jPanel2.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, 140, 40));
 
-        cb_servicios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel2.add(cb_servicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, 140, 30));
+        cb_servicios.setBackground(new java.awt.Color(255, 155, 155));
+        jPanel2.add(cb_servicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, 170, 50));
+
+        label1.setText("Servicio");
+        jPanel2.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 450, 390));
 
@@ -377,6 +381,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private java.awt.Label label1;
     private javax.swing.JLabel lblNumNota;
     private javax.swing.JTable tableDesc;
     private javax.swing.JTextField txtDescRopa;

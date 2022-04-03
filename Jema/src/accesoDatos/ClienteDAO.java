@@ -77,7 +77,7 @@ public class ClienteDAO extends DatabaseConection implements IDAO<Cliente> {
     }
 
     public Cliente consultarPorNombre(String nombre) throws SQLException {
-        String sql = String.format("SELECT * FROM 'cliente' WHERE nombre = %d", nombre);
+        String sql = String.format("SELECT * FROM 'cliente' WHERE nombre = %s", nombre);
         ResultSet rs = stmt.executeQuery(sql);
         rs.next();
         return new Cliente(rs.getNString("nombre"), rs.getNString("telefono1"), rs.getNString("telefono2"));
@@ -99,7 +99,7 @@ public class ClienteDAO extends DatabaseConection implements IDAO<Cliente> {
     }
 
     public Cliente consultarPorTelefono(String telefono) throws SQLException {
-        String sql = String.format("SELECT * FROM 'cliente' WHERE telefono1 = %d", telefono);
+        String sql = String.format("SELECT * FROM 'cliente' WHERE telefono1 = %s", telefono);
         ResultSet rs = stmt.executeQuery(sql);
         rs.next();
         return new Cliente(rs.getNString("nombre"), rs.getNString("telefono1"), rs.getNString("telefono2"));
