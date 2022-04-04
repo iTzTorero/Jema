@@ -139,10 +139,27 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jPanel2.add(txtNoPiezas, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 230, 40));
+
+        txtDescRopa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDescRopaActionPerformed(evt);
+            }
+        });
         jPanel2.add(txtDescRopa, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 400, 90));
+
+        txtPrecioU.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPrecioUActionPerformed(evt);
+            }
+        });
         jPanel2.add(txtPrecioU, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 220, 50));
 
         txtImporte.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtImporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtImporteActionPerformed(evt);
+            }
+        });
         jPanel2.add(txtImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 220, 50));
 
         btnLimpiarC1.setBackground(new java.awt.Color(255, 102, 102));
@@ -233,7 +250,7 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtNoPiezasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNoPiezasActionPerformed
-        // TODO add your handling code here:
+         
     }//GEN-LAST:event_txtNoPiezasActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
@@ -272,8 +289,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarRActionPerformed
 
     private void btnLimpiarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarCActionPerformed
-        // TODO add your handling code here:
-
+      
         jDateChooser1.setCalendar(null);
         jDateChooser2.setCalendar(null);
     }//GEN-LAST:event_btnLimpiarCActionPerformed
@@ -315,6 +331,18 @@ public class Principal extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void txtPrecioUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioUActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecioUActionPerformed
+
+    private void txtImporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtImporteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtImporteActionPerformed
+
+    private void txtDescRopaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescRopaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDescRopaActionPerformed
     private void limpiarTabla() {
         tableDesc.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{
