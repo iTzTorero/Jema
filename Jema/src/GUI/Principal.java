@@ -124,6 +124,11 @@ public class Principal extends javax.swing.JFrame {
 
         cb_clientes.setBackground(new java.awt.Color(255, 155, 155));
         cb_clientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cb_clientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_clientesActionPerformed(evt);
+            }
+        });
         jPanel3.add(cb_clientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 230, 50));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 450, 290));
@@ -269,8 +274,6 @@ public class Principal extends javax.swing.JFrame {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-        
-
             precioUnit += acceso.obtenerServicioDAO().consultarPorNombre(cb_servicios.getSelectedItem().toString()).getCosto();
         
 
@@ -289,7 +292,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarRActionPerformed
 
     private void btnLimpiarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarCActionPerformed
-      
+        
         jDateChooser1.setCalendar(null);
         jDateChooser2.setCalendar(null);
     }//GEN-LAST:event_btnLimpiarCActionPerformed
@@ -343,6 +346,10 @@ public class Principal extends javax.swing.JFrame {
     private void txtDescRopaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescRopaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDescRopaActionPerformed
+
+    private void cb_clientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_clientesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cb_clientesActionPerformed
     private void limpiarTabla() {
         tableDesc.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{

@@ -74,6 +74,11 @@ public class Cliente extends javax.swing.JFrame {
         txtCliente.setBackground(new java.awt.Color(255, 255, 255));
         txtCliente.setForeground(new java.awt.Color(255, 255, 255));
         txtCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtClienteActionPerformed(evt);
+            }
+        });
 
         txtTelefonoC.setEditable(false);
         txtTelefonoC.setBackground(new java.awt.Color(255, 255, 255));
@@ -86,6 +91,11 @@ public class Cliente extends javax.swing.JFrame {
         jComboBoxTipoServicio.setBackground(new java.awt.Color(102, 255, 102));
         jComboBoxTipoServicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBoxTipoServicio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jComboBoxTipoServicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTipoServicioActionPerformed(evt);
+            }
+        });
 
         txtPrecio.setEditable(false);
         txtPrecio.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
@@ -110,12 +120,22 @@ public class Cliente extends javax.swing.JFrame {
         btnAceptar.setText("Aceptar ");
         btnAceptar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnAceptar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
 
         btnLimpiar.setBackground(new java.awt.Color(255, 255, 255));
         btnLimpiar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnLimpiar.setText("Limpiar");
         btnLimpiar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnLimpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(17, 92, 24));
@@ -226,11 +246,50 @@ public class Cliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-       Menu menu = new Menu();
-       menu.setVisible(true);
-       this.dispose();
+        Menu menu = new Menu();
+        menu.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        txtCliente.setText(" ");
+        txtTelefonoC.setText(" ");
+        txtPrecio.setText(" ");
+        txtEstadoServicio.setText(" ");
+        /*
+        limpiarTabla();
+        */
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void txtClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtClienteActionPerformed
+
+    private void jComboBoxTipoServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoServicioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxTipoServicioActionPerformed
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+                  
+        
+    }//GEN-LAST:event_btnAceptarActionPerformed
+
+    /*
+    private void limpiarTabla() {
+        tableDesc.setModel(new javax.swing.table.DefaultTableModel(
+                new Object[][]{
+                    {null, null, null, null},
+                    {null, null, null, null},
+                    {null, null, null, null},
+                    {null, null, null, null}
+                },
+                new String[]{
+                    "Cliente", "Telefono", "Tipo servicio", "Precio ", "Estado servicio "
+                }
+        ));
+    }
+    */
+    
     /**
      * @param args the command line arguments
      */
