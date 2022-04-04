@@ -6,6 +6,7 @@
 package GUI;
 
 import java.awt.Color;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import textPrompt.TextPrompt;
 
@@ -256,9 +257,7 @@ public class Cliente extends javax.swing.JFrame {
         txtTelefonoC.setText(" ");
         txtPrecio.setText(" ");
         txtEstadoServicio.setText(" ");
-        /*
         limpiarTabla();
-        */
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void txtClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClienteActionPerformed
@@ -271,24 +270,40 @@ public class Cliente extends javax.swing.JFrame {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
                   
+        actualizarTabla();
         
     }//GEN-LAST:event_btnAceptarActionPerformed
 
-    /*
+    //Limpia la tabla de clientes
     private void limpiarTabla() {
-        tableDesc.setModel(new javax.swing.table.DefaultTableModel(
+        tablaClientes.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{
-                    {null, null, null, null},
-                    {null, null, null, null},
-                    {null, null, null, null},
-                    {null, null, null, null}
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null}
                 },
                 new String[]{
-                    "Cliente", "Telefono", "Tipo servicio", "Precio ", "Estado servicio "
+                    "Cliente", "Telefono", "Tipo Servicio", "Precio", "Estado servicio"
                 }
         ));
     }
-    */
+    
+    //Actualiza la tabla de clientes
+    private void actualizarTabla() {
+        String tipoServicio = "";
+        DefaultTableModel modelo = (DefaultTableModel) tablaClientes.getModel();
+        Object[] fila = new Object[5];
+        fila[0] = txtCliente.getText();
+        fila[1] = txtTelefonoC.getText();
+        tipoServicio = jComboBoxTipoServicio.getSelectedItem().toString();
+        fila[2] = tipoServicio;
+        fila[3] = "$ " + txtPrecio.getText();
+        fila[4] = txtEstadoServicio.getText();
+        
+        modelo.addRow(fila);
+        tablaClientes.setModel(modelo);
+    }
     
     /**
      * @param args the command line arguments
