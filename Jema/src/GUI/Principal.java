@@ -264,7 +264,7 @@ public class Principal extends javax.swing.JFrame {
         double precioUnit = 0.0;
             try {
                 detallesVenta.add(new DetalleVenta(acceso.obtenerServicioDAO().consultarPorNombre(cb_servicios.getSelectedItem().toString()).getIdServicio(),
-                        acceso.obtenerServicioDAO().consultarPorNombre(cb_servicios.getSelectedItem().toString()).getCosto(), acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString()).getIdcliente(), 0));
+                acceso.obtenerServicioDAO().consultarPorNombre(cb_servicios.getSelectedItem().toString()).getCosto(), acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString()).getIdcliente(), 0));
                 //Agregar los ids del cliente seleccionado
        //         acceso.obtenerDetalleVentaDAO().insertar(new DetalleVenta(acceso.obtenerServicioDAO().consultarPorNombre("Lavado").getIdServicio(),
          //               acceso.obtenerServicioDAO().consultarPorNombre("Lavado").getCosto(), acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString()).getIdcliente(), 0));

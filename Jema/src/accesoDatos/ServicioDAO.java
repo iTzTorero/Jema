@@ -5,6 +5,7 @@
  */
 package accesoDatos;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -25,12 +26,34 @@ public class ServicioDAO extends DatabaseConection implements IDAO<Servicio> {
 
     @Override
     public void insertar(Servicio obj) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "INSERT INTO `servicio` (`idServicio`, `nombre`, `costo`) VALUES (NULL, ?, ?)";
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(ServicioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ps.setInt(1, obj.getIdServicio());
+        ps.setString(2, obj.getNombre());
+        ps.setFloat(3, obj.getCosto());
+
+        ps.executeUpdate();
+        ps.close();
     }
 
     @Override
     public void actualizar(Servicio obj) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = String.format("UPDATE servicio SET nombre = '%s', costo = '%s' WHERE idServicio = %d",
+                obj.getNombre(),
+                obj.getCosto(),
+                obj.getIdServicio());
+                
+        Statement statement = con.createStatement();
+
+        int registroAfectado = statement.executeUpdate(sql);
+        if (registroAfectado != 1) {
+            throw new Exception("El servicio no ha podido ser actualizado.");
+        }
     }
 
     @Override
