@@ -25,12 +25,15 @@ public class DetalleVentaDAO extends DatabaseConection implements IDAO<DetalleVe
 
     @Override
     public void insertar(DetalleVenta obj) throws Exception {
-        String sql = "INSERT INTO `detalle_venta` (`iddetalle_venta`, `idestadoventa`, `precio`, `idcliente`, `idusuario`, `idventa`) VALUES (NULL, '1', '12.50', '1', '1', '2');";
-        
+        String sql = "INSERT INTO `detalle_venta` (`iddetalle_venta`, `idestadoventa`, `precio`, `idcliente`, `idusuario`, `idventa`, `idServicio`) VALUES (NULL, ?, ?, ?, ?, ?, ?);";     
         PreparedStatement ps;
         ps = con.prepareStatement(sql);
-//        ps.setDate(1, obj.getFecha());
-//        ps.setFloat(2, obj.getTotal());
+        ps.setInt(1, obj.getIdEstadoVenta());
+        ps.setFloat(2, obj.getPrecio());
+        ps.setInt(3, obj.getIdCliente());
+        ps.setInt(4, obj.getIdUsuario());
+        ps.setInt(5, obj.getIdVenta());
+        ps.setInt(6, obj.getIdServicio());
 
         ps.executeUpdate();
         ps.close();

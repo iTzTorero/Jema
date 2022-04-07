@@ -22,24 +22,24 @@ public class DetalleVenta {
     public DetalleVenta() {
     }
 
-    public DetalleVenta(int iddetalle_venta, int idEstadoVenta, int idServicio, float precio, int idCliente, int idUsuario, int idVenta) {
+    public DetalleVenta(int iddetalle_venta, int idEstadoVenta, float precio, int idCliente, int idUsuario, int idVenta, int idServicio) {
         this.iddetalle_venta = iddetalle_venta;
         this.idEstadoVenta = idEstadoVenta;
-        this.idServicio = idServicio;
         this.precio = precio;
         this.idCliente = idCliente;
         this.idUsuario = idUsuario;
         this.idVenta = idVenta;
+        this.idServicio = idServicio;
     }
     
 
-    public DetalleVenta(int idEstadoVenta, int idServicio, float precio, int idCliente, int idUsuario, int idVenta) {
+    public DetalleVenta(int idEstadoVenta, float precio, int idCliente, int idUsuario, int idVenta, int idServicio) {
         this.idEstadoVenta = idEstadoVenta;
-        this.idServicio = idServicio;
         this.precio = precio;
         this.idCliente = idCliente;
         this.idUsuario = idUsuario;
         this.idVenta = idVenta;
+        this.idServicio = idServicio;
     }
     
 

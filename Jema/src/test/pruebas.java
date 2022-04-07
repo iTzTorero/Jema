@@ -30,7 +30,7 @@ public class pruebas {
         
         FactoryAccesoDatos factory = new FactoryAccesoDatos();
         // Código para insertar venta
-        factory.obtenerVentaDAO().insertar(new Venta(new Date(122, 3, 7), 100.0f));
+//        factory.obtenerVentaDAO().insertar(new Venta(new Date(122, 3, 7), 100.0f));
         /**
 
         * Requisitos para insertar detalleVenta
@@ -40,7 +40,7 @@ public class pruebas {
         **/
         
         //Código para insertar detalle venta
-        factory.obtenerDetalleVentaDAO().insertar(new DetalleVenta(1, 1, 150.0f, 1, 1, 1));
+        factory.obtenerDetalleVentaDAO().insertar(new DetalleVenta(1, 140, 2, 1, 5, 1));
     }
 
 }
