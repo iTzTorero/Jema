@@ -10,19 +10,54 @@ package objetoNegocio;
  * @author Juan Pablo
  */
 public class DetalleVenta {
+
+    private int iddetalle_venta;
+    private int idEstadoVenta;
     private int idServicio;
     private float precio;
     private int idCliente;
-    private int idEstadoServicio;
+    private int idUsuario;
+    private int idVenta;
 
     public DetalleVenta() {
     }
 
-    public DetalleVenta(int idServicio, float precio, int idCliente, int idEstadoServicio) {
+    public DetalleVenta(int iddetalle_venta, int idEstadoVenta, int idServicio, float precio, int idCliente, int idUsuario, int idVenta) {
+        this.iddetalle_venta = iddetalle_venta;
+        this.idEstadoVenta = idEstadoVenta;
         this.idServicio = idServicio;
         this.precio = precio;
         this.idCliente = idCliente;
-        this.idEstadoServicio = idEstadoServicio;
+        this.idUsuario = idUsuario;
+        this.idVenta = idVenta;
+    }
+    
+
+    public DetalleVenta(int idEstadoVenta, int idServicio, float precio, int idCliente, int idUsuario, int idVenta) {
+        this.idEstadoVenta = idEstadoVenta;
+        this.idServicio = idServicio;
+        this.precio = precio;
+        this.idCliente = idCliente;
+        this.idUsuario = idUsuario;
+        this.idVenta = idVenta;
+    }
+    
+
+    
+    public int getIddetalle_venta() {
+        return iddetalle_venta;
+    }
+
+    public void setIddetalle_venta(int iddetalle_venta) {
+        this.iddetalle_venta = iddetalle_venta;
+    }
+
+    public int getIdEstadoVenta() {
+        return idEstadoVenta;
+    }
+
+    public void setIdEstadoVenta(int idEstadoVenta) {
+        this.idEstadoVenta = idEstadoVenta;
     }
 
     public int getIdServicio() {
@@ -33,24 +68,6 @@ public class DetalleVenta {
         this.idServicio = idServicio;
     }
 
-    public int getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
-    }
-
-    public int getIdEstadoServicio() {
-        return idEstadoServicio;
-    }
-
-    public void setIdEstadoServicio(int idEstadoServicio) {
-        this.idEstadoServicio = idEstadoServicio;
-    }
-
-    
-
     public float getPrecio() {
         return precio;
     }
@@ -59,11 +76,34 @@ public class DetalleVenta {
         this.precio = precio;
     }
 
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public int getIdVenta() {
+        return idVenta;
+    }
+
+    public void setIdVenta(int idVenta) {
+        this.idVenta = idVenta;
+    }
 
     @Override
     public String toString() {
-        return "DetalleVenta{" + "servicio=" + idServicio + ", precio=" + precio + ", cliente=" + idCliente + ", estadoServicio=" + idEstadoServicio + '}';
+        return "DetalleVenta{" + "iddetalle_venta=" + iddetalle_venta + ", idEstadoVenta=" + idEstadoVenta + ", idServicio=" + idServicio + ", precio=" + precio + ", idCliente=" + idCliente + ", idUsuario=" + idUsuario + ", idVenta=" + idVenta + '}';
     }
-    
+
     
 }

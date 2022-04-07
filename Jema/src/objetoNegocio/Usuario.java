@@ -10,28 +10,39 @@ package objetoNegocio;
  * @author Juan Pablo
  */
 public class Usuario {
+    private int idUsuario;
     private String nombre;
-    private String password;
+    private String contrasena;
     private String direccion;
     private String telefono1;
     private String telefono2;
 
-    public Usuario(String nombre, String password, String direccion, String telefono1, String telefono2) {
+    public Usuario() {
+    }
+
+    public Usuario(int idUsuario, String nombre, String contrasena, String direccion, String telefono1, String telefono2) {
+        this.idUsuario = idUsuario;
         this.nombre = nombre;
-        this.password = password;
+        this.contrasena = contrasena;
         this.direccion = direccion;
         this.telefono1 = telefono1;
         this.telefono2 = telefono2;
     }
 
-    public Usuario() {
-    }
-
-    public Usuario(String nombre, String password, String direccion, String telefono1) {
+    public Usuario(String nombre, String contrasena, String direccion, String telefono1, String telefono2) {
         this.nombre = nombre;
-        this.password = password;
+        this.contrasena = contrasena;
         this.direccion = direccion;
         this.telefono1 = telefono1;
+        this.telefono2 = telefono2;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getNombre() {
@@ -42,12 +53,12 @@ public class Usuario {
         this.nombre = nombre;
     }
 
-    public String getPassword() {
-        return password;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
     public String getDireccion() {
@@ -74,10 +85,11 @@ public class Usuario {
         this.telefono2 = telefono2;
     }
 
+    
     @Override
     public String toString() {
-        return "Usuario{" + "nombre=" + nombre + ", password=" + password + ", direccion=" + direccion + ", telefono1=" + telefono1 + ", telefono2=" + telefono2 + '}';
+        return "Usuario{" + "idUsuario=" + idUsuario + ", nombre=" + nombre + ", contrasena=" + contrasena + ", direccion=" + direccion + ", telefono1=" + telefono1 + ", telefono2=" + telefono2 + '}';
     }
-    
+
     
 }

@@ -30,7 +30,7 @@ public class UsuarioDAO extends DatabaseConection implements IDAO<Usuario> {
         PreparedStatement ps;
         ps = con.prepareStatement(sql);
         ps.setString(1, obj.getNombre());
-        ps.setString(2, obj.getPassword());
+        ps.setString(2, obj.getContrasena());
         ps.setString(3, obj.getDireccion());
         ps.setString(4, obj.getTelefono1());
         ps.setString(5, obj.getTelefono2());
@@ -77,7 +77,7 @@ public class UsuarioDAO extends DatabaseConection implements IDAO<Usuario> {
         pstmt.setString(1, nombre);
         ResultSet rs  = pstmt.executeQuery();
         rs.next();
-        return new Usuario(rs.getNString("nombre"), rs.getNString("contrasena"), rs.getNString("direccion"), rs.getNString("telefono1"));
+        return new Usuario(rs.getNString("nombre"), rs.getNString("contrasena"), rs.getNString("direccion"), rs.getNString("telefono1"), rs.getNString("telefono2"));
        
     }
 

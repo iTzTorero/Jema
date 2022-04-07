@@ -12,6 +12,7 @@ import java.sql.Date;
  * @author Juan Pablo
  */
 public class Corte {
+    private int idCorte;
     private Date fecha;
     private float total;
     private int idUsuario;
@@ -25,6 +26,13 @@ public class Corte {
         this.idUsuario = usuario;
     }
 
+    public Corte(int idCorte, Date fecha, float total, int idUsuario) {
+        this.idCorte = idCorte;
+        this.fecha = fecha;
+        this.total = total;
+        this.idUsuario = idUsuario;
+    }
+    
     public Date getFecha() {
         return fecha;
     }
@@ -47,6 +55,14 @@ public class Corte {
 
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    public int getIdCorte() {
+        return idCorte;
+    }
+
+    public void setIdCorte(int idCorte) {
+        this.idCorte = idCorte;
     }
 
    

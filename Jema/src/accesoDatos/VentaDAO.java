@@ -5,6 +5,7 @@
  */
 package accesoDatos;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,7 +27,7 @@ public class VentaDAO extends DatabaseConection implements IDAO<Venta> {
     @Override
     public void insertar(Venta obj) throws Exception {
 
-        String sql = "INSERT INTO `usuario` (`idusuario`, `nombre`, `contrasena`, `direccion`, `telefono1`, `telefono2`) VALUES (NULL, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO `venta` (`idventa`,`fecha`,`total`) VALUES (NULL, ?, ?)";
         PreparedStatement ps;
 
         ps = con.prepareStatement(sql);
