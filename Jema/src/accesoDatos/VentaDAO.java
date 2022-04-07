@@ -40,7 +40,17 @@ public class VentaDAO extends DatabaseConection implements IDAO<Venta> {
 
     @Override
     public void actualizar(Venta obj) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = String.format("UPDATE venta SET fecha = 'date', total = '%f' WHERE idventa = %d",
+                obj.getFecha(),
+                obj.getTotal(),
+                obj.getIdventa());
+                
+        Statement statement = con.createStatement();
+
+        int registroAfectado = statement.executeUpdate(sql);
+        if (registroAfectado != 1) {
+            throw new Exception("La venta no ha podido ser actualizada.");
+        }
     }
 
     @Override
@@ -50,7 +60,7 @@ public class VentaDAO extends DatabaseConection implements IDAO<Venta> {
 
         int registroAfectado = statement.executeUpdate(sql);
         if (registroAfectado != 1) {
-            throw new Exception("El cliente no ha podido ser eliminado.");
+            throw new Exception("La venta no ha podido ser eliminado.");
         }
     }
 
