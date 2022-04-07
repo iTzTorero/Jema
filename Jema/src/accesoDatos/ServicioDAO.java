@@ -43,7 +43,7 @@ public class ServicioDAO extends DatabaseConection implements IDAO<Servicio> {
 
     @Override
     public void actualizar(Servicio obj) throws Exception {
-        String sql = String.format("UPDATE servicio SET nombre = '%s', costo = '%s' WHERE idServicio = %d",
+        String sql = String.format("UPDATE servicio SET nombre = '%s', costo = '%f' WHERE idServicio = %d",
                 obj.getNombre(),
                 obj.getCosto(),
                 obj.getIdServicio());
@@ -63,7 +63,7 @@ public class ServicioDAO extends DatabaseConection implements IDAO<Servicio> {
 
         int registroAfectado = statement.executeUpdate(sql);
         if (registroAfectado != 1) {
-            throw new Exception("El cliente no ha podido ser eliminado.");
+            throw new Exception("El servicio no ha podido ser eliminado.");
         }
     }
 
@@ -88,7 +88,7 @@ public class ServicioDAO extends DatabaseConection implements IDAO<Servicio> {
             String sql = String.format("SELECT * FROM 'servicio' WHERE nombre = %s", nombre);
             ResultSet rs = stmt.executeQuery(sql);
             rs.next();
-            return new Servicio(rs.getNString("nombre"), rs.getInt("costo"));
+            return new Servicio(rs.getNString("nombre"), rs.getFloat("costo"));
         } catch (SQLException e) {
 
         }
