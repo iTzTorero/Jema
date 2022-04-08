@@ -284,7 +284,8 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimpiarC1ActionPerformed
     private void actualizarTabla() {
         try {
-
+            Cliente cliente = acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString());
+            Servicio servicios = acceso.obtenerServicioDAO().consultarPorNombre(cb_servicios.getSelectedItem().toString());
             String servicio = "";
             Servicio ser = acceso.obtenerServicioDAO().consultarPorNombre(cb_servicios.getSelectedItem().toString());
             float precioServcicio = ser.getCosto();
@@ -300,6 +301,8 @@ public class Principal extends javax.swing.JFrame {
             tableDesc.setModel(modelo);
 
             total.add((Float) (Float.parseFloat(txtPrecioU.getText()) + precioServcicio));
+            detallesVenta.add(new DetalleVenta(Float.parseFloat(txtPrecioU.getText()),
+                    txtArea_Descripcion.getText(), cliente.getIdcliente(), usuario1.getIdUsuario(), acceso.obtenerVentaDAO().consultarUltimo().getIdventa(), servicios.getIdServicio()));
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -318,7 +321,7 @@ public class Principal extends javax.swing.JFrame {
             acceso.obtenerVentaDAO().insertar(new Venta(new java.sql.Date(now.getTime()), calcularTotal(total), new java.sql.Date(jDateChooser2.getDate().getTime())));
 
             guardarDetalleVenta();
-            
+
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -364,12 +367,6 @@ public class Principal extends javax.swing.JFrame {
 
     public void guardarDetalleVenta() {
         try {
-            Cliente cliente = acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString());
-            Servicio servicios = acceso.obtenerServicioDAO().consultarPorNombre(cb_servicios.getSelectedItem().toString());
-            System.out.println(servicios.getIdServicio());
-            detallesVenta.add(new DetalleVenta(Float.parseFloat(txtPrecioU.getText()),
-                    txtArea_Descripcion.getText(), cliente.getIdcliente(), usuario1.getIdUsuario(), acceso.obtenerVentaDAO().consultarUltimo().getIdventa(), servicios.getIdServicio()));
-
             for (int i = 0; i < detallesVenta.size(); i++) {
                 acceso.obtenerDetalleVentaDAO().insertar(detallesVenta.get(i));
             }
