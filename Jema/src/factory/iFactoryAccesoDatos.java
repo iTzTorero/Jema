@@ -15,7 +15,6 @@ public interface iFactoryAccesoDatos {
     public ClienteDAO obtenerClienteDAO();
     public CorteDAO obtenerCorteDAO();
     public DetalleVentaDAO obtenerDetalleVentaDAO();
-    public EstadoVentaDAO obtenerEstadoVentaDAO();
     public ServicioDAO obtenerServicioDAO();
     public UsuarioDAO obtenerUsuarioDAO();
     public VentaDAO obtenerVentaDAO();

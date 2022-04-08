@@ -25,15 +25,15 @@ public class DetalleVentaDAO extends DatabaseConection implements IDAO<DetalleVe
 
     @Override
     public void insertar(DetalleVenta obj) throws Exception {
-        String sql = "INSERT INTO `detalle_venta` (`iddetalle_venta`, `idestadoventa`, `precio`, `idcliente`, `idusuario`, `idventa`, `idServicio`) VALUES (NULL, ?, ?, ?, ?, ?, ?);";     
+        String sql = "INSERT INTO `detalle_venta` (`iddetalle_venta`, `precio`, `idcliente`, `idusuario`, `idventa`, `idServicio`, `descripcion`) VALUES (NULL, ?, ?, ?, ?, ?, ?);";     
         PreparedStatement ps;
         ps = con.prepareStatement(sql);
-        ps.setInt(1, obj.getIdEstadoVenta());
-        ps.setFloat(2, obj.getPrecio());
-        ps.setInt(3, obj.getIdCliente());
-        ps.setInt(4, obj.getIdUsuario());
-        ps.setInt(5, obj.getIdVenta());
-        ps.setInt(6, obj.getIdServicio());
+        ps.setFloat(1, obj.getPrecio());
+        ps.setInt(2, obj.getIdCliente());
+        ps.setInt(3, obj.getIdUsuario());
+        ps.setInt(4, obj.getIdVenta());
+        ps.setInt(5, obj.getIdServicio());
+        ps.setString(6, obj.getDesc());
 
         ps.executeUpdate();
         ps.close();
@@ -51,7 +51,7 @@ public class DetalleVentaDAO extends DatabaseConection implements IDAO<DetalleVe
 
         int registroAfectado = statement.executeUpdate(sql);
         if (registroAfectado != 1) {
-            throw new Exception("El cliente no ha podido ser eliminado.");
+            throw new Exception("El detalle de la venta no ha podido ser eliminado.");
         }
     }
 

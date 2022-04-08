@@ -16,7 +16,6 @@ public class FactoryAccesoDatos implements iFactoryAccesoDatos{
     private ClienteDAO clienteDAO;
     private CorteDAO  corteDAO;
     private DetalleVentaDAO detalleVentaDAO;
-    private EstadoVentaDAO estadoVentaDAO;
     private ServicioDAO servicioDAO;
     private UsuarioDAO usuarioDAO;
     private VentaDAO ventaDAO;
@@ -25,7 +24,6 @@ public class FactoryAccesoDatos implements iFactoryAccesoDatos{
         clienteDAO = new ClienteDAO();
         corteDAO = new CorteDAO();
         detalleVentaDAO = new DetalleVentaDAO();
-        estadoVentaDAO = new EstadoVentaDAO();
         servicioDAO = new ServicioDAO();
         usuarioDAO = new UsuarioDAO();
         ventaDAO = new VentaDAO();
@@ -44,11 +42,6 @@ public class FactoryAccesoDatos implements iFactoryAccesoDatos{
     @Override
     public DetalleVentaDAO obtenerDetalleVentaDAO() {
         return detalleVentaDAO;
-    }
-
-    @Override
-    public EstadoVentaDAO obtenerEstadoVentaDAO() {
-        return estadoVentaDAO;
     }
 
     @Override

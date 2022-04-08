@@ -162,7 +162,7 @@ public class IniciarSesion extends javax.swing.JFrame {
 
         Usuario user1 = fad.obtenerUsuarioDAO().consultarUsuarioPorNombre(nombre);
 
-           if (user1.getNombre().equalsIgnoreCase(nombre) && user1.getPassword().equalsIgnoreCase(password)) {
+           if (user1.getNombre().equalsIgnoreCase(nombre) && user1.getContrasena().equalsIgnoreCase(password)) {
                Menu menu = new Menu();
                menu.setVisible(true);
                this.dispose();
@@ -210,15 +210,6 @@ public class IniciarSesion extends javax.swing.JFrame {
         });
     }
     
-    private void centrarVentana(){
-        Dimension screenSize, frameSize;
-        int x, y;
-        screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        frameSize = getSize();
-        x = (screenSize.width - frameSize.width) / 2;
-        y = (screenSize.height - frameSize.height) / 2;
-        setLocation(x, y);
-    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonIniciarSesion;

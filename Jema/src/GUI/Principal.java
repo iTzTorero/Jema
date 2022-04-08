@@ -42,8 +42,7 @@ public class Principal extends javax.swing.JFrame {
         this.tableDesc.setShowGrid(true);
         // llenarComboboxClientes();
 
-        TextPrompt phPiezas = new TextPrompt("Inserte el número de piezas", txtNoPiezas);
-        TextPrompt phDescripcion = new TextPrompt("Inserte una descripción", txtDescRopa);
+        TextPrompt phDescripcion = new TextPrompt("Inserte una descripción", txtArea_Descripcion);
         TextPrompt phPrecioU = new TextPrompt("Inserte el precio unitario", txtPrecioU);
         TextPrompt phImporte = new TextPrompt("Inserte el importe", txtImporte);
 
@@ -67,21 +66,20 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
         btnLimpiarC = new javax.swing.JButton();
         cb_clientes = new javax.swing.JComboBox<>();
+        label2 = new java.awt.Label();
         jPanel2 = new javax.swing.JPanel();
-        txtNoPiezas = new javax.swing.JTextField();
-        txtDescRopa = new javax.swing.JTextField();
         txtPrecioU = new javax.swing.JTextField();
         txtImporte = new javax.swing.JTextField();
         btnLimpiarC1 = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
         cb_servicios = new javax.swing.JComboBox<>();
         label1 = new java.awt.Label();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtArea_Descripcion = new javax.swing.JTextArea();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableDesc = new javax.swing.JTable();
         btnCancelarR = new javax.swing.JButton();
@@ -99,16 +97,12 @@ public class Principal extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel3.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 180, 35));
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel3.setText("Fecha:");
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Entrega:");
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 70, 35));
-        jPanel3.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, 180, 35));
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 70, 35));
+        jPanel3.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 180, 35));
 
         btnLimpiarC.setBackground(new java.awt.Color(255, 102, 102));
         btnLimpiarC.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -120,7 +114,7 @@ public class Principal extends javax.swing.JFrame {
                 btnLimpiarCActionPerformed(evt);
             }
         });
-        jPanel3.add(btnLimpiarC, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 230, 140, 40));
+        jPanel3.add(btnLimpiarC, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 140, 40));
 
         cb_clientes.setBackground(new java.awt.Color(255, 155, 155));
         cb_clientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -129,35 +123,24 @@ public class Principal extends javax.swing.JFrame {
                 cb_clientesActionPerformed(evt);
             }
         });
-        jPanel3.add(cb_clientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 230, 50));
+        jPanel3.add(cb_clientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 230, 50));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 450, 290));
+        label2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        label2.setText("Cliente:");
+        jPanel3.add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 400, 250));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        txtNoPiezas.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtNoPiezas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNoPiezasActionPerformed(evt);
-            }
-        });
-        jPanel2.add(txtNoPiezas, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 230, 40));
-
-        txtDescRopa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDescRopaActionPerformed(evt);
-            }
-        });
-        jPanel2.add(txtDescRopa, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 400, 90));
 
         txtPrecioU.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPrecioUActionPerformed(evt);
             }
         });
-        jPanel2.add(txtPrecioU, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 220, 50));
+        jPanel2.add(txtPrecioU, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 220, 50));
 
         txtImporte.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtImporte.addActionListener(new java.awt.event.ActionListener() {
@@ -165,7 +148,7 @@ public class Principal extends javax.swing.JFrame {
                 txtImporteActionPerformed(evt);
             }
         });
-        jPanel2.add(txtImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 220, 50));
+        jPanel2.add(txtImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 220, 50));
 
         btnLimpiarC1.setBackground(new java.awt.Color(255, 102, 102));
         btnLimpiarC1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -177,7 +160,7 @@ public class Principal extends javax.swing.JFrame {
                 btnLimpiarC1ActionPerformed(evt);
             }
         });
-        jPanel2.add(btnLimpiarC1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, 140, 40));
+        jPanel2.add(btnLimpiarC1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, 140, 40));
 
         btnAgregar.setBackground(new java.awt.Color(51, 255, 102));
         btnAgregar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -189,15 +172,21 @@ public class Principal extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, 140, 40));
+        jPanel2.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 140, 40));
 
         cb_servicios.setBackground(new java.awt.Color(255, 155, 155));
-        jPanel2.add(cb_servicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, 170, 50));
+        jPanel2.add(cb_servicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 170, 50));
 
         label1.setText("Servicio");
-        jPanel2.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, -1, -1));
+        jPanel2.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 450, 390));
+        txtArea_Descripcion.setColumns(20);
+        txtArea_Descripcion.setRows(5);
+        jScrollPane2.setViewportView(txtArea_Descripcion);
+
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 290, 60));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 400, 390));
 
         tableDesc.setBackground(new java.awt.Color(255, 155, 155));
         tableDesc.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -214,7 +203,7 @@ public class Principal extends javax.swing.JFrame {
         tableDesc.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tableDesc);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, 730, 580));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, 730, 580));
 
         btnCancelarR.setBackground(new java.awt.Color(255, 102, 102));
         btnCancelarR.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -226,7 +215,7 @@ public class Principal extends javax.swing.JFrame {
                 btnCancelarRActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCancelarR, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 670, 250, 60));
+        jPanel1.add(btnCancelarR, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 640, 250, 60));
 
         btnRegistrar.setBackground(new java.awt.Color(102, 255, 102));
         btnRegistrar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -238,12 +227,12 @@ public class Principal extends javax.swing.JFrame {
                 btnRegistrarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 670, 230, 60));
+        jPanel1.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 640, 230, 60));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 153, 153));
         jLabel6.setText("NOTA");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 10, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, -1, -1));
 
         lblNumNota.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblNumNota.setForeground(new java.awt.Color(255, 153, 153));
@@ -254,31 +243,27 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNoPiezasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNoPiezasActionPerformed
-         
-    }//GEN-LAST:event_txtNoPiezasActionPerformed
-
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // Se agregan los detalle venta
-        actualizarTabla();
-        double precioUnit = 0.0;
-            try {
-                detallesVenta.add(new DetalleVenta(acceso.obtenerServicioDAO().consultarPorNombre(cb_servicios.getSelectedItem().toString()).getIdServicio(),
-                acceso.obtenerServicioDAO().consultarPorNombre(cb_servicios.getSelectedItem().toString()).getCosto(), acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString()).getIdcliente(), 0));
-                //Agregar los ids del cliente seleccionado
-       //         acceso.obtenerDetalleVentaDAO().insertar(new DetalleVenta(acceso.obtenerServicioDAO().consultarPorNombre("Lavado").getIdServicio(),
-         //               acceso.obtenerServicioDAO().consultarPorNombre("Lavado").getCosto(), acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString()).getIdcliente(), 0));
-            } catch (SQLException ex) {
-                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (Exception ex) {
-                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            precioUnit += acceso.obtenerServicioDAO().consultarPorNombre(cb_servicios.getSelectedItem().toString()).getCosto();
-        
-
-        txtPrecioU.setText(String.valueOf(precioUnit));
-        importe = (float) (precioUnit * Integer.parseInt(txtNoPiezas.getText()));
+//        actualizarTabla();
+//        double precioUnit = 0.0;
+//            try {
+//                detallesVenta.add(new DetalleVenta(acceso.obtenerServicioDAO().consultarPorNombre(cb_servicios.getSelectedItem().toString()).getIdServicio(),
+//                acceso.obtenerServicioDAO().consultarPorNombre(cb_servicios.getSelectedItem().toString()).getCosto(), acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString()).getIdcliente(), 0));
+//                //Agregar los ids del cliente seleccionado
+//       //         acceso.obtenerDetalleVentaDAO().insertar(new DetalleVenta(acceso.obtenerServicioDAO().consultarPorNombre("Lavado").getIdServicio(),
+//         //               acceso.obtenerServicioDAO().consultarPorNombre("Lavado").getCosto(), acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString()).getIdcliente(), 0));
+//            } catch (SQLException ex) {
+//                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (Exception ex) {
+//                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//
+//            precioUnit += acceso.obtenerServicioDAO().consultarPorNombre(cb_servicios.getSelectedItem().toString()).getCosto();
+//        
+//
+//        txtPrecioU.setText(String.valueOf(precioUnit));
+//        importe = (float) (precioUnit * Integer.parseInt(txtNoPiezas.getText()));
 
         //Falta agregarlos al arraylist
 
@@ -293,45 +278,45 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnLimpiarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarCActionPerformed
         
-        jDateChooser1.setCalendar(null);
+//        jDateChooser1.setCalendar(null);
         jDateChooser2.setCalendar(null);
     }//GEN-LAST:event_btnLimpiarCActionPerformed
 
     private void btnLimpiarC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarC1ActionPerformed
         // TODO add your handling code here:
-        txtNoPiezas.setText("");
-        txtDescRopa.setText("");
-        txtImporte.setText("");
-        txtPrecioU.setText("");
-        limpiarTabla();
+//        txtNoPiezas.setText("");
+//        txtDescRopa.setText("");
+//        txtImporte.setText("");
+//        txtPrecioU.setText("");
+//        limpiarTabla();
     }//GEN-LAST:event_btnLimpiarC1ActionPerformed
     private void actualizarTabla() {
-        String servicio = "";
-        DefaultTableModel modelo = (DefaultTableModel) tableDesc.getModel();
-        Object[] fila = new Object[5];
-        fila[0] = txtNoPiezas.getText();
-        fila[1] = txtDescRopa.getText();
-        servicio = cb_servicios.getSelectedItem().toString();
-        fila[2] = servicio;
-        fila[3] = "$ " + txtPrecioU.getText();
-        fila[4] = "$ " + txtImporte.getText();
-        
-        modelo.addRow(fila);
-        tableDesc.setModel(modelo);
+//        String servicio = "";
+//        DefaultTableModel modelo = (DefaultTableModel) tableDesc.getModel();
+//        Object[] fila = new Object[5];
+//        fila[0] = txtNoPiezas.getText();
+//        fila[1] = txtDescRopa.getText();
+//        servicio = cb_servicios.getSelectedItem().toString();
+//        fila[2] = servicio;
+//        fila[3] = "$ " + txtPrecioU.getText();
+//        fila[4] = "$ " + txtImporte.getText();
+//        
+//        modelo.addRow(fila);
+//        tableDesc.setModel(modelo);
 
     }
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        if (jDateChooser2.getDate().after(jDateChooser2.getDate())) {
-            try {
-                // falta obtener el usuario de la sesión actual y guardar los detalle venta en el arreglo:
-                
-                acceso.obtenerVentaDAO().insertar(new Venta(new java.sql.Date(jDateChooser1.getDate().getTime()), importe, acceso.obtenerUsuarioDAO().consultarPorId(0), detallesVenta));
-                
-            } catch (Exception ex) {
-                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+//        if (jDateChooser2.getDate().after(jDateChooser2.getDate())) {
+//            try {
+//                // falta obtener el usuario de la sesión actual y guardar los detalle venta en el arreglo:
+//                
+//                acceso.obtenerVentaDAO().insertar(new Venta(new java.sql.Date(jDateChooser1.getDate().getTime()), importe, acceso.obtenerUsuarioDAO().consultarPorId(0), detallesVenta));
+//                
+//            } catch (Exception ex) {
+//                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
 
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
@@ -342,10 +327,6 @@ public class Principal extends javax.swing.JFrame {
     private void txtImporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtImporteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtImporteActionPerformed
-
-    private void txtDescRopaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescRopaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDescRopaActionPerformed
 
     private void cb_clientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_clientesActionPerformed
         // TODO add your handling code here:
@@ -407,21 +388,20 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JComboBox<String> cb_clientes;
     private javax.swing.JComboBox<String> cb_servicios;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private java.awt.Label label1;
+    private java.awt.Label label2;
     private javax.swing.JLabel lblNumNota;
     private javax.swing.JTable tableDesc;
-    private javax.swing.JTextField txtDescRopa;
+    private javax.swing.JTextArea txtArea_Descripcion;
     private javax.swing.JTextField txtImporte;
-    private javax.swing.JTextField txtNoPiezas;
     private javax.swing.JTextField txtPrecioU;
     // End of variables declaration//GEN-END:variables
 }

@@ -40,7 +40,7 @@ public class pruebas {
         **/
         
         //Código para insertar detalle venta
-        factory.obtenerDetalleVentaDAO().insertar(new DetalleVenta(1, 140, 2, 1, 5, 1));
+//        factory.obtenerDetalleVentaDAO().insertar(new DetalleVenta(1, 140, 2, 1, 5, 1));
     }
 
 }
