@@ -312,7 +312,17 @@ public class Actualizar extends javax.swing.JFrame {
                     DefaultTableModel modelo = (DefaultTableModel) tablaClientes.getModel();
                     int id = (int) modelo.getValueAt(indice, 0);
                     
-                    //acceso.obtenerDetalleVentaDAO().eliminar(id); ----------------------------------------------------- Aqui va el método de actualizar detalle venta
+                    DetalleVenta detVenta = acceso.obtenerDetalleVentaDAO().consultarPorId(id);
+                    
+                    
+                    int idServicio = acceso.obtenerServicioDAO().consultarPorNombre(this.cb_servicios.getSelectedItem().toString()).getIdServicio();
+                    System.out.println(idServicio);
+                    
+                    detVenta.setIdServicio(idServicio);
+                    detVenta.setPrecio(Float.parseFloat(txtPrecio.getText()));
+                    detVenta.setDesc(txtDescripcion.getText());
+                                  
+                    acceso.obtenerDetalleVentaDAO().actualizar(detVenta);
                     
                     llenarTabla();
                     limpiar();
@@ -321,7 +331,8 @@ public class Actualizar extends javax.swing.JFrame {
                 }
             }
         } catch (Exception ex) {
-
+              System.out.println(ex.getMessage());
+                
         }
     }  
     

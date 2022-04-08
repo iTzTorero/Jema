@@ -42,7 +42,18 @@ public class DetalleVentaDAO extends DatabaseConection implements IDAO<DetalleVe
 
     @Override
     public void actualizar(DetalleVenta obj) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = String.format("UPDATE detalle_venta SET precio = '%f', descripcion = '%s', idservicio = '%d' WHERE iddetalle_venta = %d",
+                obj.getPrecio(),
+                obj.getDesc(),
+                obj.getIdServicio(),
+                obj.getIddetalle_venta());
+
+        Statement statement = con.createStatement();
+
+        int registroAfectado = statement.executeUpdate(sql);
+        if (registroAfectado != 1) {
+            throw new Exception("El detalle venta no ha podido ser actualizado.");
+        }
     }
 
     @Override
