@@ -5,16 +5,10 @@
  */
 package accesoDatos;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,8 +19,8 @@ import java.util.logging.Logger;
 public class DatabaseConection {
 
     private String usuario = "root";
-    private String clave = "1234";
-    private String url = "jdbc:mysql://localhost:3306/jema_2?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    private String clave = "";
+    private String url = "jdbc:mysql://localhost:3306/jema?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     Connection con;
     Statement stmt;
    
