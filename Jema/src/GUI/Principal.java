@@ -8,12 +8,17 @@ package GUI;
 import accesoDatos.ClienteDAO;
 import accesoDatos.DatabaseConection;
 import com.sun.glass.events.KeyEvent;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import factory.FactoryAccesoDatos;
 import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -32,12 +37,15 @@ import validacion.*;
  * @author PC
  */
 public class Principal extends javax.swing.JFrame {
+
     ValidarCampos validar = new ValidarCampos();
     FactoryAccesoDatos acceso = new FactoryAccesoDatos();
     static float importe = 0;
     ArrayList<DetalleVenta> detallesVenta;
-    
+    ArrayList<Float> total;
     private static Usuario usuario1;
+    private int num_nota = 0;
+    Random r;
 
     /**
      * Creates new form Principal
@@ -49,7 +57,6 @@ public class Principal extends javax.swing.JFrame {
 
         TextPrompt phDescripcion = new TextPrompt("Inserte una descripción", txtArea_Descripcion);
         TextPrompt phPrecioU = new TextPrompt("Inserte el precio unitario", txtPrecioU);
-        
 
         try {
             cb_clientes.setModel(acceso.obtenerClienteDAO().consultarClientesCB());
@@ -59,6 +66,8 @@ public class Principal extends javax.swing.JFrame {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
         detallesVenta = new ArrayList();
+        total = new ArrayList<>();
+        r = new Random();
     }
 
     /**
@@ -242,7 +251,7 @@ public class Principal extends javax.swing.JFrame {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // Se agregan los detalle venta
         actualizarTabla();
-        
+
 
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -254,7 +263,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarRActionPerformed
 
     private void btnLimpiarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarCActionPerformed
-        
+
 //        jDateChooser1.setCalendar(null);
         jDateChooser2.setCalendar(null);
     }//GEN-LAST:event_btnLimpiarCActionPerformed
@@ -268,44 +277,64 @@ public class Principal extends javax.swing.JFrame {
 //        limpiarTabla();
     }//GEN-LAST:event_btnLimpiarC1ActionPerformed
     private void actualizarTabla() {
-        try{
-        Cliente cliente = acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString());
-        
-        String servicio = "";
-        Servicio ser = acceso.obtenerServicioDAO().consultarPorNombre(cb_servicios.getSelectedItem().toString());
-        float precioServcicio = ser.getCosto();
-        DefaultTableModel modelo = (DefaultTableModel) tableDesc.getModel();
-        Object[] fila = new Object[4];
-        fila[0] = txtArea_Descripcion.getText(); 
-        servicio = cb_servicios.getSelectedItem().toString();
-        fila[1] = servicio;
-        fila[2] = "$ " + txtPrecioU.getText();
-        fila[3] = "$ " + (Float)(Float.parseFloat(txtPrecioU.getText()) + precioServcicio);
-        
-        modelo.addRow(fila);
-        tableDesc.setModel(modelo);
+        try {
+            Cliente cliente = acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString());
+            Servicio servicios = acceso.obtenerServicioDAO().consultarPorNombre(cb_servicios.getSelectedItem().toString());
 
-//        detallesVenta.add(new DetalleVenta(Float.parseFloat(txtPrecioU.getText()),
-//                                           txtArea_Descripcion.getText(),  cliente.getIdcliente(), usuario1.getIdUsuario(),
-//        ));
-        }catch(Exception ex){
-            
+            String servicio = "";
+            Servicio ser = acceso.obtenerServicioDAO().consultarPorNombre(cb_servicios.getSelectedItem().toString());
+            float precioServcicio = ser.getCosto();
+            DefaultTableModel modelo = (DefaultTableModel) tableDesc.getModel();
+            Object[] fila = new Object[4];
+            fila[0] = txtArea_Descripcion.getText();
+            servicio = cb_servicios.getSelectedItem().toString();
+            fila[1] = servicio;
+            fila[2] = "$ " + txtPrecioU.getText();
+            fila[3] = "$ " + (Float) (Float.parseFloat(txtPrecioU.getText()) + precioServcicio);
+
+            modelo.addRow(fila);
+            tableDesc.setModel(modelo);
+
+            total.add((Float) (Float.parseFloat(txtPrecioU.getText()) + precioServcicio));
+            detallesVenta.add(new DetalleVenta(Float.parseFloat(txtPrecioU.getText()),
+                    txtArea_Descripcion.getText(), cliente.getIdcliente(), usuario1.getIdUsuario(), servicios.getIdServicio()));
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
         }
     }
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        if (jDateChooser2.getDate().after(jDateChooser2.getDate())) {
-            try {
-                // falta obtener el usuario de la sesión actual y guardar los detalle venta en el arreglo:
-                
-//                acceso.obtenerVentaDAO().insertar(new Venta(new java.sql.Date(jDateChooser1.getDate().getTime()), importe, acceso.obtenerUsuarioDAO().consultarPorId(0), detallesVenta));
-                
-            } catch (Exception ex) {
-                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-            }
+
+        try {
+            Date now = new Date();
+            String pattern = "yyyy-MM-dd";
+            SimpleDateFormat formatter = new SimpleDateFormat(pattern);
+            String mysqlDateString = formatter.format(now);
+
+            acceso.obtenerVentaDAO().insertar(new Venta(new java.sql.Date(now.getTime()), calcularTotal(total), new java.sql.Date(jDateChooser2.getDate().getTime()), nota()));
+
+        } catch (Exception ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+
     }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private float calcularTotal(ArrayList total) {
+        float totalT = (float) 0.0;
+        for (int i = 0; i < total.size(); i++) {
+            totalT += Float.parseFloat(total.get(i).toString());
+        }
+        return totalT;
+    }
+
+    private int nota() {
+        Random r = new Random();
+        String randomNumber = String.format("%04d", (Object) Integer.valueOf(r.nextInt(1001)));
+       
+        return Integer.parseInt(randomNumber);
+    }
 
     private void txtPrecioUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioUActionPerformed
         // TODO add your handling code here:
@@ -326,6 +355,25 @@ public class Principal extends javax.swing.JFrame {
                     "PZ", "Descripción", "Precio Unitario ", "Importe "
                 }
         ));
+    }
+
+    public void guardarDetalleVenta() {
+        try {
+            Venta venta = acceso.obtenerVentaDAO().consultarNota(nota());
+            System.out.println(venta);
+            int id_venta = venta.getIdventa();
+
+            for (int i = 0; i < detallesVenta.size(); i++) {
+                detallesVenta.get(i).setIdVenta(id_venta);
+            }
+
+            for (int i = 0; i < detallesVenta.size(); i++) {
+                acceso.obtenerDetalleVentaDAO().insertar(detallesVenta.get(i));
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
     }
 
     /**
@@ -359,7 +407,7 @@ public class Principal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Principal().setVisible(true);
-               
+
             }
         });
     }

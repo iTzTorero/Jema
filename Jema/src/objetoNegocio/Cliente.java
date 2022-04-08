@@ -10,12 +10,12 @@ package objetoNegocio;
  * @author Juan Pablo
  */
 public class Cliente {
-   private Integer idcliente;
+   private int idcliente;
    private String nombre;
    private String telefono1;
    private String telefono2;
 
-    public Cliente(Integer idcliente, String nombre, String telefono1, String telefono2) {
+    public Cliente(int idcliente, String nombre, String telefono1, String telefono2) {
         this.idcliente = idcliente;
         this.nombre = nombre;
         this.telefono1 = telefono1;

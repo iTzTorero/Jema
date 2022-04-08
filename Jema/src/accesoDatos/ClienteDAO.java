@@ -77,10 +77,18 @@ public class ClienteDAO extends DatabaseConection implements IDAO<Cliente> {
     }
 
     public Cliente consultarPorNombre(String nombre) throws SQLException {
-        String sql = String.format("SELECT * FROM 'cliente' WHERE nombre = %s", nombre);
-        ResultSet rs = stmt.executeQuery(sql);
-        rs.next();
-        return new Cliente(rs.getNString("nombre"), rs.getNString("telefono1"), rs.getNString("telefono2"));
+  try {
+            String sql = "SELECT * FROM cliente WHERE nombre = ?";
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, nombre);
+            ResultSet rs = pstmt.executeQuery();
+            rs.next();
+            return new Cliente(rs.getInt("idcliente"),rs.getNString("nombre"),rs.getNString("telefono1"),rs.getNString("telefono2"));
+        } catch (SQLException e) {
+
+        }
+        return null;
+
     }
 
     public DefaultComboBoxModel consultarClientesCB() throws Exception {

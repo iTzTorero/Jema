@@ -42,6 +42,15 @@ public class DetalleVenta {
         this.idServicio = idServicio;
 
     }
+    
+      public DetalleVenta(float precio, String desc, int idCliente, int idUsuario, int idServicio) {
+        this.precio = precio;
+        this.desc = desc;
+        this.idCliente = idCliente;
+        this.idUsuario = idUsuario;
+        this.idServicio = idServicio;
+
+    }
 
     public int getIddetalle_venta() {
         return iddetalle_venta;

@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import objetoNegocio.Servicio;
 import objetoNegocio.Venta;
 
 /**
@@ -27,13 +28,14 @@ public class VentaDAO extends DatabaseConection implements IDAO<Venta> {
     @Override
     public void insertar(Venta obj) throws Exception {
 
-        String sql = "INSERT INTO `venta` (`idventa`,`fecha`,`total`, `fecha_entrega`) VALUES (NULL, ?, ?)";
+        String sql = "INSERT INTO `venta` (`idventa`,`fecha`,`total`, `fecha_entrega`, `num_nota`) VALUES (NULL, ?, ?, ?, ?)";
         PreparedStatement ps;
 
         ps = con.prepareStatement(sql);
         ps.setDate(1, obj.getFecha());
         ps.setFloat(2, obj.getTotal());
         ps.setDate(3, obj.getFecha_entrega());
+        ps.setInt(4, obj.getNum_nota());
 
         ps.executeUpdate();
         ps.close();
@@ -45,7 +47,7 @@ public class VentaDAO extends DatabaseConection implements IDAO<Venta> {
                 obj.getFecha(),
                 obj.getTotal(),
                 obj.getIdventa());
-                
+
         Statement statement = con.createStatement();
 
         int registroAfectado = statement.executeUpdate(sql);
@@ -68,6 +70,20 @@ public class VentaDAO extends DatabaseConection implements IDAO<Venta> {
     @Override
     public Venta consultarPorId(int id) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Venta consultarNota(int nota) throws Exception {
+        try {
+            String sql = "SELECT * FROM Venta WHERE num_nota = ?";
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, nota);
+            ResultSet rs = pstmt.executeQuery();
+            rs.next();
+            return new Venta(rs.getInt("id_venta"));
+        } catch (SQLException e) {
+
+        }
+        return null;
     }
 
     @Override
