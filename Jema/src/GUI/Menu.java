@@ -64,7 +64,7 @@ public class Menu extends javax.swing.JFrame {
 
         jButtonRegistrarServicio.setBackground(new java.awt.Color(0, 204, 204));
         jButtonRegistrarServicio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonRegistrarServicio.setText("Registrar Servicio");
+        jButtonRegistrarServicio.setText("Registrar Venta");
         jButtonRegistrarServicio.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButtonRegistrarServicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,7 +74,7 @@ public class Menu extends javax.swing.JFrame {
 
         jButtonModificarServicio.setBackground(new java.awt.Color(0, 204, 204));
         jButtonModificarServicio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonModificarServicio.setText("Modificar Servicio");
+        jButtonModificarServicio.setText("Modificar Detalle Venta");
         jButtonModificarServicio.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButtonModificarServicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,7 +84,7 @@ public class Menu extends javax.swing.JFrame {
 
         jButtonCancelarServicio.setBackground(new java.awt.Color(0, 204, 204));
         jButtonCancelarServicio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonCancelarServicio.setText("Cancelar Servicio");
+        jButtonCancelarServicio.setText("Cancelar Detalle Venta");
         jButtonCancelarServicio.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButtonCancelarServicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -175,7 +175,9 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonRegistrarServicioActionPerformed
 
     private void jButtonModificarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarServicioActionPerformed
-        // TODO add your handling code here:
+        Actualizar actualizar = new Actualizar();
+        this.dispose();
+        actualizar.setVisible(true);
     }//GEN-LAST:event_jButtonModificarServicioActionPerformed
 
     private void jButtonCancelarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarServicioActionPerformed
