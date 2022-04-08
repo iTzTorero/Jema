@@ -14,12 +14,12 @@ import textPrompt.TextPrompt;
  *
  * @author PC
  */
-public class Cliente extends javax.swing.JFrame {
+public class CancelarDetalleVenta extends javax.swing.JFrame {
 
     /**
      * Creates new form Cancelar
      */
-    public Cliente() {
+    public CancelarDetalleVenta() {
         initComponents();
         this.setTitle("Tabla de clientes");
         TextPrompt phCliente = new TextPrompt("Cliente", txtCliente);
@@ -28,8 +28,7 @@ public class Cliente extends javax.swing.JFrame {
         phTelefono.setForeground(Color.GRAY);
         TextPrompt phPrecio = new TextPrompt("Precio", txtPrecio);
         phPrecio.setForeground(Color.GRAY);
-        TextPrompt phEstadoServicio = new TextPrompt("Estado del servicio", txtEstadoServicio);
-        phEstadoServicio.setForeground(Color.GRAY);
+        
         
         this.tablaClientes.setShowGrid(true);
         /*
@@ -52,7 +51,7 @@ public class Cliente extends javax.swing.JFrame {
         txtCliente = new javax.swing.JTextField();
         txtTelefonoC = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jComboBoxTipoServicio = new javax.swing.JComboBox<>();
+        jComboBoxTipoServicio = new javax.swing.JComboBox<String>();
         txtPrecio = new javax.swing.JTextField();
         txtEstadoServicio = new javax.swing.JTextField();
         btnCancelar = new javax.swing.JButton();
@@ -90,7 +89,7 @@ public class Cliente extends javax.swing.JFrame {
         jLabel3.setText("Tipo de servicio");
 
         jComboBoxTipoServicio.setBackground(new java.awt.Color(102, 255, 102));
-        jComboBoxTipoServicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxTipoServicio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBoxTipoServicio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jComboBoxTipoServicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,7 +139,7 @@ public class Cliente extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(17, 92, 24));
-        jLabel1.setText("Tabla de clientes");
+        jLabel1.setText("Cancelar Detalle Venta");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -226,7 +225,7 @@ public class Cliente extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 440));
@@ -322,21 +321,23 @@ public class Cliente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CancelarDetalleVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CancelarDetalleVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CancelarDetalleVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CancelarDetalleVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Cliente().setVisible(true);
+                new CancelarDetalleVenta().setVisible(true);
             }
         });
     }
