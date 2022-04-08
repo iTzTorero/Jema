@@ -302,7 +302,7 @@ public class Principal extends javax.swing.JFrame {
 
             total.add((Float) (Float.parseFloat(txtPrecioU.getText()) + precioServcicio));
             detallesVenta.add(new DetalleVenta(Float.parseFloat(txtPrecioU.getText()),
-                    txtArea_Descripcion.getText(), cliente.getIdcliente(), usuario1.getIdUsuario(), acceso.obtenerVentaDAO().consultarUltimo().getIdventa(), servicios.getIdServicio()));
+                    txtArea_Descripcion.getText(), cliente.getIdcliente(), usuario1.getIdUsuario(), servicios.getIdServicio()));
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -367,6 +367,10 @@ public class Principal extends javax.swing.JFrame {
 
     public void guardarDetalleVenta() {
         try {
+            
+            for (int i = 0; i < detallesVenta.size(); i++) {
+                detallesVenta.get(i).setIdVenta(acceso.obtenerVentaDAO().consultarUltimo().getIdventa());
+            }
             for (int i = 0; i < detallesVenta.size(); i++) {
                 acceso.obtenerDetalleVentaDAO().insertar(detallesVenta.get(i));
             }
