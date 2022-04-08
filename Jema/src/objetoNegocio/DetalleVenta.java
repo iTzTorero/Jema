@@ -22,24 +22,25 @@ public class DetalleVenta {
     public DetalleVenta() {
     }
 
-    public DetalleVenta(int iddetalle_venta, float precio, int idCliente, int idUsuario, int idVenta, int idServicio, String desc) {
+    public DetalleVenta(int iddetalle_venta, float precio, String desc, int idCliente, int idUsuario, int idVenta, int idServicio) {
         this.iddetalle_venta = iddetalle_venta;
         this.precio = precio;
+        this.desc = desc;
         this.idCliente = idCliente;
         this.idUsuario = idUsuario;
         this.idVenta = idVenta;
         this.idServicio = idServicio;
-        this.desc = desc;
-    }
-    
 
-    public DetalleVenta(float precio, int idCliente, int idUsuario, int idVenta, int idServicio, String desc) {
+    }
+
+    public DetalleVenta(float precio, String desc, int idCliente, int idUsuario, int idVenta, int idServicio) {
         this.precio = precio;
+        this.desc = desc;
         this.idCliente = idCliente;
         this.idUsuario = idUsuario;
         this.idVenta = idVenta;
         this.idServicio = idServicio;
-        this.desc = desc;
+
     }
 
     public int getIddetalle_venta() {
@@ -102,8 +103,5 @@ public class DetalleVenta {
     public String toString() {
         return "DetalleVenta{" + "iddetalle_venta=" + iddetalle_venta + ", idServicio=" + idServicio + ", precio=" + precio + ", idCliente=" + idCliente + ", idUsuario=" + idUsuario + ", idVenta=" + idVenta + ", desc=" + desc + '}';
     }
-    
-    
 
-    
 }

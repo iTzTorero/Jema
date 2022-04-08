@@ -16,14 +16,16 @@ public class Venta {
     private int idventa;
     private Date fecha;
     private float total;
+    private Date fecha_entrega;
 
     public Venta() {
     }
 
-    public Venta(int idventa, Date fecha, float total) {
+    public Venta(int idventa, Date fecha, float total, Date fecha_entrega) {
         this.idventa = idventa;
         this.fecha = fecha;
         this.total = total;
+        this.fecha_entrega = fecha_entrega;
     }
 
     public Venta(Date fecha, float total) {
@@ -55,10 +57,19 @@ public class Venta {
         this.total = total;
     }
 
+    public Date getFecha_entrega() {
+        return fecha_entrega;
+    }
+
+    public void setFecha_entrega(Date fecha_entrega) {
+        this.fecha_entrega = fecha_entrega;
+    }
+    
+
     @Override
     public String toString() {
-        return "Venta{" + "idventa=" + idventa + ", fecha=" + fecha + ", total=" + total + '}';
+        return "Venta{" + "idventa=" + idventa + ", fecha=" + fecha + ", total=" + total + ", fecha_entrega=" + fecha_entrega + '}';
     }
- 
-    
+
+
 }

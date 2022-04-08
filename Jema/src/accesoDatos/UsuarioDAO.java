@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import objetoNegocio.Cliente;
+import objetoNegocio.Servicio;
 import objetoNegocio.Usuario;
 
 /**
@@ -57,7 +58,18 @@ public class UsuarioDAO extends DatabaseConection implements IDAO<Usuario> {
 
     @Override
     public Usuario consultarPorId(int id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                try {
+            String sql = "SELECT * FROM usuario WHERE idusuario = ?";
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            rs.next();
+            return new Usuario(rs.getInt("idusuario"),rs.getNString("nombre"),rs.getNString("contrasena"),rs.getNString("direccion"),rs.getNString("telefono1"),rs.getNString("telefono2"));
+        } catch (SQLException e) {
+
+        }
+        return null;
+
     }
 
     @Override

@@ -27,12 +27,13 @@ public class VentaDAO extends DatabaseConection implements IDAO<Venta> {
     @Override
     public void insertar(Venta obj) throws Exception {
 
-        String sql = "INSERT INTO `venta` (`idventa`,`fecha`,`total`) VALUES (NULL, ?, ?)";
+        String sql = "INSERT INTO `venta` (`idventa`,`fecha`,`total`, `fecha_entrega`) VALUES (NULL, ?, ?)";
         PreparedStatement ps;
 
         ps = con.prepareStatement(sql);
         ps.setDate(1, obj.getFecha());
         ps.setFloat(2, obj.getTotal());
+        ps.setDate(3, obj.getFecha_entrega());
 
         ps.executeUpdate();
         ps.close();

@@ -20,6 +20,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import objetoNegocio.DetalleVenta;
+import objetoNegocio.Servicio;
+import objetoNegocio.Usuario;
+import objetoNegocio.Cliente;
 import objetoNegocio.Venta;
 import textPrompt.TextPrompt;
 import validacion.*;
@@ -33,6 +36,8 @@ public class Principal extends javax.swing.JFrame {
     FactoryAccesoDatos acceso = new FactoryAccesoDatos();
     static float importe = 0;
     ArrayList<DetalleVenta> detallesVenta;
+    
+    private static Usuario usuario1;
 
     /**
      * Creates new form Principal
@@ -44,11 +49,12 @@ public class Principal extends javax.swing.JFrame {
 
         TextPrompt phDescripcion = new TextPrompt("Inserte una descripción", txtArea_Descripcion);
         TextPrompt phPrecioU = new TextPrompt("Inserte el precio unitario", txtPrecioU);
-        TextPrompt phImporte = new TextPrompt("Inserte el importe", txtImporte);
+        
 
         try {
             cb_clientes.setModel(acceso.obtenerClienteDAO().consultarClientesCB());
             cb_servicios.setModel(acceso.obtenerServicioDAO().consultarServicioCB());
+            this.usuario1 = acceso.obtenerUsuarioDAO().consultarPorId(2);
         } catch (Exception ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -69,14 +75,13 @@ public class Principal extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
         btnLimpiarC = new javax.swing.JButton();
-        cb_clientes = new javax.swing.JComboBox<>();
+        cb_clientes = new javax.swing.JComboBox<String>();
         label2 = new java.awt.Label();
         jPanel2 = new javax.swing.JPanel();
         txtPrecioU = new javax.swing.JTextField();
-        txtImporte = new javax.swing.JTextField();
         btnLimpiarC1 = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
-        cb_servicios = new javax.swing.JComboBox<>();
+        cb_servicios = new javax.swing.JComboBox<String>();
         label1 = new java.awt.Label();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtArea_Descripcion = new javax.swing.JTextArea();
@@ -99,7 +104,6 @@ public class Principal extends javax.swing.JFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Entrega:");
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 70, 35));
         jPanel3.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 180, 35));
@@ -142,14 +146,6 @@ public class Principal extends javax.swing.JFrame {
         });
         jPanel2.add(txtPrecioU, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 220, 50));
 
-        txtImporte.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtImporte.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtImporteActionPerformed(evt);
-            }
-        });
-        jPanel2.add(txtImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 220, 50));
-
         btnLimpiarC1.setBackground(new java.awt.Color(255, 102, 102));
         btnLimpiarC1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnLimpiarC1.setForeground(new java.awt.Color(255, 255, 255));
@@ -160,7 +156,7 @@ public class Principal extends javax.swing.JFrame {
                 btnLimpiarC1ActionPerformed(evt);
             }
         });
-        jPanel2.add(btnLimpiarC1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, 140, 40));
+        jPanel2.add(btnLimpiarC1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 260, 140, 40));
 
         btnAgregar.setBackground(new java.awt.Color(51, 255, 102));
         btnAgregar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -172,13 +168,13 @@ public class Principal extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 140, 40));
+        jPanel2.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 140, 40));
 
         cb_servicios.setBackground(new java.awt.Color(255, 155, 155));
-        jPanel2.add(cb_servicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 170, 50));
+        jPanel2.add(cb_servicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 170, 50));
 
         label1.setText("Servicio");
-        jPanel2.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
+        jPanel2.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
 
         txtArea_Descripcion.setColumns(20);
         txtArea_Descripcion.setRows(5);
@@ -196,7 +192,7 @@ public class Principal extends javax.swing.JFrame {
             new Object [][] {
             },
             new String [] {
-                "PZ", "Descripción", "Servicio", "Precio Unitario ", "Importe "
+                "Descripción", "Servicio", "Precio Unitario ", "Importe "
             }
         ));
         tableDesc.setGridColor(new java.awt.Color(255, 255, 255));
@@ -245,27 +241,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // Se agregan los detalle venta
-//        actualizarTabla();
-//        double precioUnit = 0.0;
-//            try {
-//                detallesVenta.add(new DetalleVenta(acceso.obtenerServicioDAO().consultarPorNombre(cb_servicios.getSelectedItem().toString()).getIdServicio(),
-//                acceso.obtenerServicioDAO().consultarPorNombre(cb_servicios.getSelectedItem().toString()).getCosto(), acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString()).getIdcliente(), 0));
-//                //Agregar los ids del cliente seleccionado
-//       //         acceso.obtenerDetalleVentaDAO().insertar(new DetalleVenta(acceso.obtenerServicioDAO().consultarPorNombre("Lavado").getIdServicio(),
-//         //               acceso.obtenerServicioDAO().consultarPorNombre("Lavado").getCosto(), acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString()).getIdcliente(), 0));
-//            } catch (SQLException ex) {
-//                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-//            } catch (Exception ex) {
-//                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//
-//            precioUnit += acceso.obtenerServicioDAO().consultarPorNombre(cb_servicios.getSelectedItem().toString()).getCosto();
-//        
-//
-//        txtPrecioU.setText(String.valueOf(precioUnit));
-//        importe = (float) (precioUnit * Integer.parseInt(txtNoPiezas.getText()));
-
-        //Falta agregarlos al arraylist
+        actualizarTabla();
+        
 
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -291,42 +268,48 @@ public class Principal extends javax.swing.JFrame {
 //        limpiarTabla();
     }//GEN-LAST:event_btnLimpiarC1ActionPerformed
     private void actualizarTabla() {
-//        String servicio = "";
-//        DefaultTableModel modelo = (DefaultTableModel) tableDesc.getModel();
-//        Object[] fila = new Object[5];
-//        fila[0] = txtNoPiezas.getText();
-//        fila[1] = txtDescRopa.getText();
-//        servicio = cb_servicios.getSelectedItem().toString();
-//        fila[2] = servicio;
-//        fila[3] = "$ " + txtPrecioU.getText();
-//        fila[4] = "$ " + txtImporte.getText();
-//        
-//        modelo.addRow(fila);
-//        tableDesc.setModel(modelo);
+        try{
+        Cliente cliente = acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString());
+        
+        String servicio = "";
+        Servicio ser = acceso.obtenerServicioDAO().consultarPorNombre(cb_servicios.getSelectedItem().toString());
+        float precioServcicio = ser.getCosto();
+        DefaultTableModel modelo = (DefaultTableModel) tableDesc.getModel();
+        Object[] fila = new Object[4];
+        fila[0] = txtArea_Descripcion.getText(); 
+        servicio = cb_servicios.getSelectedItem().toString();
+        fila[1] = servicio;
+        fila[2] = "$ " + txtPrecioU.getText();
+        fila[3] = "$ " + (Float)(Float.parseFloat(txtPrecioU.getText()) + precioServcicio);
+        
+        modelo.addRow(fila);
+        tableDesc.setModel(modelo);
 
+//        detallesVenta.add(new DetalleVenta(Float.parseFloat(txtPrecioU.getText()),
+//                                           txtArea_Descripcion.getText(),  cliente.getIdcliente(), usuario1.getIdUsuario(),
+//        ));
+        }catch(Exception ex){
+            
+        }
     }
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-//        if (jDateChooser2.getDate().after(jDateChooser2.getDate())) {
-//            try {
-//                // falta obtener el usuario de la sesión actual y guardar los detalle venta en el arreglo:
-//                
+        if (jDateChooser2.getDate().after(jDateChooser2.getDate())) {
+            try {
+                // falta obtener el usuario de la sesión actual y guardar los detalle venta en el arreglo:
+                
 //                acceso.obtenerVentaDAO().insertar(new Venta(new java.sql.Date(jDateChooser1.getDate().getTime()), importe, acceso.obtenerUsuarioDAO().consultarPorId(0), detallesVenta));
-//                
-//            } catch (Exception ex) {
-//                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
+                
+            } catch (Exception ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
 
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void txtPrecioUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioUActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPrecioUActionPerformed
-
-    private void txtImporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtImporteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtImporteActionPerformed
 
     private void cb_clientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_clientesActionPerformed
         // TODO add your handling code here:
@@ -376,6 +359,7 @@ public class Principal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Principal().setVisible(true);
+               
             }
         });
     }
@@ -401,7 +385,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel lblNumNota;
     private javax.swing.JTable tableDesc;
     private javax.swing.JTextArea txtArea_Descripcion;
-    private javax.swing.JTextField txtImporte;
     private javax.swing.JTextField txtPrecioU;
     // End of variables declaration//GEN-END:variables
 }
