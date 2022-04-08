@@ -7,7 +7,10 @@ package GUI;
 
 import factory.FactoryAccesoDatos;
 import java.awt.Color;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import objetoNegocio.DetalleVenta;
 import textPrompt.TextPrompt;
 
 /**
@@ -24,18 +27,18 @@ public class Actualizar extends javax.swing.JFrame {
         
         TextPrompt phCliente = new TextPrompt("Cliente", txtCliente);
         phCliente.setForeground(Color.GRAY);
-        TextPrompt phTelefono = new TextPrompt("Telefono", txtTelefono);
+        TextPrompt phTelefono = new TextPrompt("Telefono", txtTelefonoC);
         phTelefono.setForeground(Color.GRAY);
         TextPrompt phPrecio = new TextPrompt("Precio", txtPrecio);
         phPrecio.setForeground(Color.GRAY);
-        TextPrompt phServicio = new TextPrompt("Servicio", txtServicio);
-        phServicio.setForeground(Color.GRAY);
         TextPrompt phDescrip = new TextPrompt("Descripcion", txtDescripcion);
         phDescrip.setForeground(Color.GRAY);
         
         acceso = new FactoryAccesoDatos();
         
-        this.TablaClientes.setShowGrid(true);
+        llenarTabla();
+        this.tablaClientes.setShowGrid(true);
+        
     }
 
     /**
@@ -51,7 +54,7 @@ public class Actualizar extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtCliente = new javax.swing.JTextField();
-        txtTelefono = new javax.swing.JTextField();
+        txtTelefonoC = new javax.swing.JTextField();
         txtPrecio = new javax.swing.JTextField();
         txtDescripcion = new javax.swing.JTextField();
         btn_aceptar = new javax.swing.JButton();
@@ -60,7 +63,7 @@ public class Actualizar extends javax.swing.JFrame {
         cb_servicios = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TablaClientes = new javax.swing.JTable();
+        tablaClientes = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Actualizar");
@@ -76,7 +79,7 @@ public class Actualizar extends javax.swing.JFrame {
 
         txtCliente.setEnabled(false);
 
-        txtTelefono.setEnabled(false);
+        txtTelefonoC.setEnabled(false);
 
         txtPrecio.setEnabled(false);
 
@@ -115,6 +118,7 @@ public class Actualizar extends javax.swing.JFrame {
         });
 
         cb_servicios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cb_servicios.setEnabled(false);
         cb_servicios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_serviciosActionPerformed(evt);
@@ -142,7 +146,7 @@ public class Actualizar extends javax.swing.JFrame {
                             .addComponent(btn_limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(txtDescripcion)
                         .addComponent(txtPrecio)
-                        .addComponent(txtTelefono)
+                        .addComponent(txtTelefonoC)
                         .addComponent(txtCliente))
                     .addComponent(cb_servicios, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(24, Short.MAX_VALUE))
@@ -160,7 +164,7 @@ public class Actualizar extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTelefonoC, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cb_servicios, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -180,16 +184,21 @@ public class Actualizar extends javax.swing.JFrame {
                     .addContainerGap(228, Short.MAX_VALUE)))
         );
 
-        TablaClientes.setBackground(new java.awt.Color(110, 157, 211));
-        TablaClientes.setModel(new javax.swing.table.DefaultTableModel(
+        tablaClientes.setBackground(new java.awt.Color(110, 157, 211));
+        tablaClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Cliente", "Telefono", "Descripción", "Precio", "Servicio"
+                "Codigo", "Cliente", "Telefono", "Descripción", "Precio", "Servicio"
             }
         ));
-        jScrollPane1.setViewportView(TablaClientes);
+        tablaClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaClientesMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tablaClientes);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -208,7 +217,7 @@ public class Actualizar extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -236,29 +245,124 @@ public class Actualizar extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_cancelarActionPerformed
 
     private void btn_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aceptarActionPerformed
-        
-        try{
-            
-        }catch(Exception ex){
-            System.out.println(ex.getMessage());
-            JOptionPane.showMessageDialog(this, "Ha ocurrido un error y no se ha podido actualizar la venta.", "Error!!", JOptionPane.ERROR_MESSAGE);
-        }
+        actualizar();
     }//GEN-LAST:event_btn_aceptarActionPerformed
 
     private void btn_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiarActionPerformed
-        
-        txtCliente.setText("");
-        txtTelefono.setText("");
-        cb_servicios.setSelectedIndex(0);
-        txtPrecio.setText("");
-        txtDescripcion.setText("");
-        
+        limpiar();
     }//GEN-LAST:event_btn_limpiarActionPerformed
 
     private void cb_serviciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_serviciosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cb_serviciosActionPerformed
 
+    private void tablaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaClientesMouseClicked
+        editar();
+    }//GEN-LAST:event_tablaClientesMouseClicked
+    
+    private void activarCampos() {
+        cb_servicios.setEnabled(true);
+        txtPrecio.setEnabled(true);
+        txtDescripcion.setEnabled(true);
+    }
+    
+    private void desactivarCampos() {
+        cb_servicios.setEnabled(false);
+        txtPrecio.setEnabled(false);
+        txtDescripcion.setEnabled(false);
+    }
+
+    private void editar() {
+        try {
+            int indice = this.tablaClientes.getSelectedRow();
+            if (indice == -1) {
+                JOptionPane.showMessageDialog(this, "Debe de seleccionar una fila", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                DefaultTableModel modelo = (DefaultTableModel) tablaClientes.getModel();
+                int id = (int) modelo.getValueAt(indice, 0);
+                DetalleVenta detVenta = acceso.obtenerDetalleVentaDAO().consultarPorId(id);
+                if (detVenta != null) {
+                    activarCampos();
+                    cargarDatos(detVenta);
+                }else{
+                    JOptionPane.showMessageDialog(this, "No existe el detalle venta seleccionado", "AVISO",JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getCause());
+        }
+    }
+    
+    private void actualizar(){
+          try {
+            int indice = this.tablaClientes.getSelectedRow();
+            if (indice == -1) {
+                JOptionPane.showMessageDialog(this, "Seleccione un detalle venta para modificar", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                int opcion = JOptionPane.showConfirmDialog(this, "¿Estas seguro de que desea modificar este detalle venta?", "Confirme su selección",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (opcion == JOptionPane.YES_OPTION) {
+                    DefaultTableModel modelo = (DefaultTableModel) tablaClientes.getModel();
+                    int id = (int) modelo.getValueAt(indice, 0);
+                    
+                    //acceso.obtenerDetalleVentaDAO().eliminar(id); ----------------------------------------------------- Aqui va el método de actualizar detalle venta
+                    
+                    llenarTabla();
+                    limpiar();
+                    JOptionPane.showMessageDialog(this, "Se ha modificado el detalle de la venta","INFORMACIÓN",JOptionPane.INFORMATION_MESSAGE);
+
+                }
+            }
+        } catch (Exception ex) {
+
+        }
+    }  
+    
+    public void llenarTabla() {
+        try {
+            ArrayList<DetalleVenta> listaDetalle = acceso.obtenerDetalleVentaDAO().consultar();
+            DefaultTableModel modeloTabla = (DefaultTableModel) this.tablaClientes.getModel();
+            modeloTabla.setRowCount(0);
+            for (DetalleVenta listaDetalle1 : listaDetalle) {
+                Object[] filaDatos = new Object[6];
+                filaDatos[0] = listaDetalle1.getIddetalle_venta();
+                filaDatos[1] = acceso.obtenerClienteDAO().consultarPorId(listaDetalle1.getIdCliente()).getNombre();
+                filaDatos[2] = acceso.obtenerClienteDAO().consultarPorId(listaDetalle1.getIdCliente()).getTelefono1();
+                filaDatos[3] = listaDetalle1.getDesc();
+                filaDatos[4] = listaDetalle1.getPrecio();
+                filaDatos[5] = acceso.obtenerServicioDAO().consultarPorId(listaDetalle1.getIdServicio()).getNombre();
+              
+                
+                modeloTabla.addRow(filaDatos);
+
+            }
+
+        } catch (Exception ex) {
+            System.out.println(ex.getCause());
+        }
+    }
+    
+    private void limpiar() {
+        this.txtCliente.setText("");
+        this.txtDescripcion.setText("");
+        cb_servicios.setSelectedIndex(0);
+        this.txtPrecio.setText("");
+        this.txtTelefonoC.setText("");
+    }
+
+    private void cargarDatos(DetalleVenta detalleVenta) {
+        try {
+            this.txtCliente.setText(acceso.obtenerClienteDAO().consultarPorId(detalleVenta.getIdCliente()).getNombre());
+            this.txtTelefonoC.setText(acceso.obtenerClienteDAO().consultarPorId(detalleVenta.getIdCliente()).getTelefono1());
+            this.txtDescripcion.setText(detalleVenta.getDesc());
+            this.txtPrecio.setText(Float.toString(detalleVenta.getPrecio()));
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -295,7 +399,6 @@ public class Actualizar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TablaClientes;
     private javax.swing.JButton btn_aceptar;
     private javax.swing.JButton btn_cancelar;
     private javax.swing.JButton btn_limpiar;
@@ -305,9 +408,10 @@ public class Actualizar extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tablaClientes;
     private javax.swing.JTextField txtCliente;
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtPrecio;
-    private javax.swing.JTextField txtTelefono;
+    private javax.swing.JTextField txtTelefonoC;
     // End of variables declaration//GEN-END:variables
 }
