@@ -100,6 +100,7 @@ public class Principal extends javax.swing.JFrame {
         btnRegistrar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         lblNumNota = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registrar Servicio");
@@ -243,6 +244,11 @@ public class Principal extends javax.swing.JFrame {
         lblNumNota.setForeground(new java.awt.Color(255, 153, 153));
         jPanel1.add(lblNumNota, new org.netbeans.lib.awtextra.AbsoluteConstraints(1700, 30, 170, -1));
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 153, 153));
+        jLabel7.setText("NOTA");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, -1, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 1920, 1060));
 
         pack();
@@ -278,8 +284,6 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimpiarC1ActionPerformed
     private void actualizarTabla() {
         try {
-            Cliente cliente = acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString());
-            Servicio servicios = acceso.obtenerServicioDAO().consultarPorNombre(cb_servicios.getSelectedItem().toString());
 
             String servicio = "";
             Servicio ser = acceso.obtenerServicioDAO().consultarPorNombre(cb_servicios.getSelectedItem().toString());
@@ -296,8 +300,6 @@ public class Principal extends javax.swing.JFrame {
             tableDesc.setModel(modelo);
 
             total.add((Float) (Float.parseFloat(txtPrecioU.getText()) + precioServcicio));
-            detallesVenta.add(new DetalleVenta(Float.parseFloat(txtPrecioU.getText()),
-                    txtArea_Descripcion.getText(), cliente.getIdcliente(), usuario1.getIdUsuario(), servicios.getIdServicio()));
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -307,15 +309,18 @@ public class Principal extends javax.swing.JFrame {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
 
         try {
+
             Date now = new Date();
             String pattern = "yyyy-MM-dd";
             SimpleDateFormat formatter = new SimpleDateFormat(pattern);
             String mysqlDateString = formatter.format(now);
 
-            acceso.obtenerVentaDAO().insertar(new Venta(new java.sql.Date(now.getTime()), calcularTotal(total), new java.sql.Date(jDateChooser2.getDate().getTime()), nota()));
+            acceso.obtenerVentaDAO().insertar(new Venta(new java.sql.Date(now.getTime()), calcularTotal(total), new java.sql.Date(jDateChooser2.getDate().getTime())));
 
+            guardarDetalleVenta();
+            
         } catch (Exception ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
 
 
@@ -332,7 +337,7 @@ public class Principal extends javax.swing.JFrame {
     private int nota() {
         Random r = new Random();
         String randomNumber = String.format("%04d", (Object) Integer.valueOf(r.nextInt(1001)));
-       
+
         return Integer.parseInt(randomNumber);
     }
 
@@ -359,13 +364,11 @@ public class Principal extends javax.swing.JFrame {
 
     public void guardarDetalleVenta() {
         try {
-            Venta venta = acceso.obtenerVentaDAO().consultarNota(nota());
-            System.out.println(venta);
-            int id_venta = venta.getIdventa();
-
-            for (int i = 0; i < detallesVenta.size(); i++) {
-                detallesVenta.get(i).setIdVenta(id_venta);
-            }
+            Cliente cliente = acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString());
+            Servicio servicios = acceso.obtenerServicioDAO().consultarPorNombre(cb_servicios.getSelectedItem().toString());
+            System.out.println(servicios.getIdServicio());
+            detallesVenta.add(new DetalleVenta(Float.parseFloat(txtPrecioU.getText()),
+                    txtArea_Descripcion.getText(), cliente.getIdcliente(), usuario1.getIdUsuario(), acceso.obtenerVentaDAO().consultarUltimo().getIdventa(), servicios.getIdServicio()));
 
             for (int i = 0; i < detallesVenta.size(); i++) {
                 acceso.obtenerDetalleVentaDAO().insertar(detallesVenta.get(i));
@@ -423,6 +426,7 @@ public class Principal extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

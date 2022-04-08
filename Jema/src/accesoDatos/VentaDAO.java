@@ -28,14 +28,13 @@ public class VentaDAO extends DatabaseConection implements IDAO<Venta> {
     @Override
     public void insertar(Venta obj) throws Exception {
 
-        String sql = "INSERT INTO `venta` (`idventa`,`fecha`,`total`, `fecha_entrega`, `num_nota`) VALUES (NULL, ?, ?, ?, ?)";
+        String sql = "INSERT INTO `venta` (`idventa`,`fecha`,`total`, `fecha_entrega`) VALUES (NULL, ?, ?, ?)";
         PreparedStatement ps;
 
         ps = con.prepareStatement(sql);
         ps.setDate(1, obj.getFecha());
         ps.setFloat(2, obj.getTotal());
         ps.setDate(3, obj.getFecha_entrega());
-        ps.setInt(4, obj.getNum_nota());
 
         ps.executeUpdate();
         ps.close();
@@ -72,14 +71,12 @@ public class VentaDAO extends DatabaseConection implements IDAO<Venta> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public Venta consultarNota(int nota) throws Exception {
+    public Venta consultarUltimo() throws Exception {
         try {
-            String sql = "SELECT * FROM Venta WHERE num_nota = ?";
-            PreparedStatement pstmt = con.prepareStatement(sql);
-            pstmt.setInt(1, nota);
-            ResultSet rs = pstmt.executeQuery();
+            String sql = "SELECT * FROM venta ORDER BY idventa DESC LIMIT 1";
+            ResultSet rs = stmt.executeQuery(sql);
             rs.next();
-            return new Venta(rs.getInt("id_venta"));
+            return new Venta(rs.getInt("idventa"));
         } catch (SQLException e) {
 
         }

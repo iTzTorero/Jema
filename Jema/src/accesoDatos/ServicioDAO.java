@@ -90,7 +90,7 @@ public class ServicioDAO extends DatabaseConection implements IDAO<Servicio> {
             pstmt.setString(1, nombre);
             ResultSet rs = pstmt.executeQuery();
             rs.next();
-            return new Servicio(rs.getNString("nombre"), rs.getFloat("costo"));
+            return new Servicio(rs.getInt("idservicio"),rs.getNString("nombre"), rs.getFloat("costo"));
         } catch (SQLException e) {
 
         }
