@@ -5,23 +5,12 @@
  */
 package GUI;
 
-import accesoDatos.ClienteDAO;
-import accesoDatos.DatabaseConection;
-import com.sun.glass.events.KeyEvent;
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import factory.FactoryAccesoDatos;
-import java.awt.Color;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Time;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import objetoNegocio.DetalleVenta;
@@ -44,8 +33,6 @@ public class Principal extends javax.swing.JFrame {
     ArrayList<DetalleVenta> detallesVenta;
     ArrayList<Float> total;
     private static Usuario usuario1;
-    private int num_nota = 0;
-    Random r;
 
     /**
      * Creates new form Principal
@@ -53,7 +40,6 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         this.tableDesc.setShowGrid(true);
-        // llenarComboboxClientes();
 
         TextPrompt phDescripcion = new TextPrompt("Inserte una descripción", txtArea_Descripcion);
         TextPrompt phPrecioU = new TextPrompt("Inserte el precio unitario", txtPrecioU);
@@ -62,12 +48,12 @@ public class Principal extends javax.swing.JFrame {
             cb_clientes.setModel(acceso.obtenerClienteDAO().consultarClientesCB());
             cb_servicios.setModel(acceso.obtenerServicioDAO().consultarServicioCB());
             this.usuario1 = acceso.obtenerUsuarioDAO().consultarPorId(2);
+            
         } catch (Exception ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
         detallesVenta = new ArrayList();
         total = new ArrayList<>();
-        r = new Random();
     }
 
     /**
@@ -82,15 +68,15 @@ public class Principal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        fechaEntrega = new com.toedter.calendar.JDateChooser();
         btnLimpiarC = new javax.swing.JButton();
-        cb_clientes = new javax.swing.JComboBox<String>();
+        cb_clientes = new javax.swing.JComboBox<>();
         label2 = new java.awt.Label();
         jPanel2 = new javax.swing.JPanel();
         txtPrecioU = new javax.swing.JTextField();
         btnLimpiarC1 = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
-        cb_servicios = new javax.swing.JComboBox<String>();
+        cb_servicios = new javax.swing.JComboBox<>();
         label1 = new java.awt.Label();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtArea_Descripcion = new javax.swing.JTextArea();
@@ -114,9 +100,10 @@ public class Principal extends javax.swing.JFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Entrega:");
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 70, 35));
-        jPanel3.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 180, 35));
+        jPanel3.add(fechaEntrega, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 180, 35));
 
         btnLimpiarC.setBackground(new java.awt.Color(255, 102, 102));
         btnLimpiarC.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -132,11 +119,6 @@ public class Principal extends javax.swing.JFrame {
 
         cb_clientes.setBackground(new java.awt.Color(255, 155, 155));
         cb_clientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cb_clientes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cb_clientesActionPerformed(evt);
-            }
-        });
         jPanel3.add(cb_clientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 230, 50));
 
         label2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -148,12 +130,6 @@ public class Principal extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        txtPrecioU.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPrecioUActionPerformed(evt);
-            }
-        });
         jPanel2.add(txtPrecioU, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 220, 50));
 
         btnLimpiarC1.setBackground(new java.awt.Color(255, 102, 102));
@@ -265,23 +241,24 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         Menu menu = new Menu();
         this.dispose();
+        
+        this.activarCampos();
+        
         menu.setVisible(true);
     }//GEN-LAST:event_btnCancelarRActionPerformed
 
     private void btnLimpiarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarCActionPerformed
-
-//        jDateChooser1.setCalendar(null);
-        jDateChooser2.setCalendar(null);
+        cb_clientes.setSelectedIndex(0);
+        fechaEntrega.setCalendar(null);
     }//GEN-LAST:event_btnLimpiarCActionPerformed
 
     private void btnLimpiarC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarC1ActionPerformed
-        // TODO add your handling code here:
-//        txtNoPiezas.setText("");
-//        txtDescRopa.setText("");
-//        txtImporte.setText("");
-//        txtPrecioU.setText("");
-//        limpiarTabla();
+        txtArea_Descripcion.setText("");
+        txtPrecioU.setText("");
+        cb_servicios.setSelectedIndex(0);
+        
     }//GEN-LAST:event_btnLimpiarC1ActionPerformed
+    
     private void actualizarTabla() {
         try {
             Cliente cliente = acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString());
@@ -294,8 +271,8 @@ public class Principal extends javax.swing.JFrame {
             fila[0] = txtArea_Descripcion.getText();
             servicio = cb_servicios.getSelectedItem().toString();
             fila[1] = servicio;
-            fila[2] = "$ " + txtPrecioU.getText();
-            fila[3] = "$ " + (Float) (Float.parseFloat(txtPrecioU.getText()) + precioServcicio);
+            fila[2] = txtPrecioU.getText();
+            fila[3] = (Float) (Float.parseFloat(txtPrecioU.getText()) + precioServcicio);
 
             modelo.addRow(fila);
             tableDesc.setModel(modelo);
@@ -303,27 +280,40 @@ public class Principal extends javax.swing.JFrame {
             total.add((Float) (Float.parseFloat(txtPrecioU.getText()) + precioServcicio));
             detallesVenta.add(new DetalleVenta(Float.parseFloat(txtPrecioU.getText()),
                     txtArea_Descripcion.getText(), cliente.getIdcliente(), usuario1.getIdUsuario(), servicios.getIdServicio()));
+            
+            limpiarCamposC2();
+            
+            this.desactivarCampos();
+                      
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
+            
         }
     }
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
 
         try {
-
+            llenarArrayList();
             Date now = new Date();
             String pattern = "yyyy-MM-dd";
             SimpleDateFormat formatter = new SimpleDateFormat(pattern);
             String mysqlDateString = formatter.format(now);
 
-            acceso.obtenerVentaDAO().insertar(new Venta(new java.sql.Date(now.getTime()), calcularTotal(total), new java.sql.Date(jDateChooser2.getDate().getTime())));
+            acceso.obtenerVentaDAO().insertar(new Venta(new java.sql.Date(now.getTime()), calcularTotal(total), new java.sql.Date(fechaEntrega.getDate().getTime())));
 
             guardarDetalleVenta();
+            JOptionPane.showMessageDialog(this, "Se ha registrado la venta.", "Exito!!", JOptionPane.INFORMATION_MESSAGE);
+            
+            this.activarCampos();
+            
+            limpiarTabla();
+            limpiarCamposC1();
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error y no se ha podido registrar la venta.", "Error!!", JOptionPane.ERROR_MESSAGE);
         }
 
 
@@ -336,34 +326,19 @@ public class Principal extends javax.swing.JFrame {
         }
         return totalT;
     }
-
-    private int nota() {
-        Random r = new Random();
-        String randomNumber = String.format("%04d", (Object) Integer.valueOf(r.nextInt(1001)));
-
-        return Integer.parseInt(randomNumber);
+    
+    private void limpiarCamposC1() {
+        cb_clientes.setSelectedIndex(0);
+        fechaEntrega.setCalendar(null);
     }
 
-    private void txtPrecioUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioUActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPrecioUActionPerformed
-
-    private void cb_clientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_clientesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cb_clientesActionPerformed
-    private void limpiarTabla() {
-        tableDesc.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][]{
-                    {null, null, null, null},
-                    {null, null, null, null},
-                    {null, null, null, null},
-                    {null, null, null, null}
-                },
-                new String[]{
-                    "PZ", "Descripción", "Precio Unitario ", "Importe "
-                }
-        ));
+    private void limpiarCamposC2(){
+        txtArea_Descripcion.setText("");
+        txtPrecioU.setText("");
+        cb_servicios.setSelectedIndex(0);
+        
     }
+
 
     public void guardarDetalleVenta() {
         try {
@@ -378,6 +353,36 @@ public class Principal extends javax.swing.JFrame {
             System.out.println(ex.getMessage());
         }
 
+    }
+    
+    private void llenarArrayList() {
+        try {
+            Cliente cliente = acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString());
+            Servicio servicios = acceso.obtenerServicioDAO().consultarPorNombre(cb_servicios.getSelectedItem().toString());
+            for (int i = 0; i < tableDesc.getRowCount(); i++) {
+                detallesVenta.add(new DetalleVenta(Float.parseFloat(tableDesc.getValueAt(i, 2).toString()),
+                        tableDesc.getValueAt(i, 0).toString(), cliente.getIdcliente(), usuario1.getIdUsuario(), servicios.getIdServicio()));
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    private void limpiarTabla() {
+        DefaultTableModel model = (DefaultTableModel) tableDesc.getModel();
+        model.setRowCount(0);
+    }
+    
+    private void activarCampos() {
+        cb_clientes.setEnabled(true);
+        fechaEntrega.setEnabled(true);
+        btnLimpiarC.setEnabled(true);
+    }
+
+    private void desactivarCampos() {
+        cb_clientes.setEnabled(false);
+        fechaEntrega.setEnabled(false);
+        btnLimpiarC.setEnabled(false);
     }
 
     /**
@@ -424,7 +429,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JComboBox<String> cb_clientes;
     private javax.swing.JComboBox<String> cb_servicios;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private com.toedter.calendar.JDateChooser fechaEntrega;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
