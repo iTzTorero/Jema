@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import objetoNegocio.Cliente;
 import objetoNegocio.Servicio;
 
 /**
@@ -69,8 +70,19 @@ public class ServicioDAO extends DatabaseConection implements IDAO<Servicio> {
 
     @Override
     public Servicio consultarPorId(int id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                try {
+            String sql = "SELECT * FROM servicio WHERE idservicio = ?";
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            rs.next();
+        return new Servicio (rs.getInt("idservicio"),rs.getNString("nombre"), rs.getFloat("costo"));
+        }catch(Exception ex){
+                
+                }
+        return null;
     }
+    
 
     @Override
     public ResultSet consultarTodos() throws Exception {

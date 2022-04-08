@@ -58,18 +58,33 @@ public class DetalleVentaDAO extends DatabaseConection implements IDAO<DetalleVe
 
     @Override
     public DetalleVenta consultarPorId(int id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            String sql = "SELECT * FROM detalle_venta WHERE iddetalle_venta = ?";
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            rs.next();
+            return new DetalleVenta(rs.getInt("iddetalle_venta"), rs.getFloat("precio"), rs.getString("descripcion"),rs.getInt("idcliente"),rs.getInt("idusuario"),rs.getInt("idventa"),rs.getInt("idservicio"));
+        } catch (Exception ex) {
+
+        }
+        return null;
     }
 
-    @Override
-    public ResultSet consultarTodos() throws Exception {
+
+@Override
+        public ResultSet consultarTodos() throws Exception {
         try {
             String sql = "SELECT * FROM `detalle_venta`";
             PreparedStatement st = con.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             return rs;
-        } catch (SQLException ex) {
-            Logger.getLogger(DetalleVentaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        
+
+} catch (SQLException ex) {
+            Logger.getLogger(DetalleVentaDAO.class  
+
+.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -82,7 +97,19 @@ public class DetalleVentaDAO extends DatabaseConection implements IDAO<DetalleVe
             ResultSet rs = stmt.executeQuery(codigoSQL);
             while(rs.next()){
                 int iddetalle_venta = rs.getInt("iddetalle_venta");
+                float precio = rs.getFloat("precio");
+                String descripcion = rs.getString("descripcion");
+                int id_cliente = rs.getInt("idcliente");
+                int id_usuario = rs.getInt("idusuario");
+                int id_venta = rs.getInt("idventa");
+                int id_servicio = rs.getInt("idservicio");
+                
+                
+                DetalleVenta detVenta = new DetalleVenta(iddetalle_venta, precio, descripcion, id_cliente, id_usuario, id_venta, id_servicio);
+                listaDetalle.add(detVenta);
             }
+            
+            return listaDetalle;
         } catch (Exception ex) {
 
         }
