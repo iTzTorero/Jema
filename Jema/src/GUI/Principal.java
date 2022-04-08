@@ -100,7 +100,6 @@ public class Principal extends javax.swing.JFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Entrega:");
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 70, 35));
         jPanel3.add(fechaEntrega, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 180, 35));
@@ -159,8 +158,9 @@ public class Principal extends javax.swing.JFrame {
         cb_servicios.setBackground(new java.awt.Color(255, 155, 155));
         jPanel2.add(cb_servicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 170, 50));
 
+        label1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         label1.setText("Servicio");
-        jPanel2.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
+        jPanel2.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
 
         txtArea_Descripcion.setColumns(20);
         txtArea_Descripcion.setRows(5);
