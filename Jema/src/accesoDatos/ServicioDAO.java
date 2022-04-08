@@ -78,7 +78,7 @@ public class ServicioDAO extends DatabaseConection implements IDAO<Servicio> {
         try {
             return stmt.executeQuery(sql);
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServicioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
