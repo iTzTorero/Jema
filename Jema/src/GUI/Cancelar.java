@@ -5,17 +5,41 @@
  */
 package GUI;
 
+import factory.FactoryAccesoDatos;
+import java.awt.Color;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import objetoNegocio.DetalleVenta;
+import textPrompt.TextPrompt;
+
 /**
  *
  * @author PC
  */
 public class Cancelar extends javax.swing.JFrame {
 
+    FactoryAccesoDatos acceso;
     /**
      * Creates new form Cancelar
      */
     public Cancelar() {
         initComponents();
+                this.setTitle("Tabla datos");
+        TextPrompt phCliente = new TextPrompt("Cliente", txtCliente);
+        phCliente.setForeground(Color.GRAY);
+        TextPrompt phTelefono = new TextPrompt("Telefono", txtTelefonoC);
+        phTelefono.setForeground(Color.GRAY);
+        TextPrompt phPrecio = new TextPrompt("Precio", txtPrecio);
+        phPrecio.setForeground(Color.GRAY);
+        TextPrompt phServicio = new TextPrompt("Servicio", txtServicio);
+        phServicio.setForeground(Color.GRAY);
+        TextPrompt phDescrip = new TextPrompt("Descripcion", txtDescripcion);
+        phDescrip.setForeground(Color.GRAY);
+        
+        acceso = new FactoryAccesoDatos();
+        
+        this.tablaClientes.setShowGrid(true);
     }
 
     /**
@@ -31,14 +55,13 @@ public class Cancelar extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         txtCliente = new javax.swing.JTextField();
         txtTelefonoC = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jComboBoxTipoServicio = new javax.swing.JComboBox<String>();
         txtPrecio = new javax.swing.JTextField();
-        txtEstadoServicio = new javax.swing.JTextField();
+        txtDescripcion = new javax.swing.JTextField();
         btnCancelar = new javax.swing.JButton();
         btnAceptar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        txtServicio = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaClientes = new javax.swing.JTable();
 
@@ -51,25 +74,21 @@ public class Cancelar extends javax.swing.JFrame {
 
         txtCliente.setEditable(false);
         txtCliente.setBackground(new java.awt.Color(255, 255, 255));
+        txtCliente.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         txtCliente.setForeground(new java.awt.Color(255, 255, 255));
         txtCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
         txtTelefonoC.setEditable(false);
         txtTelefonoC.setBackground(new java.awt.Color(255, 255, 255));
+        txtTelefonoC.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         txtTelefonoC.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(48, 120, 56));
-        jLabel3.setText("Tipo de servicio");
-
-        jComboBoxTipoServicio.setBackground(new java.awt.Color(102, 255, 102));
-        jComboBoxTipoServicio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBoxTipoServicio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
         txtPrecio.setEditable(false);
+        txtPrecio.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         txtPrecio.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
-        txtEstadoServicio.setEditable(false);
+        txtDescripcion.setEditable(false);
+        txtDescripcion.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
 
         btnCancelar.setBackground(new java.awt.Color(195, 52, 52));
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -98,7 +117,10 @@ public class Cancelar extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(17, 92, 24));
-        jLabel1.setText("Tabla de clientes");
+        jLabel1.setText("Cancelar ");
+
+        txtServicio.setEditable(false);
+        txtServicio.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -107,22 +129,23 @@ public class Cancelar extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3)
-                    .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEstadoServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTelefonoC)
-                    .addComponent(jComboBoxTipoServicio, 0, 350, Short.MAX_VALUE)
+                    .addComponent(txtTelefonoC, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtCliente))
+                    .addComponent(txtCliente)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txtPrecio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+                        .addComponent(txtDescripcion, javax.swing.GroupLayout.Alignment.LEADING)))
                 .addGap(39, 39, 39))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(txtServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -133,14 +156,12 @@ public class Cancelar extends javax.swing.JFrame {
                 .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtTelefonoC, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBoxTipoServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(24, 24, 24)
+                .addComponent(txtServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtEstadoServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -150,6 +171,7 @@ public class Cancelar extends javax.swing.JFrame {
         );
 
         tablaClientes.setBackground(new java.awt.Color(153, 255, 153));
+        tablaClientes.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         tablaClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -158,7 +180,7 @@ public class Cancelar extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Cliente", "Telefono", "Tipo Servicio ", "Precio ", "Estado Servicio "
+                "Cliente", "Telefono", "Tipo Servicio ", "Precio ", "Servicio"
             }
         ));
         tablaClientes.setGridColor(new java.awt.Color(0, 0, 0));
@@ -217,6 +239,31 @@ public class Cancelar extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void eliminar(){
+        try{
+            int indice = this.tablaClientes.getSelectedRow();
+            if (indice == -1) {
+                
+            }
+        }catch(Exception ex){
+            
+        }
+    }
+    
+    public void llenarTabla(){
+        try{
+            ResultSet rs = acceso.obtenerDetalleVentaDAO().consultarTodos();
+            DefaultTableModel modeloTabla = (DefaultTableModel) this.tablaClientes.getModel();
+            modeloTabla.setRowCount(0);
+            while(rs.next()){
+                
+            }
+        }catch(Exception ex){
+            
+        }
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -256,16 +303,15 @@ public class Cancelar extends javax.swing.JFrame {
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnLimpiar;
-    private javax.swing.JComboBox<String> jComboBoxTipoServicio;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaClientes;
     private javax.swing.JTextField txtCliente;
-    private javax.swing.JTextField txtEstadoServicio;
+    private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtPrecio;
+    private javax.swing.JTextField txtServicio;
     private javax.swing.JTextField txtTelefonoC;
     // End of variables declaration//GEN-END:variables
 }

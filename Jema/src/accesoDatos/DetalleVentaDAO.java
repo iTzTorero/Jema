@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import objetoNegocio.DetalleVenta;
@@ -25,7 +26,7 @@ public class DetalleVentaDAO extends DatabaseConection implements IDAO<DetalleVe
 
     @Override
     public void insertar(DetalleVenta obj) throws Exception {
-        String sql = "INSERT INTO `detalle_venta` (`iddetalle_venta`, `precio`, `idcliente`, `idusuario`, `idventa`, `idServicio`, `descripcion`) VALUES (NULL, ?, ?, ?, ?, ?, ?);";     
+        String sql = "INSERT INTO `detalle_venta` (`iddetalle_venta`, `precio`, `idcliente`, `idusuario`, `idventa`, `idServicio`, `descripcion`) VALUES (NULL, ?, ?, ?, ?, ?, ?);";
         PreparedStatement ps;
         ps = con.prepareStatement(sql);
         ps.setFloat(1, obj.getPrecio());
@@ -62,11 +63,28 @@ public class DetalleVentaDAO extends DatabaseConection implements IDAO<DetalleVe
 
     @Override
     public ResultSet consultarTodos() throws Exception {
-        String sql = "SELECT * FROM `detalle_venta`";
         try {
-            return stmt.executeQuery(sql);
+            String sql = "SELECT * FROM `detalle_venta`";
+            PreparedStatement st = con.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            return rs;
         } catch (SQLException ex) {
             Logger.getLogger(DetalleVentaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public ArrayList<DetalleVenta> consultar() {
+        ArrayList<DetalleVenta> listaDetalle = new ArrayList<>();
+        try {
+            Statement stmt = con.createStatement();
+            String codigoSQL = "SELECT * FROM detalle_venta";
+            ResultSet rs = stmt.executeQuery(codigoSQL);
+            while(rs.next()){
+                int iddetalle_venta = rs.getInt("iddetalle_venta");
+            }
+        } catch (Exception ex) {
+
         }
         return null;
     }
