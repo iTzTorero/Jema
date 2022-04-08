@@ -54,7 +54,7 @@ public class CorteDAO extends DatabaseConection implements IDAO<Corte> {
         
         int registroAfectado = statement.executeUpdate(sql);
         if (registroAfectado != 1) {
-            throw new Exception("El cliente no ha podido ser eliminado.");
+            throw new Exception("El corte no ha podido ser eliminado.");
         }    }
 
     @Override
@@ -71,7 +71,7 @@ public class CorteDAO extends DatabaseConection implements IDAO<Corte> {
         try {
             return stmt.executeQuery(sql);
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CorteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

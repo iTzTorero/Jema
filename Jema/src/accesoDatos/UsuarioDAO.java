@@ -51,7 +51,7 @@ public class UsuarioDAO extends DatabaseConection implements IDAO<Usuario> {
 
         int registroAfectado = statement.executeUpdate(sql);
         if (registroAfectado != 1) {
-            throw new Exception("El cliente no ha podido ser eliminado.");
+            throw new Exception("El usuario no ha podido ser eliminado.");
         }
     }
 

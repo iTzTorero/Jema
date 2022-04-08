@@ -25,7 +25,7 @@ import java.util.logging.Logger;
 public class DatabaseConection {
 
     private String usuario = "root";
-    private String clave = "tucontraseña";
+    private String clave = "tucontraseñachila";
     private String url = "jdbc:mysql://localhost:3306/jema?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     Connection con;
     Statement stmt;

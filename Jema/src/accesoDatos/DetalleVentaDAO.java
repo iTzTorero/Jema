@@ -46,7 +46,7 @@ public class DetalleVentaDAO extends DatabaseConection implements IDAO<DetalleVe
 
     @Override
     public void eliminar(int id) throws Exception {
-        String sql = String.format("DELETE FROM detalleventa WHERE iddetalle_venta = %d", id);
+        String sql = String.format("DELETE FROM detalle_venta WHERE iddetalle_venta = %d", id);
         Statement statement = con.createStatement();
 
         int registroAfectado = statement.executeUpdate(sql);
@@ -62,11 +62,11 @@ public class DetalleVentaDAO extends DatabaseConection implements IDAO<DetalleVe
 
     @Override
     public ResultSet consultarTodos() throws Exception {
-        String sql = "SELECT * FROM `detalleVenta`";
+        String sql = "SELECT * FROM `detalle_venta`";
         try {
             return stmt.executeQuery(sql);
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DetalleVentaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
