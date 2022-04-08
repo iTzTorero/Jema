@@ -8,6 +8,8 @@ package GUI;
 import factory.FactoryAccesoDatos;
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import objetoNegocio.DetalleVenta;
@@ -37,6 +39,11 @@ public class Actualizar extends javax.swing.JFrame {
         acceso = new FactoryAccesoDatos();
         
         llenarTabla();
+        try {
+            cb_servicios.setModel(acceso.obtenerServicioDAO().consultarServicioCB());
+        } catch (Exception ex) {
+            Logger.getLogger(Actualizar.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.tablaClientes.setShowGrid(true);
         
     }
@@ -117,7 +124,6 @@ public class Actualizar extends javax.swing.JFrame {
             }
         });
 
-        cb_servicios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cb_servicios.setEnabled(false);
         cb_servicios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -281,6 +287,7 @@ public class Actualizar extends javax.swing.JFrame {
                 DefaultTableModel modelo = (DefaultTableModel) tablaClientes.getModel();
                 int id = (int) modelo.getValueAt(indice, 0);
                 DetalleVenta detVenta = acceso.obtenerDetalleVentaDAO().consultarPorId(id);
+                
                 if (detVenta != null) {
                     activarCampos();
                     cargarDatos(detVenta);
@@ -352,8 +359,11 @@ public class Actualizar extends javax.swing.JFrame {
 
     private void cargarDatos(DetalleVenta detalleVenta) {
         try {
+            cb_servicios.setModel(acceso.obtenerServicioDAO().consultarServicioCB());
+      
             this.txtCliente.setText(acceso.obtenerClienteDAO().consultarPorId(detalleVenta.getIdCliente()).getNombre());
             this.txtTelefonoC.setText(acceso.obtenerClienteDAO().consultarPorId(detalleVenta.getIdCliente()).getTelefono1());
+            this.cb_servicios.setSelectedItem(acceso.obtenerServicioDAO().consultarPorId(detalleVenta.getIdServicio()).getNombre());
             this.txtDescripcion.setText(detalleVenta.getDesc());
             this.txtPrecio.setText(Float.toString(detalleVenta.getPrecio()));
 
