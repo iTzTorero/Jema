@@ -179,7 +179,8 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonModificarServicioActionPerformed
 
     private void jButtonCancelarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarServicioActionPerformed
-        CancelarDetalleVenta cancelar = new CancelarDetalleVenta();
+
+       Cancelar cancelar = new Cancelar();
         this.dispose();
         cancelar.setVisible(true);
        

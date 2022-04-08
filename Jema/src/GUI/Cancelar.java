@@ -5,35 +5,17 @@
  */
 package GUI;
 
-import java.awt.Color;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import textPrompt.TextPrompt;
-
 /**
  *
  * @author PC
  */
-public class CancelarDetalleVenta extends javax.swing.JFrame {
+public class Cancelar extends javax.swing.JFrame {
 
     /**
      * Creates new form Cancelar
      */
-    public CancelarDetalleVenta() {
+    public Cancelar() {
         initComponents();
-        this.setTitle("Tabla de clientes");
-        TextPrompt phCliente = new TextPrompt("Cliente", txtCliente);
-        phCliente.setForeground(Color.GRAY);
-        TextPrompt phTelefono = new TextPrompt("Telefono", txtTelefonoC);
-        phTelefono.setForeground(Color.GRAY);
-        TextPrompt phPrecio = new TextPrompt("Precio", txtPrecio);
-        phPrecio.setForeground(Color.GRAY);
-        
-        
-        this.tablaClientes.setShowGrid(true);
-        /*
-        this.txtTipoServicio.disable();
-        */
     }
 
     /**
@@ -45,7 +27,6 @@ public class CancelarDetalleVenta extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         txtCliente = new javax.swing.JTextField();
@@ -63,8 +44,6 @@ public class CancelarDetalleVenta extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         jPanel2.setBackground(new java.awt.Color(204, 255, 204));
 
         jPanel3.setBackground(new java.awt.Color(166, 232, 166));
@@ -74,11 +53,6 @@ public class CancelarDetalleVenta extends javax.swing.JFrame {
         txtCliente.setBackground(new java.awt.Color(255, 255, 255));
         txtCliente.setForeground(new java.awt.Color(255, 255, 255));
         txtCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        txtCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtClienteActionPerformed(evt);
-            }
-        });
 
         txtTelefonoC.setEditable(false);
         txtTelefonoC.setBackground(new java.awt.Color(255, 255, 255));
@@ -91,11 +65,6 @@ public class CancelarDetalleVenta extends javax.swing.JFrame {
         jComboBoxTipoServicio.setBackground(new java.awt.Color(102, 255, 102));
         jComboBoxTipoServicio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBoxTipoServicio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jComboBoxTipoServicio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxTipoServicioActionPerformed(evt);
-            }
-        });
 
         txtPrecio.setEditable(false);
         txtPrecio.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
@@ -120,26 +89,16 @@ public class CancelarDetalleVenta extends javax.swing.JFrame {
         btnAceptar.setText("Aceptar ");
         btnAceptar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnAceptar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAceptarActionPerformed(evt);
-            }
-        });
 
         btnLimpiar.setBackground(new java.awt.Color(255, 255, 255));
         btnLimpiar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnLimpiar.setText("Limpiar");
         btnLimpiar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnLimpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimpiarActionPerformed(evt);
-            }
-        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(17, 92, 24));
-        jLabel1.setText("Cancelar Detalle Venta");
+        jLabel1.setText("Tabla de clientes");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -216,7 +175,7 @@ public class CancelarDetalleVenta extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,21 +187,28 @@ public class CancelarDetalleVenta extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 440));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 1080, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(0, 440, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -251,59 +217,6 @@ public class CancelarDetalleVenta extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        txtCliente.setText(" ");
-        txtTelefonoC.setText(" ");
-        txtPrecio.setText(" ");
-        txtEstadoServicio.setText(" ");
-        limpiarTabla();
-    }//GEN-LAST:event_btnLimpiarActionPerformed
-
-    private void txtClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtClienteActionPerformed
-
-    private void jComboBoxTipoServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoServicioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxTipoServicioActionPerformed
-
-    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-                  
-        actualizarTabla();
-        
-    }//GEN-LAST:event_btnAceptarActionPerformed
-
-    //Limpia la tabla de clientes
-    private void limpiarTabla() {
-        tablaClientes.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][]{
-                    {null, null, null, null, null},
-                    {null, null, null, null, null},
-                    {null, null, null, null, null},
-                    {null, null, null, null, null}
-                },
-                new String[]{
-                    "Cliente", "Telefono", "Tipo Servicio", "Precio", "Estado servicio"
-                }
-        ));
-    }
-    
-    //Actualiza la tabla de clientes
-    private void actualizarTabla() {
-        String tipoServicio = "";
-        DefaultTableModel modelo = (DefaultTableModel) tablaClientes.getModel();
-        Object[] fila = new Object[5];
-        fila[0] = txtCliente.getText();
-        fila[1] = txtTelefonoC.getText();
-        tipoServicio = jComboBoxTipoServicio.getSelectedItem().toString();
-        fila[2] = tipoServicio;
-        fila[3] = "$ " + txtPrecio.getText();
-        fila[4] = txtEstadoServicio.getText();
-        
-        modelo.addRow(fila);
-        tablaClientes.setModel(modelo);
-    }
-    
     /**
      * @param args the command line arguments
      */
@@ -321,23 +234,20 @@ public class CancelarDetalleVenta extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CancelarDetalleVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Cancelar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CancelarDetalleVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Cancelar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CancelarDetalleVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Cancelar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CancelarDetalleVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Cancelar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CancelarDetalleVenta().setVisible(true);
+                new Cancelar().setVisible(true);
             }
         });
     }
@@ -349,7 +259,6 @@ public class CancelarDetalleVenta extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBoxTipoServicio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
