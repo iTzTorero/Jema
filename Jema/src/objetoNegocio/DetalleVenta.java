@@ -13,7 +13,7 @@ public class DetalleVenta {
 
     private int iddetalle_venta;
     private int idServicio;
-    private float precio;
+    private int cantidad;
     private int idCliente;
     private int idUsuario;
     private int idVenta;
@@ -22,9 +22,9 @@ public class DetalleVenta {
     public DetalleVenta() {
     }
 
-    public DetalleVenta(int iddetalle_venta, float precio, String desc, int idCliente, int idUsuario, int idVenta, int idServicio) {
+    public DetalleVenta(int iddetalle_venta, int cantidad, String desc, int idCliente, int idUsuario, int idVenta, int idServicio) {
         this.iddetalle_venta = iddetalle_venta;
-        this.precio = precio;
+        this.cantidad = cantidad;
         this.desc = desc;
         this.idCliente = idCliente;
         this.idUsuario = idUsuario;
@@ -33,8 +33,8 @@ public class DetalleVenta {
 
     }
 
-    public DetalleVenta(float precio, String desc, int idCliente, int idUsuario, int idVenta, int idServicio) {
-        this.precio = precio;
+    public DetalleVenta(int cantidad, String desc, int idCliente, int idUsuario, int idVenta, int idServicio) {
+        this.cantidad = cantidad;
         this.desc = desc;
         this.idCliente = idCliente;
         this.idUsuario = idUsuario;
@@ -43,8 +43,8 @@ public class DetalleVenta {
 
     }
     
-      public DetalleVenta(float precio, String desc, int idCliente, int idUsuario, int idServicio) {
-        this.precio = precio;
+      public DetalleVenta(int cantidad, String desc, int idCliente, int idUsuario, int idServicio) {
+        this.cantidad = cantidad;
         this.desc = desc;
         this.idCliente = idCliente;
         this.idUsuario = idUsuario;
@@ -68,12 +68,12 @@ public class DetalleVenta {
         this.idServicio = idServicio;
     }
 
-    public float getPrecio() {
-        return precio;
+    public int getPrecio() {
+        return cantidad;
     }
 
-    public void setPrecio(float precio) {
-        this.precio = precio;
+    public void setPrecio(int cantidad) {
+        this.cantidad = cantidad;
     }
 
     public int getIdCliente() {
@@ -110,7 +110,7 @@ public class DetalleVenta {
 
     @Override
     public String toString() {
-        return "DetalleVenta{" + "iddetalle_venta=" + iddetalle_venta + ", idServicio=" + idServicio + ", precio=" + precio + ", idCliente=" + idCliente + ", idUsuario=" + idUsuario + ", idVenta=" + idVenta + ", desc=" + desc + '}';
+        return "DetalleVenta{" + "iddetalle_venta=" + iddetalle_venta + ", idServicio=" + idServicio + ", cantidad=" + cantidad + ", idCliente=" + idCliente + ", idUsuario=" + idUsuario + ", idVenta=" + idVenta + ", desc=" + desc + '}';
     }
 
 }

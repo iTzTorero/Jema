@@ -75,7 +75,7 @@ public class DetalleVentaDAO extends DatabaseConection implements IDAO<DetalleVe
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             rs.next();
-            return new DetalleVenta(rs.getInt("iddetalle_venta"), rs.getFloat("precio"), rs.getString("descripcion"),rs.getInt("idcliente"),rs.getInt("idusuario"),rs.getInt("idventa"),rs.getInt("idservicio"));
+            return new DetalleVenta(rs.getInt("iddetalle_venta"), rs.getInt("cantidad"), rs.getString("descripcion"),rs.getInt("idcliente"),rs.getInt("idusuario"),rs.getInt("idventa"),rs.getInt("idservicio"));
         } catch (Exception ex) {
 
         }
@@ -108,7 +108,7 @@ public class DetalleVentaDAO extends DatabaseConection implements IDAO<DetalleVe
             ResultSet rs = stmt.executeQuery(codigoSQL);
             while(rs.next()){
                 int iddetalle_venta = rs.getInt("iddetalle_venta");
-                float precio = rs.getFloat("precio");
+                int cantidad = rs.getInt("cantidad");
                 String descripcion = rs.getString("descripcion");
                 int id_cliente = rs.getInt("idcliente");
                 int id_usuario = rs.getInt("idusuario");
@@ -116,7 +116,7 @@ public class DetalleVentaDAO extends DatabaseConection implements IDAO<DetalleVe
                 int id_servicio = rs.getInt("idservicio");
                 
                 
-                DetalleVenta detVenta = new DetalleVenta(iddetalle_venta, precio, descripcion, id_cliente, id_usuario, id_venta, id_servicio);
+                DetalleVenta detVenta = new DetalleVenta(iddetalle_venta, cantidad , descripcion, id_cliente, id_usuario, id_venta, id_servicio);
                 listaDetalle.add(detVenta);
             }
             

@@ -6,6 +6,7 @@
 package GUI;
 
 import factory.FactoryAccesoDatos;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,6 +28,11 @@ import validacion.*;
  */
 public class Principal extends javax.swing.JFrame {
 
+    //SI ALGUIEN PUEDE HACER QUE FUNCIONE MEJOR LO DEL ANTICIPO, YO TENIA PENSADO 
+    //PONERLO COMO UN DATO QUE ES OPCIONAL Y QUE EL CALCULO DE CUANTO SE DEBE DE PAGAR AL FINAL 
+    //LO CALCULE LA ENCARGADA. 
+    
+    
     ValidarCampos validar = new ValidarCampos();
     FactoryAccesoDatos acceso = new FactoryAccesoDatos();
     static float importe = 0;
@@ -42,13 +48,14 @@ public class Principal extends javax.swing.JFrame {
         this.tableDesc.setShowGrid(true);
 
         TextPrompt phDescripcion = new TextPrompt("Inserte una descripción", txtArea_Descripcion);
-        TextPrompt phPrecioU = new TextPrompt("Inserte el precio unitario", txtPrecioU);
+        TextPrompt phCantidad = new TextPrompt("Inserte La cantidad", txtCantidad);
+        TextPrompt phAnticipo = new TextPrompt("Anticipo (Solo si el cliente lo desea)", txtAnticipo);
 
         try {
             cb_clientes.setModel(acceso.obtenerClienteDAO().consultarClientesCB());
             cb_servicios.setModel(acceso.obtenerServicioDAO().consultarServicioCB());
             this.usuario1 = acceso.obtenerUsuarioDAO().consultarPorId(2);
-            
+
         } catch (Exception ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -70,23 +77,26 @@ public class Principal extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         fechaEntrega = new com.toedter.calendar.JDateChooser();
         btnLimpiarC = new javax.swing.JButton();
-        cb_clientes = new javax.swing.JComboBox<>();
+        cb_clientes = new javax.swing.JComboBox<String>();
         label2 = new java.awt.Label();
+        btnAggCliente = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        txtPrecioU = new javax.swing.JTextField();
+        txtCantidad = new javax.swing.JTextField();
         btnLimpiarC1 = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
-        cb_servicios = new javax.swing.JComboBox<>();
+        cb_servicios = new javax.swing.JComboBox<String>();
         label1 = new java.awt.Label();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtArea_Descripcion = new javax.swing.JTextArea();
+        btnEliminar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableDesc = new javax.swing.JTable();
         btnCancelarR = new javax.swing.JButton();
         btnRegistrar = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
         lblNumNota = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        txtAnticipo = new javax.swing.JTextField();
+        txtTotal = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registrar Servicio");
@@ -102,6 +112,8 @@ public class Principal extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Entrega:");
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 70, 35));
+
+        fechaEntrega.setMinSelectableDate(new java.util.Date(-62135740728000L));
         jPanel3.add(fechaEntrega, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 180, 35));
 
         btnLimpiarC.setBackground(new java.awt.Color(255, 102, 102));
@@ -124,14 +136,19 @@ public class Principal extends javax.swing.JFrame {
         label2.setText("Cliente:");
         jPanel3.add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 400, 250));
+        btnAggCliente.setBackground(new java.awt.Color(0, 204, 204));
+        btnAggCliente.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnAggCliente.setText("Agregar cliente");
+        jPanel3.add(btnAggCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 160, 50));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 430, 250));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel2.add(txtPrecioU, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 220, 50));
+        jPanel2.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 220, 50));
 
-        btnLimpiarC1.setBackground(new java.awt.Color(255, 102, 102));
+        btnLimpiarC1.setBackground(new java.awt.Color(255, 0, 204));
         btnLimpiarC1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnLimpiarC1.setForeground(new java.awt.Color(255, 255, 255));
         btnLimpiarC1.setText("Limpiar ");
@@ -141,7 +158,7 @@ public class Principal extends javax.swing.JFrame {
                 btnLimpiarC1ActionPerformed(evt);
             }
         });
-        jPanel2.add(btnLimpiarC1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 260, 140, 40));
+        jPanel2.add(btnLimpiarC1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, 120, 40));
 
         btnAgregar.setBackground(new java.awt.Color(51, 255, 102));
         btnAgregar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -153,14 +170,14 @@ public class Principal extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 140, 40));
+        jPanel2.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 120, 40));
 
         cb_servicios.setBackground(new java.awt.Color(255, 155, 155));
-        jPanel2.add(cb_servicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 170, 50));
+        jPanel2.add(cb_servicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 170, 50));
 
         label1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         label1.setText("Servicio");
-        jPanel2.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+        jPanel2.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
 
         txtArea_Descripcion.setColumns(20);
         txtArea_Descripcion.setRows(5);
@@ -168,7 +185,18 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 290, 60));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 400, 390));
+        btnEliminar.setBackground(new java.awt.Color(255, 102, 102));
+        btnEliminar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminar.setText("Eliminar ");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 290, 120, 40));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 430, 350));
 
         tableDesc.setBackground(new java.awt.Color(255, 155, 155));
         tableDesc.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -178,14 +206,19 @@ public class Principal extends javax.swing.JFrame {
             new Object [][] {
             },
             new String [] {
-                "Descripción", "Servicio", "Precio Unitario ", "Importe "
+                "Descripción", "Servicio", "Fecha de entrega", "Nombre Cliente", "Telefono" ,"Cantidad","Precio"
             }
         ));
         tableDesc.setGridColor(new java.awt.Color(255, 255, 255));
         tableDesc.getTableHeader().setReorderingAllowed(false);
+        tableDesc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableDescMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableDesc);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, 730, 580));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 50, 820, 580));
 
         btnCancelarR.setBackground(new java.awt.Color(255, 102, 102));
         btnCancelarR.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -197,7 +230,7 @@ public class Principal extends javax.swing.JFrame {
                 btnCancelarRActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCancelarR, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 640, 250, 60));
+        jPanel1.add(btnCancelarR, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 740, 250, 60));
 
         btnRegistrar.setBackground(new java.awt.Color(102, 255, 102));
         btnRegistrar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -209,12 +242,7 @@ public class Principal extends javax.swing.JFrame {
                 btnRegistrarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 640, 230, 60));
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 153, 153));
-        jLabel6.setText("NOTA");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, -1, -1));
+        jPanel1.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 740, 230, 60));
 
         lblNumNota.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblNumNota.setForeground(new java.awt.Color(255, 153, 153));
@@ -223,9 +251,13 @@ public class Principal extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 153, 153));
         jLabel7.setText("NOTA");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, 80, -1));
+        jPanel1.add(txtAnticipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 660, 220, 50));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 1920, 1060));
+        txtTotal.setEnabled(false);
+        jPanel1.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 660, 220, 50));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 1350, 870));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -233,7 +265,7 @@ public class Principal extends javax.swing.JFrame {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // Se agregan los detalle venta
         actualizarTabla();
-
+        this.txtTotal.setText(Float.toString(calcularTotal(total)));
 
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -241,9 +273,9 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         Menu menu = new Menu();
         this.dispose();
-        
+
         this.activarCampos();
-        
+
         menu.setVisible(true);
     }//GEN-LAST:event_btnCancelarRActionPerformed
 
@@ -254,11 +286,11 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnLimpiarC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarC1ActionPerformed
         txtArea_Descripcion.setText("");
-        txtPrecioU.setText("");
+        txtCantidad.setText("");
         cb_servicios.setSelectedIndex(0);
-        
+
     }//GEN-LAST:event_btnLimpiarC1ActionPerformed
-    
+
     private void actualizarTabla() {
         try {
             Cliente cliente = acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString());
@@ -267,28 +299,30 @@ public class Principal extends javax.swing.JFrame {
             Servicio ser = acceso.obtenerServicioDAO().consultarPorNombre(cb_servicios.getSelectedItem().toString());
             float precioServcicio = ser.getCosto();
             DefaultTableModel modelo = (DefaultTableModel) tableDesc.getModel();
-            Object[] fila = new Object[4];
+            Object[] fila = new Object[7];
             fila[0] = txtArea_Descripcion.getText();
             servicio = cb_servicios.getSelectedItem().toString();
             fila[1] = servicio;
-            fila[2] = txtPrecioU.getText();
-            fila[3] = (Float) (Float.parseFloat(txtPrecioU.getText()) + precioServcicio);
+            fila[2] = fechaEntrega.getDate();
+            fila[3] = cliente.getNombre();
+            fila[4] = cliente.getTelefono1();
+            fila[5] = txtCantidad.getText();
+            fila[6] = Float.parseFloat(txtCantidad.getText()) * precioServcicio;
 
             modelo.addRow(fila);
             tableDesc.setModel(modelo);
 
-            total.add((Float) (Float.parseFloat(txtPrecioU.getText()) + precioServcicio));
-            detallesVenta.add(new DetalleVenta(Float.parseFloat(txtPrecioU.getText()),
+            total.add((Float) (Float.parseFloat(txtCantidad.getText()) * precioServcicio));
+            detallesVenta.add(new DetalleVenta(Integer.parseInt(txtCantidad.getText()),
                     txtArea_Descripcion.getText(), cliente.getIdcliente(), usuario1.getIdUsuario(), servicios.getIdServicio()));
-            
-            limpiarCamposC2();
-            
-            this.desactivarCampos();
-                      
 
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            
+            limpiarCamposC2();
+
+            this.desactivarCampos();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.INFORMATION_MESSAGE);
+
         }
     }
 
@@ -301,13 +335,13 @@ public class Principal extends javax.swing.JFrame {
             SimpleDateFormat formatter = new SimpleDateFormat(pattern);
             String mysqlDateString = formatter.format(now);
 
-            acceso.obtenerVentaDAO().insertar(new Venta(new java.sql.Date(now.getTime()), calcularTotal(total), new java.sql.Date(fechaEntrega.getDate().getTime())));
+            acceso.obtenerVentaDAO().insertar(new Venta(new java.sql.Date(now.getTime()), calcularTotal(total), new java.sql.Date(fechaEntrega.getDate().getTime()), Integer.parseInt(txtAnticipo.getText())));
 
             guardarDetalleVenta();
             JOptionPane.showMessageDialog(this, "Se ha registrado la venta.", "Exito!!", JOptionPane.INFORMATION_MESSAGE);
-            
+
             this.activarCampos();
-            
+
             limpiarTabla();
             limpiarCamposC1();
 
@@ -319,6 +353,21 @@ public class Principal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+       int indice = tableDesc.getSelectedRow();
+        DefaultTableModel dtm = (DefaultTableModel) tableDesc.getModel();
+       //HAY UN ERROR, CUANDO SE RESTA LO QUE SE ELIMINA DE LA COLUMNA NO SE ELIMINA DEL ARRAYLIST DEL TOTAL 
+        //FALTA CORREGUIR ESO. 
+        float totalU = (float) dtm.getValueAt(indice, 6);
+        this.txtTotal.setText(Float.toString(calcularTotal(total) - totalU));
+        dtm.removeRow(tableDesc.getSelectedRow());
+        
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void tableDescMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDescMouseClicked
+       this.editar();
+    }//GEN-LAST:event_tableDescMouseClicked
+
     private float calcularTotal(ArrayList total) {
         float totalT = (float) 0.0;
         for (int i = 0; i < total.size(); i++) {
@@ -326,23 +375,22 @@ public class Principal extends javax.swing.JFrame {
         }
         return totalT;
     }
-    
+
     private void limpiarCamposC1() {
         cb_clientes.setSelectedIndex(0);
         fechaEntrega.setCalendar(null);
     }
 
-    private void limpiarCamposC2(){
+    private void limpiarCamposC2() {
         txtArea_Descripcion.setText("");
-        txtPrecioU.setText("");
+        txtCantidad.setText("");
         cb_servicios.setSelectedIndex(0);
-        
-    }
 
+    }
 
     public void guardarDetalleVenta() {
         try {
-            
+
             for (int i = 0; i < detallesVenta.size(); i++) {
                 detallesVenta.get(i).setIdVenta(acceso.obtenerVentaDAO().consultarUltimo().getIdventa());
             }
@@ -354,13 +402,13 @@ public class Principal extends javax.swing.JFrame {
         }
 
     }
-    
+
     private void llenarArrayList() {
         try {
             Cliente cliente = acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString());
             Servicio servicios = acceso.obtenerServicioDAO().consultarPorNombre(cb_servicios.getSelectedItem().toString());
             for (int i = 0; i < tableDesc.getRowCount(); i++) {
-                detallesVenta.add(new DetalleVenta(Float.parseFloat(tableDesc.getValueAt(i, 2).toString()),
+                detallesVenta.add(new DetalleVenta(Integer.parseInt(tableDesc.getValueAt(i, 2).toString()),
                         tableDesc.getValueAt(i, 0).toString(), cliente.getIdcliente(), usuario1.getIdUsuario(), servicios.getIdServicio()));
             }
         } catch (Exception ex) {
@@ -372,7 +420,7 @@ public class Principal extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tableDesc.getModel();
         model.setRowCount(0);
     }
-    
+
     private void activarCampos() {
         cb_clientes.setEnabled(true);
         fechaEntrega.setEnabled(true);
@@ -383,6 +431,24 @@ public class Principal extends javax.swing.JFrame {
         cb_clientes.setEnabled(false);
         fechaEntrega.setEnabled(false);
         btnLimpiarC.setEnabled(false);
+    }
+
+    private void editar() {
+        //AQUI, YA SE PUEDE SELECCIONAR PARA EDITAR PERO CUANDO LO EDITAS Y LO VUELVBS AGREGAR SE AGREGA COMO UNO NUEVO, HAY QUE CORREGUIR ESE ERROR. 
+        try {
+            int indice = this.tableDesc.getSelectedRow();
+            if (indice == -1) {
+                JOptionPane.showMessageDialog(this, "Debe de seleccionar una fila", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                DefaultTableModel modelo = (DefaultTableModel) tableDesc.getModel();
+                this.txtArea_Descripcion.setText(modelo.getValueAt(indice, 0).toString());
+                this.txtCantidad.setText(modelo.getValueAt(indice, 5).toString());
+                this.cb_servicios.setSelectedItem(acceso.obtenerServicioDAO().consultarPorNombre(modelo.getValueAt(indice, 1).toString()).getNombre());
+                
+            }
+        }catch (Exception ex) {
+            System.out.println(ex.getCause());
+        }
     }
 
     /**
@@ -422,8 +488,10 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAggCliente;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnCancelarR;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnLimpiarC;
     private javax.swing.JButton btnLimpiarC1;
     private javax.swing.JButton btnRegistrar;
@@ -431,7 +499,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cb_servicios;
     private com.toedter.calendar.JDateChooser fechaEntrega;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -442,7 +509,9 @@ public class Principal extends javax.swing.JFrame {
     private java.awt.Label label2;
     private javax.swing.JLabel lblNumNota;
     private javax.swing.JTable tableDesc;
+    private javax.swing.JTextField txtAnticipo;
     private javax.swing.JTextArea txtArea_Descripcion;
-    private javax.swing.JTextField txtPrecioU;
+    private javax.swing.JTextField txtCantidad;
+    private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
 }

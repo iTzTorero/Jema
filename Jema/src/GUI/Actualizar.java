@@ -31,8 +31,8 @@ public class Actualizar extends javax.swing.JFrame {
         phCliente.setForeground(Color.GRAY);
         TextPrompt phTelefono = new TextPrompt("Telefono", txtTelefonoC);
         phTelefono.setForeground(Color.GRAY);
-        TextPrompt phPrecio = new TextPrompt("Precio", txtPrecio);
-        phPrecio.setForeground(Color.GRAY);
+        TextPrompt phCantidad = new TextPrompt("Cantidad", txtCantidad);
+        phCantidad.setForeground(Color.GRAY);
         TextPrompt phDescrip = new TextPrompt("Descripcion", txtDescripcion);
         phDescrip.setForeground(Color.GRAY);
         
@@ -62,12 +62,12 @@ public class Actualizar extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         txtCliente = new javax.swing.JTextField();
         txtTelefonoC = new javax.swing.JTextField();
-        txtPrecio = new javax.swing.JTextField();
+        txtCantidad = new javax.swing.JTextField();
         txtDescripcion = new javax.swing.JTextField();
         btn_aceptar = new javax.swing.JButton();
         btn_cancelar = new javax.swing.JButton();
         btn_limpiar = new javax.swing.JButton();
-        cb_servicios = new javax.swing.JComboBox<>();
+        cb_servicios = new javax.swing.JComboBox<String>();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaClientes = new javax.swing.JTable();
@@ -88,7 +88,7 @@ public class Actualizar extends javax.swing.JFrame {
 
         txtTelefonoC.setEnabled(false);
 
-        txtPrecio.setEnabled(false);
+        txtCantidad.setEnabled(false);
 
         txtDescripcion.setEnabled(false);
 
@@ -151,7 +151,7 @@ public class Actualizar extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(btn_limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(txtDescripcion)
-                        .addComponent(txtPrecio)
+                        .addComponent(txtCantidad)
                         .addComponent(txtTelefonoC)
                         .addComponent(txtCliente))
                     .addComponent(cb_servicios, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -174,7 +174,7 @@ public class Actualizar extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cb_servicios, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -268,13 +268,13 @@ public class Actualizar extends javax.swing.JFrame {
     
     private void activarCampos() {
         cb_servicios.setEnabled(true);
-        txtPrecio.setEnabled(true);
+        txtCantidad.setEnabled(true);
         txtDescripcion.setEnabled(true);
     }
     
     private void desactivarCampos() {
         cb_servicios.setEnabled(false);
-        txtPrecio.setEnabled(false);
+        txtCantidad.setEnabled(false);
         txtDescripcion.setEnabled(false);
     }
 
@@ -319,7 +319,7 @@ public class Actualizar extends javax.swing.JFrame {
                     System.out.println(idServicio);
                     
                     detVenta.setIdServicio(idServicio);
-                    detVenta.setPrecio(Float.parseFloat(txtPrecio.getText()));
+                    detVenta.setPrecio(Integer.parseInt(txtCantidad.getText()));
                     detVenta.setDesc(txtDescripcion.getText());
                                   
                     acceso.obtenerDetalleVentaDAO().actualizar(detVenta);
@@ -364,7 +364,7 @@ public class Actualizar extends javax.swing.JFrame {
         this.txtCliente.setText("");
         this.txtDescripcion.setText("");
         cb_servicios.setSelectedIndex(0);
-        this.txtPrecio.setText("");
+        this.txtCantidad.setText("");
         this.txtTelefonoC.setText("");
     }
 
@@ -376,7 +376,7 @@ public class Actualizar extends javax.swing.JFrame {
             this.txtTelefonoC.setText(acceso.obtenerClienteDAO().consultarPorId(detalleVenta.getIdCliente()).getTelefono1());
             this.cb_servicios.setSelectedItem(acceso.obtenerServicioDAO().consultarPorId(detalleVenta.getIdServicio()).getNombre());
             this.txtDescripcion.setText(detalleVenta.getDesc());
-            this.txtPrecio.setText(Float.toString(detalleVenta.getPrecio()));
+            this.txtCantidad.setText(Float.toString(detalleVenta.getPrecio()));
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -430,9 +430,9 @@ public class Actualizar extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaClientes;
+    private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtCliente;
     private javax.swing.JTextField txtDescripcion;
-    private javax.swing.JTextField txtPrecio;
     private javax.swing.JTextField txtTelefonoC;
     // End of variables declaration//GEN-END:variables
 }

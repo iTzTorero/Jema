@@ -17,6 +17,7 @@ public class Venta {
     private Date fecha;
     private float total;
     private Date fecha_entrega;
+    private float anticipo;
 
     public Venta() {
     }
@@ -25,17 +26,19 @@ public class Venta {
         this.idventa= idventa;
     }
     
-    public Venta(int idventa, Date fecha, float total, Date fecha_entrega) {
+    public Venta(int idventa, Date fecha, float total, Date fecha_entrega, float anticipo) {
         this.idventa = idventa;
         this.fecha = fecha;
         this.total = total;
         this.fecha_entrega = fecha_entrega;
+        this.anticipo=anticipo;
     }
 
-    public Venta(Date fecha, float total, Date fecha_entrega) {
+    public Venta(Date fecha, float total, Date fecha_entrega, float anticipo) {
         this.fecha = fecha;
         this.total = total;
         this.fecha_entrega=fecha_entrega;
+        this.anticipo=anticipo;
     }
 
     public int getIdventa() {
@@ -70,11 +73,21 @@ public class Venta {
         this.fecha_entrega = fecha_entrega;
     }
 
+    public float getAnticipo() {
+        return anticipo;
+    }
+
+    public void setAnticipo(float anticipo) {
+        this.anticipo = anticipo;
+    }
 
     @Override
     public String toString() {
-        return "Venta{" + "idventa=" + idventa + ", fecha=" + fecha + ", total=" + total + ", fecha_entrega=" + fecha_entrega + '}';
+        return "Venta{" + "idventa=" + idventa + ", fecha=" + fecha + ", total=" + total + ", fecha_entrega=" + fecha_entrega + ", anticipo=" + anticipo + '}';
     }
+
+    
+
 
 
 }
