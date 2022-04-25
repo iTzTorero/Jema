@@ -35,7 +35,7 @@ public class Principal extends javax.swing.JFrame {
     FactoryAccesoDatos acceso = new FactoryAccesoDatos();
     static float importe = 0;
     ArrayList<DetalleVenta> detallesVenta;
-    ArrayList<Float> total;
+    //ArrayList<Float> total;
     private static Usuario usuario1;
 
     /**
@@ -58,7 +58,7 @@ public class Principal extends javax.swing.JFrame {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
         detallesVenta = new ArrayList();
-        total = new ArrayList<>();
+       // total = new ArrayList<>();
     }
 
     /**
@@ -263,7 +263,7 @@ public class Principal extends javax.swing.JFrame {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // Se agregan los detalle venta
         actualizarTabla();
-        this.txtTotal.setText(Float.toString(calcularTotal(total)));
+     //   this.txtTotal.setText(Float.toString(calcularTotal(total)));
 
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -310,7 +310,7 @@ public class Principal extends javax.swing.JFrame {
             modelo.addRow(fila);
             tableDesc.setModel(modelo);
 
-            total.add((Float) (Float.parseFloat(txtCantidad.getText()) * precioServcicio));
+           // total.add((Float) (Float.parseFloat(txtCantidad.getText()) * precioServcicio));
             detallesVenta.add(new DetalleVenta(Integer.parseInt(txtCantidad.getText()),
                     txtArea_Descripcion.getText(), cliente.getIdcliente(), usuario1.getIdUsuario(), servicios.getIdServicio()));
 
@@ -322,6 +322,19 @@ public class Principal extends javax.swing.JFrame {
             System.out.println(ex.getMessage());
 
         }
+
+        actualizarTotal();
+        System.out.println(txtTotal.getText());
+    }
+
+    private void actualizarTotal() {
+        DefaultTableModel modelo = (DefaultTableModel) tableDesc.getModel();
+        float total = 0;
+        for (int i = 0; i < tableDesc.getRowCount(); i++) {
+
+            total += Float.parseFloat(modelo.getValueAt(i, 6).toString());
+        }
+        txtTotal.setText("" + total);
     }
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
@@ -337,10 +350,10 @@ public class Principal extends javax.swing.JFrame {
 
             if (this.txtAnticipo.getText().equals("")) {
                 anticipo = 0;
-                totalT = calcularTotal(total);
+                totalT = calcularTotal();
             } else {
                 anticipo = Float.parseFloat(this.txtAnticipo.getText());
-                totalT = calcularTotal(total) - anticipo;
+                totalT = calcularTotal() - anticipo;
             }
 
             acceso.obtenerVentaDAO().insertar(new Venta(new java.sql.Date(now.getTime()), totalT, new java.sql.Date(fechaEntrega.getDate().getTime()), anticipo));
@@ -358,7 +371,8 @@ public class Principal extends javax.swing.JFrame {
             System.out.println(ex.getMessage());
             JOptionPane.showMessageDialog(this, "Ha ocurrido un error y no se ha podido registrar la venta.", "Error!!", JOptionPane.ERROR_MESSAGE);
         }
-
+        
+        txtTotal.setText(0+"");
 
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
@@ -369,10 +383,11 @@ public class Principal extends javax.swing.JFrame {
         //FALTA CORREGUIR ESO. 
         System.out.println(detallesVenta);
         detallesVenta.remove(indice);
-        System.out.println("Ya elminado: "+detallesVenta);
+        System.out.println("Ya elminado: " + detallesVenta);
         float totalU = (float) dtm.getValueAt(indice, 6);
-        this.txtTotal.setText(Float.toString(calcularTotal(total) - totalU));
+        //this.txtTotal.setText(Float.toString(calcularTotal(total) - totalU));
         dtm.removeRow(tableDesc.getSelectedRow());
+        actualizarTotal();
 
     }//GEN-LAST:event_btnEliminarActionPerformed
 
@@ -380,12 +395,20 @@ public class Principal extends javax.swing.JFrame {
         this.editar();
     }//GEN-LAST:event_tableDescMouseClicked
 
-    private float calcularTotal(ArrayList total) {
-        float totalT = (float) 0.0;
-        for (int i = 0; i < total.size(); i++) {
-            totalT += Float.parseFloat(total.get(i).toString());
+    private float calcularTotal() {
+//        float totalT = (float) 0.0;
+//        for (int i = 0; i < total.size(); i++) {
+//            totalT += Float.parseFloat(total.get(i).toString());
+//        }
+//        return totalT;
+        DefaultTableModel modelo = (DefaultTableModel) tableDesc.getModel();
+        float total = 0;
+        for (int i = 0; i < tableDesc.getRowCount(); i++) {
+
+            total += Float.parseFloat(modelo.getValueAt(i, 6).toString());
         }
-        return totalT;
+        txtTotal.setText("" + total);
+        return total;
     }
 
     private void limpiarCamposC1() {
@@ -400,10 +423,10 @@ public class Principal extends javax.swing.JFrame {
 
     }
 
-    public void limpiarDetalleVentaList(){
+    public void limpiarDetalleVentaList() {
         detallesVenta.clear();
     }
-    
+
     public void guardarDetalleVenta() {
         try {
 
