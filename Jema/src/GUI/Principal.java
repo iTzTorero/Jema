@@ -58,7 +58,7 @@ public class Principal extends javax.swing.JFrame {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
         detallesVenta = new ArrayList();
-       // total = new ArrayList<>();
+        // total = new ArrayList<>();
     }
 
     /**
@@ -240,7 +240,7 @@ public class Principal extends javax.swing.JFrame {
                 btnRegistrarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 740, 230, 60));
+        jPanel1.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, 230, 60));
 
         lblNumNota.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblNumNota.setForeground(new java.awt.Color(255, 153, 153));
@@ -263,7 +263,7 @@ public class Principal extends javax.swing.JFrame {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // Se agregan los detalle venta
         actualizarTabla();
-     //   this.txtTotal.setText(Float.toString(calcularTotal(total)));
+        //   this.txtTotal.setText(Float.toString(calcularTotal(total)));
 
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -310,7 +310,7 @@ public class Principal extends javax.swing.JFrame {
             modelo.addRow(fila);
             tableDesc.setModel(modelo);
 
-           // total.add((Float) (Float.parseFloat(txtCantidad.getText()) * precioServcicio));
+            // total.add((Float) (Float.parseFloat(txtCantidad.getText()) * precioServcicio));
             detallesVenta.add(new DetalleVenta(Integer.parseInt(txtCantidad.getText()),
                     txtArea_Descripcion.getText(), cliente.getIdcliente(), usuario1.getIdUsuario(), servicios.getIdServicio()));
 
@@ -355,8 +355,13 @@ public class Principal extends javax.swing.JFrame {
                 anticipo = Float.parseFloat(this.txtAnticipo.getText());
                 totalT = calcularTotal() - anticipo;
             }
+            if (fechaEntrega.getDate().after(now)) {
+                acceso.obtenerVentaDAO().insertar(new Venta(new java.sql.Date(now.getTime()), totalT, new java.sql.Date(fechaEntrega.getDate().getTime()), anticipo));
 
-            acceso.obtenerVentaDAO().insertar(new Venta(new java.sql.Date(now.getTime()), totalT, new java.sql.Date(fechaEntrega.getDate().getTime()), anticipo));
+            } else {
+                JOptionPane.showMessageDialog(this, "No se puede registrar una fecha de entrega anterior al dia actual", "Erorr!!", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
 
             guardarDetalleVenta();
             JOptionPane.showMessageDialog(this, "Se ha registrado la venta.", "Exito!!", JOptionPane.INFORMATION_MESSAGE);
@@ -371,8 +376,8 @@ public class Principal extends javax.swing.JFrame {
             System.out.println(ex.getMessage());
             JOptionPane.showMessageDialog(this, "Ha ocurrido un error y no se ha podido registrar la venta.", "Error!!", JOptionPane.ERROR_MESSAGE);
         }
-        
-        txtTotal.setText(0+"");
+
+        txtTotal.setText(0 + "");
 
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
