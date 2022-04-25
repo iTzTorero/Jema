@@ -26,7 +26,7 @@ public class VentaDAO extends DatabaseConection implements IDAO<Venta> {
     }
 
     @Override
-    public void insertar(Venta obj) throws Exception {
+    public void insertar(Venta obj) throws SQLException {
 
         String sql = "INSERT INTO `venta` (`idventa`,`fecha`,`total`, `fecha_entrega`, `anticipo`) VALUES (NULL, ?, ?, ?, ?)";
         PreparedStatement ps;

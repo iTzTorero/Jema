@@ -31,8 +31,6 @@ public class Principal extends javax.swing.JFrame {
     //SI ALGUIEN PUEDE HACER QUE FUNCIONE MEJOR LO DEL ANTICIPO, YO TENIA PENSADO 
     //PONERLO COMO UN DATO QUE ES OPCIONAL Y QUE EL CALCULO DE CUANTO SE DEBE DE PAGAR AL FINAL 
     //LO CALCULE LA ENCARGADA. 
-    
-    
     ValidarCampos validar = new ValidarCampos();
     FactoryAccesoDatos acceso = new FactoryAccesoDatos();
     static float importe = 0;
@@ -320,8 +318,8 @@ public class Principal extends javax.swing.JFrame {
 
             this.desactivarCampos();
 
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
 
         }
     }
@@ -329,13 +327,23 @@ public class Principal extends javax.swing.JFrame {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
 
         try {
-            llenarArrayList();
+            //llenarArrayList();
             Date now = new Date();
             String pattern = "yyyy-MM-dd";
             SimpleDateFormat formatter = new SimpleDateFormat(pattern);
             String mysqlDateString = formatter.format(now);
+            float anticipo;
+            float totalT = 0;
 
-            acceso.obtenerVentaDAO().insertar(new Venta(new java.sql.Date(now.getTime()), calcularTotal(total), new java.sql.Date(fechaEntrega.getDate().getTime()), Integer.parseInt(txtAnticipo.getText())));
+            if (this.txtAnticipo.getText().equals("")) {
+                anticipo = 0;
+                totalT = calcularTotal(total);
+            } else {
+                anticipo = Float.parseFloat(this.txtAnticipo.getText());
+                totalT = calcularTotal(total) - anticipo;
+            }
+
+            acceso.obtenerVentaDAO().insertar(new Venta(new java.sql.Date(now.getTime()), totalT, new java.sql.Date(fechaEntrega.getDate().getTime()), anticipo));
 
             guardarDetalleVenta();
             JOptionPane.showMessageDialog(this, "Se ha registrado la venta.", "Exito!!", JOptionPane.INFORMATION_MESSAGE);
@@ -344,8 +352,9 @@ public class Principal extends javax.swing.JFrame {
 
             limpiarTabla();
             limpiarCamposC1();
+            limpiarDetalleVentaList();
 
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             JOptionPane.showMessageDialog(this, "Ha ocurrido un error y no se ha podido registrar la venta.", "Error!!", JOptionPane.ERROR_MESSAGE);
         }
@@ -354,18 +363,21 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-       int indice = tableDesc.getSelectedRow();
+        int indice = tableDesc.getSelectedRow();
         DefaultTableModel dtm = (DefaultTableModel) tableDesc.getModel();
-       //HAY UN ERROR, CUANDO SE RESTA LO QUE SE ELIMINA DE LA COLUMNA NO SE ELIMINA DEL ARRAYLIST DEL TOTAL 
+        //HAY UN ERROR, CUANDO SE RESTA LO QUE SE ELIMINA DE LA COLUMNA NO SE ELIMINA DEL ARRAYLIST DEL TOTAL 
         //FALTA CORREGUIR ESO. 
+        System.out.println(detallesVenta);
+        detallesVenta.remove(indice);
+        System.out.println("Ya elminado: "+detallesVenta);
         float totalU = (float) dtm.getValueAt(indice, 6);
         this.txtTotal.setText(Float.toString(calcularTotal(total) - totalU));
         dtm.removeRow(tableDesc.getSelectedRow());
-        
+
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void tableDescMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDescMouseClicked
-       this.editar();
+        this.editar();
     }//GEN-LAST:event_tableDescMouseClicked
 
     private float calcularTotal(ArrayList total) {
@@ -388,6 +400,10 @@ public class Principal extends javax.swing.JFrame {
 
     }
 
+    public void limpiarDetalleVentaList(){
+        detallesVenta.clear();
+    }
+    
     public void guardarDetalleVenta() {
         try {
 
@@ -406,12 +422,16 @@ public class Principal extends javax.swing.JFrame {
     private void llenarArrayList() {
         try {
             Cliente cliente = acceso.obtenerClienteDAO().consultarPorNombre(cb_clientes.getSelectedItem().toString());
-            Servicio servicios = acceso.obtenerServicioDAO().consultarPorNombre(cb_servicios.getSelectedItem().toString());
+            Servicio servicios;
             for (int i = 0; i < tableDesc.getRowCount(); i++) {
-                detallesVenta.add(new DetalleVenta(Integer.parseInt(tableDesc.getValueAt(i, 2).toString()),
-                        tableDesc.getValueAt(i, 0).toString(), cliente.getIdcliente(), usuario1.getIdUsuario(), servicios.getIdServicio()));
+                detallesVenta.add(new DetalleVenta(Integer.parseInt(tableDesc.getValueAt(i, 5).toString()),
+                        tableDesc.getValueAt(i, 0).toString(),
+                        cliente.getIdcliente(),
+                        usuario1.getIdUsuario(),
+                        acceso.obtenerServicioDAO().consultarPorNombre(tableDesc.getValueAt(i, 3).toString()).getIdServicio()));
+
             }
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
     }
@@ -444,9 +464,9 @@ public class Principal extends javax.swing.JFrame {
                 this.txtArea_Descripcion.setText(modelo.getValueAt(indice, 0).toString());
                 this.txtCantidad.setText(modelo.getValueAt(indice, 5).toString());
                 this.cb_servicios.setSelectedItem(acceso.obtenerServicioDAO().consultarPorNombre(modelo.getValueAt(indice, 1).toString()).getNombre());
-                
+
             }
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             System.out.println(ex.getCause());
         }
     }
