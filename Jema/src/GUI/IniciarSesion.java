@@ -163,6 +163,7 @@ public class IniciarSesion extends javax.swing.JFrame {
         Usuario user1 = fad.obtenerUsuarioDAO().consultarUsuarioPorNombre(nombre);
 
            if (user1.getNombre().equalsIgnoreCase(nombre) && user1.getContrasena().equalsIgnoreCase(password)) {
+               JOptionPane.showMessageDialog(this, "Se ha iniciado sesión de manera correcta!", "Inicio de sesión exitoso.", JOptionPane.INFORMATION_MESSAGE);
                Menu menu = new Menu();
                menu.setVisible(true);
                this.dispose();
