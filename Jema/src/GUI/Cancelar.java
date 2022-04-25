@@ -70,7 +70,7 @@ public class Cancelar extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel2.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel2.setBackground(new java.awt.Color(229, 249, 229));
 
         jPanel3.setBackground(new java.awt.Color(166, 232, 166));
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
