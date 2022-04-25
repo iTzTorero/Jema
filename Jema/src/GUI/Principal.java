@@ -228,7 +228,7 @@ public class Principal extends javax.swing.JFrame {
                 btnCancelarRActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCancelarR, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 650, 250, 60));
+        jPanel1.add(btnCancelarR, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 740, 250, 60));
 
         btnRegistrar.setBackground(new java.awt.Color(102, 255, 102));
         btnRegistrar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -240,7 +240,7 @@ public class Principal extends javax.swing.JFrame {
                 btnRegistrarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 650, 230, 60));
+        jPanel1.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 740, 230, 60));
 
         lblNumNota.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblNumNota.setForeground(new java.awt.Color(255, 153, 153));
