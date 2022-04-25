@@ -75,14 +75,14 @@ public class Principal extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         fechaEntrega = new com.toedter.calendar.JDateChooser();
         btnLimpiarC = new javax.swing.JButton();
-        cb_clientes = new javax.swing.JComboBox<String>();
+        cb_clientes = new javax.swing.JComboBox<>();
         label2 = new java.awt.Label();
         btnAggCliente = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         txtCantidad = new javax.swing.JTextField();
         btnLimpiarC1 = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
-        cb_servicios = new javax.swing.JComboBox<String>();
+        cb_servicios = new javax.swing.JComboBox<>();
         label1 = new java.awt.Label();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtArea_Descripcion = new javax.swing.JTextArea();
