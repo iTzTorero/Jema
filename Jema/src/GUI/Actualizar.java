@@ -319,7 +319,7 @@ public class Actualizar extends javax.swing.JFrame {
                     System.out.println(idServicio);
                     
                     detVenta.setIdServicio(idServicio);
-                    detVenta.setPrecio(Integer.parseInt(txtCantidad.getText()));
+                    detVenta.setCantidad(Integer.parseInt(txtCantidad.getText()));
                     detVenta.setDesc(txtDescripcion.getText());
                                   
                     acceso.obtenerDetalleVentaDAO().actualizar(detVenta);
@@ -347,7 +347,7 @@ public class Actualizar extends javax.swing.JFrame {
                 filaDatos[1] = acceso.obtenerClienteDAO().consultarPorId(listaDetalle1.getIdCliente()).getNombre();
                 filaDatos[2] = acceso.obtenerClienteDAO().consultarPorId(listaDetalle1.getIdCliente()).getTelefono1();
                 filaDatos[3] = listaDetalle1.getDesc();
-                filaDatos[4] = listaDetalle1.getPrecio();
+                filaDatos[4] = listaDetalle1.getCantidad();
                 filaDatos[5] = acceso.obtenerServicioDAO().consultarPorId(listaDetalle1.getIdServicio()).getNombre();
               
                 
@@ -376,7 +376,7 @@ public class Actualizar extends javax.swing.JFrame {
             this.txtTelefonoC.setText(acceso.obtenerClienteDAO().consultarPorId(detalleVenta.getIdCliente()).getTelefono1());
             this.cb_servicios.setSelectedItem(acceso.obtenerServicioDAO().consultarPorId(detalleVenta.getIdServicio()).getNombre());
             this.txtDescripcion.setText(detalleVenta.getDesc());
-            this.txtCantidad.setText(Float.toString(detalleVenta.getPrecio()));
+            this.txtCantidad.setText(Float.toString(detalleVenta.getCantidad()));
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
