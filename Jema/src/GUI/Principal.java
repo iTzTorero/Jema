@@ -240,7 +240,7 @@ public class Principal extends javax.swing.JFrame {
                 btnRegistrarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 740, 230, 60));
+        jPanel1.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, 230, 60));
 
         lblNumNota.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblNumNota.setForeground(new java.awt.Color(255, 153, 153));
@@ -262,7 +262,15 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // Se agregan los detalle venta
-        actualizarTabla();
+        if (fechaEntrega.getDate().after(new Date())) {
+            actualizarTabla();
+
+        } else {
+            JOptionPane.showMessageDialog(this, "No se puede registrar una fecha de entrega anterior al dia actual", "Erorr!!", JOptionPane.INFORMATION_MESSAGE);
+
+            return;
+        }
+
         //   this.txtTotal.setText(Float.toString(calcularTotal(total)));
 
     }//GEN-LAST:event_btnAgregarActionPerformed
