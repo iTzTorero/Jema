@@ -320,7 +320,7 @@ public class Cancelar extends javax.swing.JFrame {
                 filaDatos[1] = acceso.obtenerClienteDAO().consultarPorId(listaDetalle1.getIdCliente()).getNombre();
                 filaDatos[2] = acceso.obtenerClienteDAO().consultarPorId(listaDetalle1.getIdCliente()).getTelefono1();
                 filaDatos[3] = listaDetalle1.getDesc();
-                filaDatos[4] = listaDetalle1.getCantidad();
+                filaDatos[4] = listaDetalle1.getPrecio();
                 filaDatos[5] = acceso.obtenerServicioDAO().consultarPorId(listaDetalle1.getIdServicio()).getNombre();
               
                 
@@ -382,7 +382,7 @@ public class Cancelar extends javax.swing.JFrame {
             this.txtCliente.setText(acceso.obtenerClienteDAO().consultarPorId(detalleVenta.getIdCliente()).getNombre());
             this.txtTelefonoC.setText(acceso.obtenerClienteDAO().consultarPorId(detalleVenta.getIdCliente()).getTelefono1());
             this.txtDescripcion.setText(detalleVenta.getDesc());
-            this.txtPrecio.setText(Float.toString(detalleVenta.getCantidad()));
+            this.txtPrecio.setText(Float.toString(detalleVenta.getPrecio()));
             this.txtServicio.setText(acceso.obtenerServicioDAO().consultarPorId(detalleVenta.getIdServicio()).getNombre());
 
         } catch (Exception ex) {

@@ -26,15 +26,15 @@ public class DetalleVentaDAO extends DatabaseConection implements IDAO<DetalleVe
 
     @Override
     public void insertar(DetalleVenta obj) throws Exception {
-        String sql = "INSERT INTO `detalle_venta` (`iddetalle_venta`, `cantidad`, `descripcion`, `idcliente`, `idusuario`, `idventa`, `idServicio`) VALUES (NULL, ?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO `detalle_venta` (`iddetalle_venta`, `precio`, `idcliente`, `idusuario`, `idventa`, `idServicio`, `descripcion`) VALUES (NULL, ?, ?, ?, ?, ?, ?);";
         PreparedStatement ps;
         ps = con.prepareStatement(sql);
-        ps.setFloat(1, obj.getCantidad());
-        ps.setString(2, obj.getDesc());
-        ps.setInt(3, obj.getIdCliente());
-        ps.setInt(4, obj.getIdUsuario());
-        ps.setInt(5, obj.getIdVenta());
-        ps.setInt(6, obj.getIdServicio());
+        ps.setFloat(1, obj.getPrecio());
+        ps.setInt(2, obj.getIdCliente());
+        ps.setInt(3, obj.getIdUsuario());
+        ps.setInt(4, obj.getIdVenta());
+        ps.setInt(5, obj.getIdServicio());
+        ps.setString(6, obj.getDesc());
 
         ps.executeUpdate();
         ps.close();
@@ -42,8 +42,8 @@ public class DetalleVentaDAO extends DatabaseConection implements IDAO<DetalleVe
 
     @Override
     public void actualizar(DetalleVenta obj) throws Exception {
-        String sql = String.format("UPDATE detalle_venta SET cantidad = '%d', descripcion = '%s', idservicio = '%d' WHERE iddetalle_venta = %d",
-                obj.getCantidad(),
+        String sql = String.format("UPDATE detalle_venta SET precio = '%f', descripcion = '%s', idservicio = '%d' WHERE iddetalle_venta = %d",
+                obj.getPrecio(),
                 obj.getDesc(),
                 obj.getIdServicio(),
                 obj.getIddetalle_venta());
@@ -75,24 +75,27 @@ public class DetalleVentaDAO extends DatabaseConection implements IDAO<DetalleVe
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             rs.next();
-            return new DetalleVenta(rs.getInt("iddetalle_venta"), rs.getInt("cantidad"), rs.getString("descripcion"), rs.getInt("idcliente"), rs.getInt("idusuario"), rs.getInt("idventa"), rs.getInt("idservicio"));
+            return new DetalleVenta(rs.getInt("iddetalle_venta"), rs.getInt("cantidad"), rs.getString("descripcion"),rs.getInt("idcliente"),rs.getInt("idusuario"),rs.getInt("idventa"),rs.getInt("idservicio"));
         } catch (Exception ex) {
 
         }
         return null;
     }
 
-    @Override
-    public ResultSet consultarTodos() throws Exception {
+
+@Override
+        public ResultSet consultarTodos() throws Exception {
         try {
             String sql = "SELECT * FROM `detalle_venta`";
             PreparedStatement st = con.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             return rs;
+        
 
-        } catch (SQLException ex) {
-            Logger.getLogger(DetalleVentaDAO.class
-                    .getName()).log(Level.SEVERE, null, ex);
+} catch (SQLException ex) {
+            Logger.getLogger(DetalleVentaDAO.class  
+
+.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -103,7 +106,7 @@ public class DetalleVentaDAO extends DatabaseConection implements IDAO<DetalleVe
             Statement stmt = con.createStatement();
             String codigoSQL = "SELECT * FROM detalle_venta";
             ResultSet rs = stmt.executeQuery(codigoSQL);
-            while (rs.next()) {
+            while(rs.next()){
                 int iddetalle_venta = rs.getInt("iddetalle_venta");
                 int cantidad = rs.getInt("cantidad");
                 String descripcion = rs.getString("descripcion");
@@ -111,11 +114,12 @@ public class DetalleVentaDAO extends DatabaseConection implements IDAO<DetalleVe
                 int id_usuario = rs.getInt("idusuario");
                 int id_venta = rs.getInt("idventa");
                 int id_servicio = rs.getInt("idservicio");
-
-                DetalleVenta detVenta = new DetalleVenta(iddetalle_venta, cantidad, descripcion, id_cliente, id_usuario, id_venta, id_servicio);
+                
+                
+                DetalleVenta detVenta = new DetalleVenta(iddetalle_venta, cantidad , descripcion, id_cliente, id_usuario, id_venta, id_servicio);
                 listaDetalle.add(detVenta);
             }
-
+            
             return listaDetalle;
         } catch (Exception ex) {
 

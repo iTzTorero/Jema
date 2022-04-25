@@ -42,8 +42,8 @@ public class DetalleVenta {
         this.idServicio = idServicio;
 
     }
-
-    public DetalleVenta(int cantidad, String desc, int idCliente, int idUsuario, int idServicio) {
+    
+      public DetalleVenta(int cantidad, String desc, int idCliente, int idUsuario, int idServicio) {
         this.cantidad = cantidad;
         this.desc = desc;
         this.idCliente = idCliente;
@@ -68,11 +68,11 @@ public class DetalleVenta {
         this.idServicio = idServicio;
     }
 
-    public int getCantidad() {
+    public int getPrecio() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setPrecio(int cantidad) {
         this.cantidad = cantidad;
     }
 
