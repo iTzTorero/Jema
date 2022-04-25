@@ -240,7 +240,7 @@ public class Principal extends javax.swing.JFrame {
                 btnRegistrarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, 230, 60));
+        jPanel1.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 740, 230, 60));
 
         lblNumNota.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblNumNota.setForeground(new java.awt.Color(255, 153, 153));
