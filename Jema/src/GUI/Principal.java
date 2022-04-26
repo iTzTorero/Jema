@@ -240,7 +240,7 @@ public class Principal extends javax.swing.JFrame {
                 btnRegistrarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, 230, 60));
+        jPanel1.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 740, 230, 60));
 
         lblNumNota.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblNumNota.setForeground(new java.awt.Color(255, 153, 153));
@@ -262,6 +262,12 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // Se agregan los detalle venta
+        if(cb_clientes.getSelectedIndex() == 0 || fechaEntrega.getDate() == null || txtArea_Descripcion.getText() == "" || 
+                txtCantidad.getText() == "" || cb_servicios.getSelectedIndex() == 0){
+            JOptionPane.showMessageDialog(this, "Los campos tienen que ser llenados!!", "Error!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         if (fechaEntrega.getDate().after(new Date())) {
             actualizarTabla();
 
@@ -348,41 +354,45 @@ public class Principal extends javax.swing.JFrame {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
 
         try {
-            //llenarArrayList();
-            Date now = new Date();
-            String pattern = "yyyy-MM-dd";
-            SimpleDateFormat formatter = new SimpleDateFormat(pattern);
-            String mysqlDateString = formatter.format(now);
-            float anticipo;
-            float totalT = 0;
-
-            if (this.txtAnticipo.getText().equals("")) {
-                anticipo = 0;
-                totalT = calcularTotal();
+            if (tableDesc.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(this, "Se necesita por lo menos una venta para poder registrarla en el sistema!", "Error!!", JOptionPane.ERROR_MESSAGE);
             } else {
-                anticipo = Float.parseFloat(this.txtAnticipo.getText());
-                totalT = calcularTotal() - anticipo;
-            }
-            if (detallesVenta != null) {
-                try {
-                    acceso.obtenerVentaDAO().insertar(new Venta(new java.sql.Date(now.getTime()), totalT, new java.sql.Date(fechaEntrega.getDate().getTime()), anticipo));
-                } catch (NullPointerException ex) {
+                //llenarArrayList();
+                Date now = new Date();
+                String pattern = "yyyy-MM-dd";
+                SimpleDateFormat formatter = new SimpleDateFormat(pattern);
+                String mysqlDateString = formatter.format(now);
+                float anticipo;
+                float totalT = 0;
+
+                if (this.txtAnticipo.getText().equals("")) {
+                    anticipo = 0;
+                    totalT = calcularTotal();
+                } else {
+                    anticipo = Float.parseFloat(this.txtAnticipo.getText());
+                    totalT = calcularTotal() - anticipo;
+                }
+                if (detallesVenta != null) {
+                    try {
+                        acceso.obtenerVentaDAO().insertar(new Venta(new java.sql.Date(now.getTime()), totalT, new java.sql.Date(fechaEntrega.getDate().getTime()), anticipo));
+                    } catch (NullPointerException ex) {
+                        JOptionPane.showMessageDialog(this, "No hay detalles venta para poder registrar la venta", "Erorr!!", JOptionPane.INFORMATION_MESSAGE);
+                        return;
+                    }
+                } else {
                     JOptionPane.showMessageDialog(this, "No hay detalles venta para poder registrar la venta", "Erorr!!", JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }
-            } else {
-                JOptionPane.showMessageDialog(this, "No hay detalles venta para poder registrar la venta", "Erorr!!", JOptionPane.INFORMATION_MESSAGE);
-                return;
+
+                guardarDetalleVenta();
+                JOptionPane.showMessageDialog(this, "Se ha registrado la venta.", "Exito!!", JOptionPane.INFORMATION_MESSAGE);
+
+                this.activarCampos();
+
+                limpiarTabla();
+                limpiarCamposC1();
+                limpiarDetalleVentaList();
             }
-
-            guardarDetalleVenta();
-            JOptionPane.showMessageDialog(this, "Se ha registrado la venta.", "Exito!!", JOptionPane.INFORMATION_MESSAGE);
-
-            this.activarCampos();
-
-            limpiarTabla();
-            limpiarCamposC1();
-            limpiarDetalleVentaList();
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -391,6 +401,7 @@ public class Principal extends javax.swing.JFrame {
 
         txtTotal.setText(0 + "");
 
+        
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
