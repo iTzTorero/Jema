@@ -18,14 +18,14 @@ import textPrompt.TextPrompt;
  *
  * @author PC
  */
-public class Cancelar extends javax.swing.JFrame {
+public class CancelarDetalleVenta extends javax.swing.JFrame {
 
     FactoryAccesoDatos acceso;
 
     /**
      * Creates new form Cancelar
      */
-    public Cancelar() {
+    public CancelarDetalleVenta() {
         initComponents();
         this.setTitle("Tabla datos");
         TextPrompt phCliente = new TextPrompt("Cliente", txtCliente);

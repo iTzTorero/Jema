@@ -34,9 +34,8 @@ public class ServicioDAO extends DatabaseConection implements IDAO<Servicio> {
         } catch (SQLException ex) {
             Logger.getLogger(ServicioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        ps.setInt(1, obj.getIdServicio());
-        ps.setString(2, obj.getNombre());
-        ps.setFloat(3, obj.getCosto());
+        ps.setString(1, obj.getNombre());
+        ps.setFloat(2, obj.getCosto());
 
         ps.executeUpdate();
         ps.close();

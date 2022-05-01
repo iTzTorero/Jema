@@ -175,14 +175,14 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonRegistrarServicioActionPerformed
 
     private void jButtonModificarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarServicioActionPerformed
-        Actualizar actualizar = new Actualizar();
+        ActualizarDetalleVenta actualizar = new ActualizarDetalleVenta();
         this.dispose();
         actualizar.setVisible(true);
     }//GEN-LAST:event_jButtonModificarServicioActionPerformed
 
     private void jButtonCancelarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarServicioActionPerformed
 
-       Cancelar cancelar = new Cancelar();
+       CancelarDetalleVenta cancelar = new CancelarDetalleVenta();
         this.dispose();
         cancelar.setVisible(true);
        

@@ -19,12 +19,12 @@ import textPrompt.TextPrompt;
  *
  * @author Orlando Mendivil
  */
-public class Actualizar extends javax.swing.JFrame {
+public class ActualizarDetalleVenta extends javax.swing.JFrame {
     FactoryAccesoDatos acceso;
     /**
      * Creates new form Actualizar
      */
-    public Actualizar() {
+    public ActualizarDetalleVenta() {
         initComponents();
         
         TextPrompt phCliente = new TextPrompt("Cliente", txtCliente);
@@ -42,7 +42,7 @@ public class Actualizar extends javax.swing.JFrame {
         try {
             cb_servicios.setModel(acceso.obtenerServicioDAO().consultarServicioCB());
         } catch (Exception ex) {
-            Logger.getLogger(Actualizar.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ActualizarDetalleVenta.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.tablaClientes.setShowGrid(true);
         
@@ -67,7 +67,7 @@ public class Actualizar extends javax.swing.JFrame {
         btn_aceptar = new javax.swing.JButton();
         btn_cancelar = new javax.swing.JButton();
         btn_limpiar = new javax.swing.JButton();
-        cb_servicios = new javax.swing.JComboBox<String>();
+        cb_servicios = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaClientes = new javax.swing.JTable();
