@@ -50,7 +50,7 @@ public class Menu extends javax.swing.JFrame {
         jLabel3.setText("JEMA");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Semilight", 3, 24)); // NOI18N
-        jLabel4.setText("Lavanderia");
+        jLabel4.setText("Lavandería");
 
         jButtonSalir.setBackground(new java.awt.Color(255, 102, 102));
         jButtonSalir.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
