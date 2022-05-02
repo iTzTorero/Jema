@@ -159,7 +159,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI Semilight" size="18" style="3"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Lavanderia JEMA"/>
+            <Property name="text" type="java.lang.String" value="Lavander&#xed;a JEMA"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JPasswordField" name="tf_Contrasena">

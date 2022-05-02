@@ -51,6 +51,7 @@ public class EliminarServicio extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(5, 118, 5));
         jLabel1.setText("Eliminar servicio");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(254, 25, -1, -1));
 
@@ -115,7 +116,8 @@ public class EliminarServicio extends javax.swing.JFrame {
         });
         getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(557, 348, 122, 43));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(5, 118, 5));
         jLabel2.setText("Buscar:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 57, 352, 58));
 

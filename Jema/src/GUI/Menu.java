@@ -35,8 +35,14 @@ public class Menu extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jButtonSalir = new javax.swing.JButton();
         jButtonRegistrarServicio = new javax.swing.JButton();
+        jButtonModificarDetalleVenta = new javax.swing.JButton();
+        jButtonCancelarDetalleVenta = new javax.swing.JButton();
+        jButtonEliminarCliente = new javax.swing.JButton();
+        jButtonModificarCliente = new javax.swing.JButton();
+        jButtonAgregarCliente = new javax.swing.JButton();
+        jButtonEliminarServicio = new javax.swing.JButton();
         jButtonModificarServicio = new javax.swing.JButton();
-        jButtonCancelarServicio = new javax.swing.JButton();
+        jButtonAgregarServicio = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         menuConsultarS = new javax.swing.JMenuItem();
@@ -72,9 +78,69 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        jButtonModificarDetalleVenta.setBackground(new java.awt.Color(0, 204, 204));
+        jButtonModificarDetalleVenta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonModificarDetalleVenta.setText("Modificar Detalle Venta");
+        jButtonModificarDetalleVenta.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButtonModificarDetalleVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarDetalleVentaActionPerformed(evt);
+            }
+        });
+
+        jButtonCancelarDetalleVenta.setBackground(new java.awt.Color(0, 204, 204));
+        jButtonCancelarDetalleVenta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonCancelarDetalleVenta.setText("Cancelar Detalle Venta");
+        jButtonCancelarDetalleVenta.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButtonCancelarDetalleVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarDetalleVentaActionPerformed(evt);
+            }
+        });
+
+        jButtonEliminarCliente.setBackground(new java.awt.Color(0, 204, 204));
+        jButtonEliminarCliente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonEliminarCliente.setText("Eliminar Cliente");
+        jButtonEliminarCliente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButtonEliminarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEliminarClienteActionPerformed(evt);
+            }
+        });
+
+        jButtonModificarCliente.setBackground(new java.awt.Color(0, 204, 204));
+        jButtonModificarCliente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonModificarCliente.setText("Modificar Cliente");
+        jButtonModificarCliente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButtonModificarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarClienteActionPerformed(evt);
+            }
+        });
+
+        jButtonAgregarCliente.setBackground(new java.awt.Color(0, 204, 204));
+        jButtonAgregarCliente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonAgregarCliente.setText("Registrar Cliente");
+        jButtonAgregarCliente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButtonAgregarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAgregarClienteActionPerformed(evt);
+            }
+        });
+
+        jButtonEliminarServicio.setBackground(new java.awt.Color(0, 204, 204));
+        jButtonEliminarServicio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonEliminarServicio.setText("Eliminar Servicio");
+        jButtonEliminarServicio.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButtonEliminarServicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEliminarServicioActionPerformed(evt);
+            }
+        });
+
         jButtonModificarServicio.setBackground(new java.awt.Color(0, 204, 204));
         jButtonModificarServicio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonModificarServicio.setText("Modificar Detalle Venta");
+        jButtonModificarServicio.setText("Modificar Servicio");
         jButtonModificarServicio.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButtonModificarServicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,13 +148,13 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jButtonCancelarServicio.setBackground(new java.awt.Color(0, 204, 204));
-        jButtonCancelarServicio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonCancelarServicio.setText("Cancelar Detalle Venta");
-        jButtonCancelarServicio.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButtonCancelarServicio.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAgregarServicio.setBackground(new java.awt.Color(0, 204, 204));
+        jButtonAgregarServicio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonAgregarServicio.setText("Registrar Servicio");
+        jButtonAgregarServicio.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButtonAgregarServicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCancelarServicioActionPerformed(evt);
+                jButtonAgregarServicioActionPerformed(evt);
             }
         });
 
@@ -96,42 +162,71 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(301, 301, 301)
+                .addComponent(jLabel3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(301, 301, 301)
-                        .addComponent(jLabel3))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(286, 286, 286)
-                        .addComponent(jLabel4))
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(266, 266, 266)
+                        .addGap(37, 37, 37)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButtonRegistrarServicio, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
-                            .addComponent(jButtonModificarServicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonCancelarServicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(271, Short.MAX_VALUE))
+                            .addComponent(jButtonRegistrarServicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonModificarDetalleVenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonCancelarDetalleVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButtonAgregarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonModificarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonEliminarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(50, 50, 50)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonAgregarServicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonModificarServicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonEliminarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(63, 63, 63))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButtonRegistrarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonModificarDetalleVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonCancelarDetalleVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButtonAgregarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonModificarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonEliminarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonAgregarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonModificarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonEliminarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(22, 22, 22)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addComponent(jButtonRegistrarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonModificarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonCancelarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
                 .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
+                .addContainerGap())
         );
 
         jMenu2.setText("Consultar ");
@@ -174,24 +269,72 @@ public class Menu extends javax.swing.JFrame {
    
     }//GEN-LAST:event_jButtonRegistrarServicioActionPerformed
 
-    private void jButtonModificarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarServicioActionPerformed
+    private void jButtonModificarDetalleVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarDetalleVentaActionPerformed
         ActualizarDetalleVenta actualizar = new ActualizarDetalleVenta();
         this.dispose();
         actualizar.setVisible(true);
-    }//GEN-LAST:event_jButtonModificarServicioActionPerformed
+    }//GEN-LAST:event_jButtonModificarDetalleVentaActionPerformed
 
-    private void jButtonCancelarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarServicioActionPerformed
+    private void jButtonCancelarDetalleVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarDetalleVentaActionPerformed
 
        CancelarDetalleVenta cancelar = new CancelarDetalleVenta();
         this.dispose();
         cancelar.setVisible(true);
        
-    }//GEN-LAST:event_jButtonCancelarServicioActionPerformed
+    }//GEN-LAST:event_jButtonCancelarDetalleVentaActionPerformed
+
+    private void jButtonEliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarClienteActionPerformed
+        // TODO add your handling code here:
+        EliminarCliente eliminarCliente = new EliminarCliente();
+        this.dispose();
+        eliminarCliente.setVisible(true);
+    }//GEN-LAST:event_jButtonEliminarClienteActionPerformed
+
+    private void jButtonModificarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarClienteActionPerformed
+        // TODO add your handling code here:
+        ActualizarCliente ac = new ActualizarCliente();
+        this.dispose();
+        ac.setVisible(true);
+    }//GEN-LAST:event_jButtonModificarClienteActionPerformed
+
+    private void jButtonAgregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarClienteActionPerformed
+        // TODO add your handling code here:
+        AgregarCliente acliente = new AgregarCliente();
+        this.dispose();
+        acliente.setVisible(true);
+    }//GEN-LAST:event_jButtonAgregarClienteActionPerformed
+
+    private void jButtonEliminarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarServicioActionPerformed
+        // TODO add your handling code here:
+        EliminarServicio es = new EliminarServicio();
+        this.dispose();
+        es.setVisible(true);
+    }//GEN-LAST:event_jButtonEliminarServicioActionPerformed
+
+    private void jButtonModificarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarServicioActionPerformed
+        // TODO add your handling code here:
+        ActualizarServicio as = new ActualizarServicio();
+        this.dispose();
+        as.setVisible(true);
+    }//GEN-LAST:event_jButtonModificarServicioActionPerformed
+
+    private void jButtonAgregarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarServicioActionPerformed
+        // TODO add your handling code here:
+        AgregarServicio aser = new AgregarServicio();
+        this.dispose();
+        aser.setVisible(true);
+    }//GEN-LAST:event_jButtonAgregarServicioActionPerformed
 
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonCancelarServicio;
+    private javax.swing.JButton jButtonAgregarCliente;
+    private javax.swing.JButton jButtonAgregarServicio;
+    private javax.swing.JButton jButtonCancelarDetalleVenta;
+    private javax.swing.JButton jButtonEliminarCliente;
+    private javax.swing.JButton jButtonEliminarServicio;
+    private javax.swing.JButton jButtonModificarCliente;
+    private javax.swing.JButton jButtonModificarDetalleVenta;
     private javax.swing.JButton jButtonModificarServicio;
     private javax.swing.JButton jButtonRegistrarServicio;
     private javax.swing.JButton jButtonSalir;

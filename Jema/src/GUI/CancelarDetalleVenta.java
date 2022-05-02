@@ -127,7 +127,8 @@ public class CancelarDetalleVenta extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(5, 118, 5));
         jLabel1.setText("Cancelar detalle venta ");
 
         txtServicio.setEditable(false);

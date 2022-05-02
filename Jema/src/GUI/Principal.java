@@ -108,6 +108,7 @@ public class Principal extends javax.swing.JFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(245, 132, 132));
         jLabel4.setText("Entrega:");
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 70, 35));
 
@@ -131,6 +132,7 @@ public class Principal extends javax.swing.JFrame {
         jPanel3.add(cb_clientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 230, 50));
 
         label2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        label2.setForeground(new java.awt.Color(245, 132, 132));
         label2.setText("Cliente:");
         jPanel3.add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
@@ -174,6 +176,7 @@ public class Principal extends javax.swing.JFrame {
         jPanel2.add(cb_servicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 170, 50));
 
         label1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        label1.setForeground(new java.awt.Color(245, 132, 132));
         label1.setText("Servicio");
         jPanel2.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
 

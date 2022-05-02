@@ -86,7 +86,7 @@ public class IniciarSesion extends javax.swing.JFrame {
         );
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Semilight", 3, 18)); // NOI18N
-        jLabel3.setText("Lavanderia JEMA");
+        jLabel3.setText("Lavandería JEMA");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
