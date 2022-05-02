@@ -6,6 +6,8 @@
 package GUI;
 
 import factory.FactoryAccesoDatos;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +29,18 @@ public class ActualizarServicio extends javax.swing.JFrame {
     public ActualizarServicio() {
         initComponents();
         actualizarTabla();
+        this.setSize(740, 586);
+
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension frameSize = getSize();
+
+        if (frameSize.height > screenSize.height) {
+            frameSize.height = screenSize.height;
+        }
+        if (frameSize.width > screenSize.width) {
+            frameSize.width = screenSize.width;
+        }
+        setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2);
     }
 
     /**
@@ -54,7 +68,6 @@ public class ActualizarServicio extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 204, 255));
-        setPreferredSize(new java.awt.Dimension(701, 415));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(162, 201, 227));
@@ -203,18 +216,20 @@ public class ActualizarServicio extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaServiciosMouseClicked
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        try {
-            acceso.obtenerServicioDAO().actualizar(new Servicio((int) tablaServicios.getModel().getValueAt(tablaServicios.getSelectedRow(), 0), txtNombre.getText(), Float.parseFloat(txtCosto.getText())));
-        } catch (Exception ex) {
-            Logger.getLogger(ActualizarServicio.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Hubo un error al actualizar el servicio", "Erorr!!", JOptionPane.INFORMATION_MESSAGE);
-            limpiarCampos();
-            return;
-        }
-        limpiarCampos();
-        actualizarTabla();
-        JOptionPane.showMessageDialog(this, "Servicio actualizado correctamente", "Exito!!", JOptionPane.INFORMATION_MESSAGE);
+        if (validarSeleccionado()) {
 
+            try {
+                acceso.obtenerServicioDAO().actualizar(new Servicio((int) tablaServicios.getModel().getValueAt(tablaServicios.getSelectedRow(), 0), txtNombre.getText(), Float.parseFloat(txtCosto.getText())));
+            } catch (Exception ex) {
+                Logger.getLogger(ActualizarServicio.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "Hubo un error al actualizar el servicio", "Erorr!!", JOptionPane.INFORMATION_MESSAGE);
+                limpiarCampos();
+                return;
+            }
+            limpiarCampos();
+            actualizarTabla();
+            JOptionPane.showMessageDialog(this, "Servicio actualizado correctamente", "Exito!!", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -309,6 +324,14 @@ public class ActualizarServicio extends javax.swing.JFrame {
         txtNombre.setText("");
         txtCosto.setText("");
 
+    }
+
+    private boolean validarSeleccionado() {
+        if (tablaServicios.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Favor de seleccionar un servicio primero", "Error", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        return true;
     }
 
 }

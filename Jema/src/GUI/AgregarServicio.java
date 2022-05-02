@@ -6,6 +6,8 @@
 package GUI;
 
 import factory.FactoryAccesoDatos;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import objetoNegocio.Cliente;
 import objetoNegocio.Servicio;
@@ -22,6 +24,16 @@ public class AgregarServicio extends javax.swing.JFrame {
      */
     public AgregarServicio() {
         initComponents();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension frameSize = getSize();
+
+        if (frameSize.height > screenSize.height) {
+            frameSize.height = screenSize.height;
+        }
+        if (frameSize.width > screenSize.width) {
+            frameSize.width = screenSize.width;
+        }
+        setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2);
     }
 
     /**

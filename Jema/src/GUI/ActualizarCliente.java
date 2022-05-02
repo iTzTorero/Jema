@@ -6,6 +6,8 @@
 package GUI;
 
 import factory.FactoryAccesoDatos;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +29,18 @@ public class ActualizarCliente extends javax.swing.JFrame {
     public ActualizarCliente() {
         initComponents();
         actualizarTabla();
+        this.setSize(768, 556);
+
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension frameSize = getSize();
+
+        if (frameSize.height > screenSize.height) {
+            frameSize.height = screenSize.height;
+        }
+        if (frameSize.width > screenSize.width) {
+            frameSize.width = screenSize.width;
+        }
+        setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2);
     }
 
     /**
@@ -175,7 +189,7 @@ public class ActualizarCliente extends javax.swing.JFrame {
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtTelefono1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(443, Short.MAX_VALUE))
+                .addContainerGap(433, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,18 +221,20 @@ public class ActualizarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarKeyPressed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        try {
-            acceso.obtenerClienteDAO().actualizar(new Cliente((Integer) tablaClientes.getModel().getValueAt(tablaClientes.getSelectedRow(), 0), txtNombre.getText(), txtTelefono1.getText(), txtTelefono2.getText()));
-        } catch (Exception ex) {
-            Logger.getLogger(ActualizarCliente.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Hubo un error al actualizar el cliente", "Erorr!!", JOptionPane.INFORMATION_MESSAGE);
-            limpiarCampos();
-            return;
-        }
-        limpiarCampos();
-        actualizarTabla();
-        JOptionPane.showMessageDialog(this, "Cliente actualizado correctamente", "Exito!", JOptionPane.INFORMATION_MESSAGE);
+        if (validarSeleccionado()) {
 
+            try {
+                acceso.obtenerClienteDAO().actualizar(new Cliente((Integer) tablaClientes.getModel().getValueAt(tablaClientes.getSelectedRow(), 0), txtNombre.getText(), txtTelefono1.getText(), txtTelefono2.getText()));
+            } catch (Exception ex) {
+                Logger.getLogger(ActualizarCliente.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "Hubo un error al actualizar el cliente", "Erorr!!", JOptionPane.INFORMATION_MESSAGE);
+                limpiarCampos();
+                return;
+            }
+            limpiarCampos();
+            actualizarTabla();
+            JOptionPane.showMessageDialog(this, "Cliente actualizado correctamente", "Exito!", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -324,6 +340,14 @@ public class ActualizarCliente extends javax.swing.JFrame {
         txtTelefono1.setText("");
         txtTelefono2.setText("");
         txtBuscar.setText("");
+    }
+
+    private boolean validarSeleccionado() {
+        if (tablaClientes.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Favor de seleccionar un cliente primero", "Error", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        return true;
     }
 
 }
