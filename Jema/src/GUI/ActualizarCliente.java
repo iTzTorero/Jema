@@ -31,6 +31,7 @@ public class ActualizarCliente extends javax.swing.JFrame {
         actualizarTabla();
         this.setSize(768, 556);
 
+        txtNombre.disable();;
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         Dimension frameSize = getSize();
 

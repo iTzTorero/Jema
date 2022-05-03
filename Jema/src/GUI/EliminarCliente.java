@@ -110,6 +110,11 @@ public class EliminarCliente extends javax.swing.JFrame {
         btnCancelar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setBackground(new java.awt.Color(102, 255, 102));
         btnEliminar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
@@ -192,11 +197,26 @@ public class EliminarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        Menu menu = new Menu();
-        menu.setVisible(true);
-        this.dispose();
-        // TODO add your handling code here:
+        if (validarSeleccionado()) {
+            int fila = tablaClientes.getSelectedRow();
+            DefaultTableModel modelo = (DefaultTableModel) tablaClientes.getModel();
+            try {
+                acceso.obtenerClienteDAO().eliminar((Integer) modelo.getValueAt(fila, 0));
+            } catch (Exception ex) {
+                Logger.getLogger(EliminarCliente.class.getName()).log(Level.SEVERE, null, ex);
+                return;
+            }
+            modelo.removeRow(fila);
+            JOptionPane.showMessageDialog(this, "Cliente eliminado exitosamente!", "Exito", JOptionPane.INFORMATION_MESSAGE);
+            tablaClientes.setModel(modelo);
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        Menu menu = new Menu();
+        this.dispose();
+
+        menu.setVisible(true);    }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void actualizarTabla() {
         Object[] fila = new Object[4];

@@ -139,6 +139,11 @@ public class Principal extends javax.swing.JFrame {
         btnAggCliente.setBackground(new java.awt.Color(0, 204, 204));
         btnAggCliente.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnAggCliente.setText("Agregar cliente");
+        btnAggCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAggClienteActionPerformed(evt);
+            }
+        });
         jPanel3.add(btnAggCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 160, 50));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 430, 250));
@@ -265,12 +270,12 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // Se agregan los detalle venta
-        if(cb_clientes.getSelectedIndex() == 0 || fechaEntrega.getDate() == null || txtArea_Descripcion.getText() == "" || 
-                txtCantidad.getText() == "" || cb_servicios.getSelectedIndex() == 0){
+        if (cb_clientes.getSelectedIndex() == 0 || fechaEntrega.getDate() == null || txtArea_Descripcion.getText() == ""
+                || txtCantidad.getText() == "" || cb_servicios.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(this, "Los campos tienen que ser llenados!!", "Error!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         if (fechaEntrega.getDate().after(new Date())) {
             actualizarTabla();
 
@@ -404,7 +409,7 @@ public class Principal extends javax.swing.JFrame {
 
         txtTotal.setText(0 + "");
 
-        
+
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -425,6 +430,13 @@ public class Principal extends javax.swing.JFrame {
     private void tableDescMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDescMouseClicked
         this.editar();
     }//GEN-LAST:event_tableDescMouseClicked
+
+    private void btnAggClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAggClienteActionPerformed
+        AgregarCliente agCliente = new AgregarCliente();
+        this.dispose();
+
+       agCliente.setVisible(true);
+    }//GEN-LAST:event_btnAggClienteActionPerformed
 
     private float calcularTotal() {
 //        float totalT = (float) 0.0;
