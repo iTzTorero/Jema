@@ -31,7 +31,7 @@ public class ActualizarDetalleVenta extends javax.swing.JFrame {
         phCliente.setForeground(Color.GRAY);
         TextPrompt phTelefono = new TextPrompt("Telefono", txtTelefonoC);
         phTelefono.setForeground(Color.GRAY);
-        TextPrompt phCantidad = new TextPrompt("Cantidad", txtCantidad);
+        TextPrompt phCantidad = new TextPrompt("Precio", txtCantidad);
         phCantidad.setForeground(Color.GRAY);
         TextPrompt phDescrip = new TextPrompt("Descripcion", txtDescripcion);
         phDescrip.setForeground(Color.GRAY);
